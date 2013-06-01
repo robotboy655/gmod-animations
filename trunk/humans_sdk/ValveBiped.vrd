@@ -1,0 +1,156 @@
+<helper> Bip01_R_Elbow Bip01_R_UpperArm Bip01_R_UpperArm Bip01_R_Forearm
+<display> 1.5 3 3 100
+<basepos> 0 0 0
+<trigger> 90 0 0 0 0 0 0 0 0 0
+<trigger> 90 0 0 -90 0 0 -45 0 0 0
+<helper> Bip01_R_Ankle Bip01_R_Calf Bip01_R_Calf Bip01_R_Foot
+<display> 3 3 4 94
+<basepos> 0 0 0
+<trigger> 90 0 0 0 0 0 0 0 0 0
+<helper> Bip01_R_Shin Bip01_R_Calf Bip01_R_Calf Bip01_R_Foot
+<display> 3 3 4 47
+<basepos> 0 0 0
+<trigger> 90 0 0 0 0 0 0 0 0 0
+<helper> Bip01_R_Knee Bip01_R_Thigh Bip01_R_Thigh Bip01_R_Calf
+<display> 1.5 3 3 100
+<basepos> 0 0 0
+<trigger> 90 0 0 0 0 0 0 0 0 0
+<trigger> 90 0 0 90 0 0 45 0 0 0
+<helper> Bip01_R_Quadricep Bip01_R_Thigh Bip01_R_Thigh Bip01_R_Calf
+<display> 4 6 5 40
+<basepos> 0 0 0
+<trigger> 90 0 0 0 0 0 0 0 0 0
+<helper> Bip01_R_Hip Bip01_Spine Bip01_Spine Bip01_R_Thigh
+<display> 3 3 4 0
+<basepos> -4.163 1.81 -3.984
+<trigger> 90 0 0 0 0 0 0 0 0 0
+<helper> Bip01_L_Ankle Bip01_L_Calf Bip01_L_Calf Bip01_L_Foot
+<display> 3 3 4 94
+<basepos> 0 0 0
+<trigger> 90 0 0 0 0 0 0 0 0 0
+<helper> Bip01_L_Shin Bip01_L_Calf Bip01_L_Calf Bip01_L_Foot
+<display> 3 3 4 47
+<basepos> 0 0 0
+<trigger> 90 0 0 0 0 0 0 0 0 0
+<helper> Bip01_L_Knee Bip01_L_Thigh Bip01_L_Thigh Bip01_L_Calf
+<display> 1.5 3 3 100
+<basepos> 0 0 0
+<trigger> 90 0 0 0 0 0 0 0 0 0
+<trigger> 90 0 0 90 0 0 45 0 0 0
+<helper> Bip01_L_Quadricep Bip01_L_Thigh Bip01_L_Thigh Bip01_L_Calf
+<display> 4 6 5 40
+<basepos> 0 0 0
+<trigger> 90 0 0 0 0 0 0 0 0 0
+<helper> Bip01_L_Hip Bip01_Spine Bip01_Spine Bip01_L_Thigh
+<display> 3 3 4 0
+<basepos> -4.163 1.81 3.984
+<trigger> 90 0 0 0 0 0 0 0 0 0
+<helper> Bip01_R_Wrist Bip01_R_Forearm Bip01_R_Forearm Bip01_R_Hand
+<display> 1.5 3 3 100
+<basepos> 0 0 0
+<trigger> 90 -90 0 0 0 0 0 0 0 0
+<trigger> 90 -90 90 0 0 0 0 0 0 0
+<trigger> 90 -90 -90 0 0 0 0 0 0 0
+<trigger> 90 0 0 -90 90 0 0 0 0 0
+<trigger> 90 0 0 90 90 0 0 0 0 0
+<trigger> 90 0 0 0 90 0 0 0 0 0
+<trigger> 90 180 0 0 -90 0 0 0 0 0
+<helper> Bip01_R_Ulna Bip01_R_Forearm Bip01_R_Forearm Bip01_R_Hand
+<display> 3 2 2 50
+<basepos> 0 0 0
+<trigger> 90 -90 0 0 0 0 0 0 0 0
+<trigger> 90 -90 90 0 0 0 0 0 0 0
+<trigger> 90 -90 -90 0 0 0 0 0 0 0
+<trigger> 90 0 0 -90 45 0 0 0 0 0
+<trigger> 90 0 0 90 45 0 0 0 0 0
+<trigger> 90 0 0 0 45 0 0 0 0 0
+<trigger> 90 180 0 0 -45 0 0 0 0 0
+<helper> Bip01_L_Elbow Bip01_L_UpperArm Bip01_L_UpperArm Bip01_L_Forearm
+<display> 1.5 3 3 100
+<basepos> 0 0 0
+<trigger> 90 0 0 0 0 0 0 0 0 0
+<trigger> 90 0 0 -90 0 0 -45 0 0 0
+<helper> Bip01_L_Wrist Bip01_L_Forearm Bip01_L_Forearm Bip01_L_Hand
+<display> 1.5 3 3 100
+<basepos> 0 0 0
+<trigger> 90 90 0 0 0 0 0 0 0 0
+<trigger> 90 90 -90 0 0 0 0 0 0 0
+<trigger> 90 90 90 0 0 0 0 0 0 0
+<trigger> 90 0 0 -90 -90 0 0 0 0 0
+<trigger> 90 0 0 90 -90 0 0 0 0 0
+<trigger> 90 0 0 0 -90 0 0 0 0 0
+<trigger> 90 180 0 0 90 0 0 0 0 0
+<helper> Bip01_L_Ulna Bip01_L_Forearm Bip01_L_Forearm Bip01_L_Hand
+<display> 3 2 2 50
+<basepos> 0 0 0
+<trigger> 90 90 0 0 0 0 0 0 0 0
+<trigger> 90 90 -90 0 0 0 0 0 0 0
+<trigger> 90 90 90 0 0 0 0 0 0 0
+<trigger> 90 0 0 -90 -45 0 0 0 0 0
+<trigger> 90 0 0 90 -45 0 0 0 0 0
+<trigger> 90 0 0 0 -45 0 0 0 0 0
+<trigger> 90 180 0 0 45 0 0 0 0 0
+<helper> Bip01_R_Shoulder Bip01_R_UpperArm Bip01_R_Clavicle Bip01_R_UpperArm
+<display> 3 3 1.5 0
+<basepos> 1.5 0 0
+<trigger> 90 180 0 0 -60 0 0 0 0 0
+<trigger> 90 90 0 0 0 0 0 0 0 0
+<trigger> 90 0 0 0 60 0 0 0 0 0
+<trigger> 90 180 90 0 -30 15 15 0 0 0
+<trigger> 45 108.0672 -53.1462 -69.5529 -15 0 -15 0 0 0
+<trigger> 90 13.7564 39.4934 -46.1673 90 -30 0 0 0 0
+<trigger> 45 -136.6314 -0.5678 53.6574 -90 0 0 0 0 0
+<trigger> 0 171.9408 3.8279 53.3188 -60 0 0 1.5 0 0
+<helper> Bip01_R_Bicep Bip01_R_UpperArm Bip01_R_Clavicle Bip01_R_UpperArm
+<display> 3 3 2 0
+<basepos> 5.56 0 0
+<trigger> 90 90 0 0 0 0 0 0 0 0
+<trigger> 90 180 0 0 -45 0 0 0 0 0
+<trigger> 90 0 0 0 30 0 0 0 0 0
+<trigger> 90 180 90 0 -15 0 0 0 0 0
+<trigger> 90 13.7564 39.4934 -46.1673 30 0 0 0 0 0
+<trigger> 45 -147.335 5.4027 57.3422 -45 0 0 0 0 0
+<trigger> 0 171.9408 3.8279 53.3188 0 0 0 0 0 0
+<helper> Bip01_L_Shoulder Bip01_L_UpperArm Bip01_L_Clavicle Bip01_L_UpperArm
+<display> 3 3 1.5 0
+<basepos> 1.5 0 0
+<trigger> 90 -180 0 0 60 0 0 0 0 0
+<trigger> 90 -90 0 0 0 0 0 0 0 0
+<trigger> 90 0 0 0 -60 0 0 0 0 0
+<trigger> 90 -180 -90 0 30 -15 15 0 0 0
+<trigger> 45 -105.4334 56.9712 -67.3925 15 0 -15 0 0 0
+<trigger> 90 -10.2167 -36.4735 -48.3468 -90 30 0 0 0 0
+<trigger> 45 139.0691 -2.7428 53.6111 90 0 0 0 0 0
+<trigger> 90 -169.4673 -7.12 53.0827 60 0 0 1.5 0 0
+<helper> Bip01_L_Bicep Bip01_L_UpperArm Bip01_L_Clavicle Bip01_L_UpperArm
+<display> 3 3 2 0
+<basepos> 5.56 0 0
+<trigger> 90 -90 0 0 0 0 0 0 0 0
+<trigger> 90 -180 0 0 30 0 0 0 0 0
+<trigger> 90 0 0 0 -30 0 0 0 0 0
+<trigger> 90 -180 -90 0 15 0 0 0 0 0
+<trigger> 90 -10.2167 -36.4735 -48.3468 -30 0 0 0 0 0
+<trigger> 45 149.5788 -8.8585 57.0634 45 0 0 0 0 0
+<trigger> 90 -169.4673 -7.12 53.0827 33.0062 0 0 5.56 0 0
+<helper> Bip01_R_PectoralX Bip01_Spine2 Bip01_Spine2 Bip01_R_Clavicle
+<display> 4 1.708 3.76 31
+<basepos> 0 4.674 -2.578
+<trigger> 30 82.0175 103.5595 -4.9089 0 0 0 0 0 0
+<trigger> 30 106.2735 70.7251 18.4139 0 0 0 4 0 0
+<trigger> 30 2.3427 115.3626 -85.3776 0 0 0 0 2 0
+<trigger> 10 5.033 118.1588 -82.4348 0 0 0 0 0 2
+<helper> Bip01_L_PectoralX Bip01_Spine2 Bip01_Spine2 Bip01_L_Clavicle
+<display> 4 1.7 3.7 31
+<basepos> 0 4.674 2.578
+<trigger> 30 -86.129 -103.5596 -4.9082 0 0 0 0 0 0
+<trigger> 30 -110.3839 -70.7253 18.4136 0 0 0 4 0 0
+<trigger> 30 -6.4538 -115.3624 -85.3773 0 0 0 0 2 0
+<trigger> 10 -9.1441 -118.1586 -82.4345 0 0 0 0 0 -2
+<helper> Bip01_R_Sartorius Bip01_Spine Bip01_Spine Bip01_R_Thigh
+<display> 1 1 1 0
+<basepos> -5.5 5 -4
+<trigger> 90 0 0 0 0 0 0 0 0 0
+<helper> Bip01_L_Sartorius Bip01_Spine Bip01_Spine Bip01_L_Thigh
+<display> 1 1 1 0
+<basepos> -5.5 5 4
+<trigger> 90 0 0 0 0 0 0 0 0 0

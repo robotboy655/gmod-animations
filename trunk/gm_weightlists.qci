@@ -1,0 +1,587 @@
+// ------------------------------------
+//  Gmod player animation weightlists
+// ------------------------------------
+
+// Base weightlists
+
+$Weightlist AllBones "valvebiped.Bip01_Pelvis" 1.0
+$Weightlist 85percent "valvebiped.Bip01_Pelvis" 0.85
+$Weightlist 75percent "valvebiped.Bip01_Pelvis" 0.75
+$Weightlist 50percent "valvebiped.Bip01_Pelvis" 0.50
+$Weightlist 25percent "valvebiped.Bip01_Pelvis" 0.25
+$Weightlist 10percent "valvebiped.Bip01_Pelvis" 0.10
+$Weightlist NoBones "valvebiped.Bip01_Pelvis" 0.0
+$Weightlist NoLegs "valvebiped.Bip01_Pelvis" 1.0 "ValveBiped.Bip01_L_Thigh" 0.0 "ValveBiped.Bip01_R_Thigh" 0.0
+$Weightlist NoFeet "valvebiped.Bip01_Pelvis" 1.0 "ValveBiped.Bip01_L_Foot" 0.0 "ValveBiped.Bip01_R_Foot" 0.0 "ValveBiped.Bip01_L_Toe0" 0.0 "ValveBiped.Bip01_R_Toe0" 0.0
+
+$Weightlist Pelvis50 "valvebiped.Bip01_Spine" 1.0 "valvebiped.Bip01_Pelvis" 0.5 "ValveBiped.Bip01_L_Thigh" 0.0 "ValveBiped.Bip01_R_Thigh" 0.0
+
+$Weightlist UpperBodyReplace "valvebiped.Bip01_Spine" 1.0
+$Weightlist LowerBodyReplace "valvebiped.Bip01_Pelvis" 0.0 "ValveBiped.Bip01_L_Thigh" 1.0 "ValveBiped.Bip01_R_Thigh" 1.0
+$Weightlist HipsLowerBodyReplace "valvebiped.Bip01_Pelvis" 1.0 "ValveBiped.Bip01_Spine" 0.0
+$Weightlist UpperbodyMeld "valvebiped.Bip01_Spine" 0.5 "ValveBiped.Bip01_Spine1" 1.0
+
+// Aimlayer weightlists
+
+$Weightlist AimlayerWL {
+	"ValveBiped.Bip01_Pelvis" 1.0
+	"ValveBiped.Bip01_Spine" 1.0
+	"ValveBiped.Bip01_Neck1" 0.0
+	"ValveBiped.Bip01_Head1" 0.0
+	"ValveBiped.Bip01_L_Thigh" 1.0
+	"ValveBiped.Bip01_L_Calf" 0.0
+	"ValveBiped.Bip01_R_Thigh" 1.0
+	"ValveBiped.Bip01_R_Calf" 0.0
+	}
+	
+$Weightlist AimlayerNoLeftArmWL {
+	"ValveBiped.Bip01_Pelvis" 1.0
+	"ValveBiped.Bip01_Spine" 1.0
+	"ValveBiped.Bip01_Spine1" 1.0
+	"ValveBiped.Bip01_Spine2" 1.0
+	"ValveBiped.Bip01_Spine4" 1.0
+	"ValveBiped.Bip01_Neck1" 0.0
+	"ValveBiped.Bip01_Head1" 0.0
+	"ValveBiped.Bip01_L_Clavicle" 0.5
+	"ValveBiped.Bip01_L_UpperArm" 0.2
+	"ValveBiped.Bip01_L_ForeArm"  0.1
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_L_Calf" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0
+	"ValveBiped.Bip01_R_Calf" 0.0
+	}
+
+$Weightlist AimlayerSwimWL {
+	"ValveBiped.Bip01_Pelvis" 0.4
+	"ValveBiped.Bip01_Spine" 0.5
+	"ValveBiped.Bip01_Spine1" 0.6
+	"ValveBiped.Bip01_Spine2" 0.7
+	"ValveBiped.Bip01_Spine4" 0.8
+	"ValveBiped.Bip01_Neck1" 0.0
+	"ValveBiped.Bip01_Head1" 0.0
+	"ValveBiped.Bip01_L_Clavicle" 0.85
+	"ValveBiped.Bip01_L_UpperArm" 0.92
+	"ValveBiped.Bip01_L_ForeArm"  1.00
+	"ValveBiped.Bip01_R_Clavicle" 0.85
+	"ValveBiped.Bip01_R_UpperArm" 0.92
+	"ValveBiped.Bip01_R_ForeArm"  1.00
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0
+	}
+
+$Weightlist AimlayerSwimNoLeftArmWL {
+	"ValveBiped.Bip01_Pelvis" 0.3
+	"ValveBiped.Bip01_Spine" 0.4
+	"ValveBiped.Bip01_Spine1" 0.5
+	"ValveBiped.Bip01_Spine2" 0.6
+	"ValveBiped.Bip01_Spine4" 0.7
+	"ValveBiped.Bip01_Neck1" 0.0
+	"ValveBiped.Bip01_Head1" 0.0
+	"ValveBiped.Bip01_L_Clavicle" 0.40
+	"ValveBiped.Bip01_L_UpperArm" 0.00
+	"ValveBiped.Bip01_R_Clavicle" 0.85
+	"ValveBiped.Bip01_R_UpperArm" 0.95
+	"ValveBiped.Bip01_R_ForeArm"  1.00
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0
+	}	
+
+$Weightlist AimlayerWorldspaceBlend {
+	"valvebiped.Bip01_Pelvis" 0.0
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0
+	"ValveBiped.Bip01_Spine" 0.10
+	"ValveBiped.Bip01_Spine1" 0.30
+	"ValveBiped.Bip01_Spine2" 0.50
+	"ValveBiped.Bip01_Spine4" 0.70
+	"ValveBiped.Bip01_L_Clavicle" 0.80
+	"ValveBiped.Bip01_L_UpperArm" 0.80
+	"ValveBiped.Bip01_L_ForeArm"  0.90
+	"ValveBiped.Bip01_L_Hand"     1.00
+	"ValveBiped.Bip01_R_Clavicle" 0.80
+	"ValveBiped.Bip01_R_UpperArm" 0.85
+	"ValveBiped.Bip01_R_ForeArm"  0.95
+	"ValveBiped.Bip01_R_Hand"     1.00
+	}
+
+$Weightlist AimlayerComposite {
+	"ValveBiped.Bip01_Pelvis" 1.0
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0 
+	"ValveBiped.Bip01_Spine" 1.0
+	}	
+	
+// Pelvis compositing weightlists ($MakeSplineGestureLockFeet)
+
+$Weightlist PelvisOnly { "ValveBiped.Bip01_Pelvis" 1.0
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0
+	"ValveBiped.Bip01_Spine" 0.0
+	}
+
+$Weightlist Pelvis0090 {
+	"ValveBiped.Bip01_Pelvis" 0.90
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0
+	"ValveBiped.Bip01_Spine" 0.0
+	}	
+
+$Weightlist PelvisOnlyMinusQuarter {
+	"ValveBiped.Bip01_Pelvis" 0.75
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0
+	"ValveBiped.Bip01_Spine" 0.0
+	}
+	
+$Weightlist PelvisOnlyHalved {
+	"ValveBiped.Bip01_Pelvis" 0.5
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0
+	"ValveBiped.Bip01_Spine" 0.0
+	}
+
+$Weightlist PelvisOnlyQuartered {
+	"ValveBiped.Bip01_Pelvis" 0.25
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0
+	"ValveBiped.Bip01_Spine" 0.0
+	}
+
+$Weightlist NoPelvis {
+	"ValveBiped.Bip01_Pelvis" 0.0
+	"ValveBiped.Bip01_L_Thigh" 1.0
+	"ValveBiped.Bip01_R_Thigh" 1.0
+	"ValveBiped.Bip01_Spine" 1.0
+	}
+
+$Weightlist NoPelvisNoRightFingers {
+	"ValveBiped.Bip01_Pelvis" 0.5
+	"ValveBiped.Bip01_L_Thigh" 0.1
+	"ValveBiped.Bip01_R_Thigh" 0.1
+	"ValveBiped.Bip01_Spine" 0.6
+	"ValveBiped.Bip01_Spine1" 0.8
+	"ValveBiped.Bip01_Spine2" 0.9
+	"ValveBiped.Bip01_Spine4" 1.0
+	"ValveBiped.Bip01_R_Clavicle" 0.9
+	"ValveBiped.Bip01_R_UpperArm" 0.4
+	"ValveBiped.Bip01_R_ForeArm" 0.5
+	"ValveBiped.Bip01_R_Hand" 0.5
+	"ValveBiped.Bip01_R_Finger0" 0.0
+	"ValveBiped.Bip01_R_Finger1" 0.0
+	"ValveBiped.Bip01_R_Finger2" 0.0
+	"ValveBiped.Bip01_R_Finger3" 0.0
+	"ValveBiped.Bip01_R_Finger4" 0.0
+	}
+
+$Weightlist GestureCompositingOne {
+	"ValveBiped.Bip01_Pelvis" 1.0
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0
+	"ValveBiped.Bip01_Spine" 1.0
+	"ValveBiped.Bip01_Spine1" 0.6
+	"ValveBiped.Bip01_Spine2" 0.2
+	"ValveBiped.Bip01_Spine4" 0.0
+	"ValveBiped.Bip01_L_Clavicle" 0.0
+	"ValveBiped.Bip01_R_Clavicle" 0.7
+	"ValveBiped.Bip01_R_Hand" 0.0
+	}
+
+$Weightlist GestureCompositingTwo {
+	"ValveBiped.Bip01_Pelvis" 0.0
+	"ValveBiped.Bip01_Spine" 0.0
+	"ValveBiped.Bip01_Spine1" 0.4
+	"ValveBiped.Bip01_Spine2" 0.9
+	"ValveBiped.Bip01_Spine4" 1.0
+	"ValveBiped.Bip01_L_Clavicle" 1.0
+	"ValveBiped.Bip01_R_Clavicle" 0.3
+	"ValveBiped.Bip01_L_Hand" 1.0
+	"ValveBiped.Bip01_R_Hand" 1.0
+	"ValveBiped.Bip01_R_Finger0" 0.0
+	"ValveBiped.Bip01_R_Finger1" 0.0
+	"ValveBiped.Bip01_R_Finger2" 0.0
+	"ValveBiped.Bip01_R_Finger3" 0.0
+	"ValveBiped.Bip01_R_Finger4" 0.0
+	}
+
+// Movement weightlists
+
+$Weightlist MakeWalkNoLeftArm {
+	"ValveBiped.Bip01_Pelvis" 0.0
+	"ValveBiped.Bip01_Spine" 0.1
+	"ValveBiped.Bip01_Spine1" 0.2 
+	"ValveBiped.Bip01_Spine2" 0.3
+	"ValveBiped.Bip01_Spine4" 0.4
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0
+	"ValveBiped.Bip01_L_Clavicle" 0.2
+	"ValveBiped.Bip01_L_Hand" 0.0
+	"ValveBiped.Bip01_R_Clavicle" 0.8
+	"ValveBiped.Bip01_R_UpperArm" 0.9
+	"ValveBiped.Bip01_R_Hand" 1.0
+	}
+	
+$Weightlist MakeCrouchWalkNoLeftArm {
+	"ValveBiped.Bip01_Pelvis" 0.0
+	"ValveBiped.Bip01_Spine" 0.05
+	"ValveBiped.Bip01_Spine1" 0.15
+	"ValveBiped.Bip01_Spine2" 0.25
+	"ValveBiped.Bip01_Spine4" 0.3
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0
+	"ValveBiped.Bip01_L_Clavicle" 0.0
+	"ValveBiped.Bip01_L_Hand" 0.0
+	"ValveBiped.Bip01_R_Clavicle" 0.7
+	"ValveBiped.Bip01_R_UpperArm" 0.8
+	"ValveBiped.Bip01_R_Hand" 1.0
+	}
+
+$Weightlist MakeRunNoLeftArm {
+	"ValveBiped.Bip01_Pelvis" 0.0
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0
+	"ValveBiped.Bip01_Spine" 0.0
+	"ValveBiped.Bip01_Spine1" 0.1
+	"ValveBiped.Bip01_Spine2" 0.2
+	"ValveBiped.Bip01_Spine4" 0.3
+	"ValveBiped.Bip01_L_Clavicle" 0.2
+	"ValveBiped.Bip01_L_Hand" 0.0
+	"ValveBiped.Bip01_R_Clavicle" 0.8
+	"ValveBiped.Bip01_R_UpperArm" 0.9
+	}
+
+$Weightlist MakeSwimNoLeftArm {
+	"ValveBiped.Bip01_Pelvis" 0.0
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0
+	"ValveBiped.Bip01_Spine" 0.1 
+	"ValveBiped.Bip01_Spine1" 0.3 
+	"ValveBiped.Bip01_Spine2" 0.4 
+	"ValveBiped.Bip01_Spine4" 0.7 
+	"ValveBiped.Bip01_L_Clavicle" 0.0
+	"ValveBiped.Bip01_R_Clavicle" 0.9
+	"ValveBiped.Bip01_R_Hand" 1.0
+	}	
+	
+// Miscellaneous generic compositing weightlists
+
+$Weightlist UpperBodyBlend {
+	"valvebiped.Bip01_Pelvis" 0.0
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0 
+	"ValveBiped.Bip01_Spine" 0.3
+	"ValveBiped.Bip01_Spine1" 0.5 
+	"ValveBiped.Bip01_Spine2" 0.7
+	"ValveBiped.Bip01_Spine4" 0.9
+	"ValveBiped.Bip01_L_Clavicle" 1.0 
+	"ValveBiped.Bip01_R_Clavicle" 1.0 
+	}
+
+
+$Weightlist FasterUpperBodyBlend {
+	"valvebiped.Bip01_Pelvis" 0.0
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0 
+	"ValveBiped.Bip01_Spine" 0.2
+	"ValveBiped.Bip01_Spine1" 0.6 
+	"ValveBiped.Bip01_Spine2" 0.9
+	"ValveBiped.Bip01_Spine4" 1.0
+	}	
+	
+$Weightlist SlowerUpperBodyBlend {
+	"valvebiped.Bip01_Pelvis" 0.0 
+	"ValveBiped.Bip01_L_Thigh" 0.0 
+	"ValveBiped.Bip01_R_Thigh" 0.0 
+	"ValveBiped.Bip01_Spine" 0.1 
+	"ValveBiped.Bip01_Spine1" 0.3 
+	"ValveBiped.Bip01_Spine2" 0.4 
+	"ValveBiped.Bip01_Spine4" 0.7 
+	"ValveBiped.Bip01_R_Clavicle" 1.0 
+	"ValveBiped.Bip01_L_Clavicle" 1.0 
+	"ValveBiped.Bip01_Neck1" 1.0
+	}
+	
+$Weightlist LowerBodyBlend {
+	"valvebiped.Bip01_Pelvis" 0.5 
+	"ValveBiped.Bip01_L_Thigh" 1.0 
+	"ValveBiped.Bip01_R_Thigh" 1.0 
+	"ValveBiped.Bip01_R_Calf" 1.0
+	"ValveBiped.Bip01_R_Foot" 1.0
+	"ValveBiped.Bip01_R_Toe0" 1.0
+	"ValveBiped.Bip01_L_Calf" 1.0
+	"ValveBiped.Bip01_L_Foot" 1.0
+	"ValveBiped.Bip01_L_Toe0" 1.0
+	} 
+
+$Weightlist BodyGesture {
+	"valvebiped.Bip01_Pelvis" 0.8 
+	"ValveBiped.Bip01_L_Thigh" 0.8 
+	"ValveBiped.Bip01_R_Thigh" 0.8 
+	"ValveBiped.Bip01_Spine" 0.8 
+	"ValveBiped.Bip01_Spine1" 0.9 
+	"ValveBiped.Bip01_Spine2" 0.9 
+	"ValveBiped.Bip01_Spine4" 0.9 
+	"ValveBiped.Bip01_R_Clavicle" 0.7
+	"ValveBiped.Bip01_L_Clavicle" 0.7 
+	"ValveBiped.Bip01_Neck1" 1.0
+	}
+
+$Weightlist BodyGestureUpper {
+	"valvebiped.Bip01_Pelvis" 0 
+	"ValveBiped.Bip01_Spine" 0.8 
+	"ValveBiped.Bip01_Spine1" 0.9 
+	"ValveBiped.Bip01_Spine2" 0.9 
+	"ValveBiped.Bip01_Spine4" 0.9 
+	"ValveBiped.Bip01_R_Clavicle" 0.8 
+	"ValveBiped.Bip01_L_Clavicle" 0.8 // 1.0
+	"ValveBiped.Bip01_Neck1" 1.0
+	}
+
+$Weightlist LeftArmBlend {
+	"valvebiped.Bip01_Pelvis" 0.0
+	"valvebiped.Bip01_Spine" 0.1
+	"valvebiped.Bip01_Spine1" 0.1
+	"valvebiped.Bip01_Spine2" 0.2
+	"valvebiped.Bip01_Spine4" 0.3
+	"ValveBiped.Bip01_L_Clavicle" 1.0 
+	}
+	
+$Weightlist LeftArmSpline {
+	"ValveBiped.Bip01_Pelvis" 0.0
+	"ValveBiped.Bip01_Spine" 0.1
+	"ValveBiped.Bip01_Spine1" 0.2 
+	"ValveBiped.Bip01_Spine2" 0.3 
+	"ValveBiped.Bip01_Spine4" 0.4 
+	"ValveBiped.Bip01_L_Clavicle" 1.0 
+	"ValveBiped.Bip01_R_Clavicle" 0.0
+	"ValveBiped.Bip01_Head1" 0.5
+	}
+	
+$Weightlist RightArmSpline {
+	"ValveBiped.Bip01_Pelvis" 0.0
+	"ValveBiped.Bip01_Spine" 0.1
+	"ValveBiped.Bip01_Spine1" 0.2 
+	"ValveBiped.Bip01_Spine2" 0.3
+	"ValveBiped.Bip01_Spine4" 0.4
+	"ValveBiped.Bip01_L_Clavicle" 0.0 
+	"ValveBiped.Bip01_R_Clavicle" 1.0 
+	"ValveBiped.Bip01_Head1" 0.5
+	}
+
+$Weightlist HandsOnly {
+	"ValveBiped.Bip01_Pelvis" 0.0
+	"ValveBiped.Bip01_L_Hand" 1.0
+	"ValveBiped.Bip01_R_Hand" 1.0
+	}
+
+// Miscellaneous specific compositing weightlists
+
+$weightlist jump_delta { 
+	"ValveBiped.Bip01_Pelvis" 0.3
+	"ValveBiped.Bip01_Spine" 0.6
+	"ValveBiped.Bip01_Neck1" 0.5
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0
+	"ValveBiped.Bip01_R_Finger0" 0.0
+	"ValveBiped.Bip01_R_Finger1" 0.0
+	"ValveBiped.Bip01_R_Finger2" 0.0
+	"ValveBiped.Bip01_R_Finger3" 0.0
+	"ValveBiped.Bip01_R_Finger4" 0.0
+	}
+
+$weightlist OneHandedRange {
+	"ValveBiped.Bip01_Pelvis" 0.3
+	"ValveBiped.Bip01_Spine" 0.5
+	"ValveBiped.Bip01_Spine1" 0.5
+	"ValveBiped.Bip01_Spine2" 0.7
+	"ValveBiped.Bip01_Spine4" 0.9
+	"ValveBiped.Bip01_Neck1" 0.2
+	"ValveBiped.Bip01_R_Clavicle" 1.0
+	}
+
+$Weightlist MeleeShove {
+	"ValveBiped.Bip01_Pelvis" 0.0
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0
+	"ValveBiped.Bip01_Spine" 1.0
+	"ValveBiped.Bip01_R_Hand" 1.0
+	"ValveBiped.Bip01_R_Finger0" 0.0
+	"ValveBiped.Bip01_R_Finger1" 0.0
+	"ValveBiped.Bip01_R_Finger2" 0.0
+	"ValveBiped.Bip01_R_Finger3" 0.0
+	"ValveBiped.Bip01_R_Finger4" 0.0
+	"ValveBiped.Bip01_L_UpperArm" 0.0
+	}
+
+// ZOMBIE COMPOSITING WEIGHTLISTS
+// THERE BE DRAGONS
+
+$Weightlist ZombieAnimFix {
+	"ValveBiped.Bip01_Pelvis" 0.0
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0
+	"ValveBiped.Bip01_Spine" 0.0
+	"ValveBiped.Bip01_L_Hand" 1.0
+	"ValveBiped.Bip01_R_Hand" 1.0
+	"ValveBiped.Bip01_Neck1" 1.0
+	}
+
+$Weightlist ZombiePelvis {
+	"ValveBiped.Bip01_Pelvis" 0.6
+	"ValveBiped.Bip01_L_Thigh" 0.4
+	"ValveBiped.Bip01_R_Thigh" 0.4
+	"ValveBiped.Bip01_Spine" 0.0
+	}
+
+$Weightlist ZombieWSB {
+	"ValveBiped.Bip01_Pelvis" 0.8
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0
+	"ValveBiped.Bip01_Spine" 0.7
+	"ValveBiped.Bip01_Spine1" 0.3
+	"ValveBiped.Bip01_Spine2" 0.4
+	"ValveBiped.Bip01_Spine4" 0.5
+	"ValveBiped.Bip01_L_Clavicle" 0.7
+	"ValveBiped.Bip01_L_ForeArm" 0.6
+	"ValveBiped.Bip01_L_Hand" 0.9
+	"ValveBiped.Bip01_R_Clavicle" 0.7
+	"ValveBiped.Bip01_R_ForeArm" 0.6
+	"ValveBiped.Bip01_R_Hand" 0.9
+	"ValveBiped.Bip01_Neck1" 0.8
+	"ValveBiped.Bip01_Head1" 0.8
+	}
+
+$Weightlist ZombieWSBCenter {
+	"ValveBiped.Bip01_Pelvis" 0.3
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0
+	"ValveBiped.Bip01_Spine" 0.7
+	"ValveBiped.Bip01_L_Clavicle" 0.0
+	"ValveBiped.Bip01_L_ForeArm" 0.3
+	"ValveBiped.Bip01_L_Hand" 1.0
+	"ValveBiped.Bip01_R_Clavicle" 0.0
+	"ValveBiped.Bip01_R_ForeArm" 0.3
+	"ValveBiped.Bip01_R_Hand" 1.0
+	"ValveBiped.Bip01_Neck1" 0.8
+	"ValveBiped.Bip01_Head1" 0.8
+	}
+
+$Weightlist ZombieWSBCenterNoHands {
+	"ValveBiped.Bip01_Pelvis" 0.3
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0
+	"ValveBiped.Bip01_Spine" 0.7
+	"ValveBiped.Bip01_L_Clavicle" 0.0
+	"ValveBiped.Bip01_L_ForeArm" 0.3
+	"ValveBiped.Bip01_L_Hand" 0.0
+	"ValveBiped.Bip01_R_Clavicle" 0.0
+	"ValveBiped.Bip01_R_ForeArm" 0.3
+	"ValveBiped.Bip01_R_Hand" 0.0
+	"ValveBiped.Bip01_Neck1" 0.8
+	"ValveBiped.Bip01_R_Finger0" 0
+	"ValveBiped.Bip01_R_Finger1" 0
+	"ValveBiped.Bip01_R_Finger2" 0
+	"ValveBiped.Bip01_R_Finger3" 0
+	"ValveBiped.Bip01_R_Finger4" 0
+	"ValveBiped.Bip01_L_Finger0" 0
+	"ValveBiped.Bip01_L_Finger1" 0
+	"ValveBiped.Bip01_L_Finger2" 0
+	"ValveBiped.Bip01_L_Finger3" 0
+	"ValveBiped.Bip01_L_Finger4" 0
+	}
+
+$Weightlist ZombieWSBAnimFix {
+	"ValveBiped.Bip01_Pelvis" 0.0
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0
+	"ValveBiped.Bip01_Spine" 0.0
+	"ValveBiped.Bip01_L_Clavicle" 0.0
+	"ValveBiped.Bip01_R_Clavicle" 0.0
+	"ValveBiped.Bip01_Neck1" 0.9
+	"ValveBiped.Bip01_R_Finger0" 1
+	"ValveBiped.Bip01_R_Finger1" 1
+	"ValveBiped.Bip01_R_Finger2" 1
+	"ValveBiped.Bip01_R_Finger3" 1
+	"ValveBiped.Bip01_R_Finger4" 1
+	"ValveBiped.Bip01_L_Finger0" 1
+	"ValveBiped.Bip01_L_Finger1" 1
+	"ValveBiped.Bip01_L_Finger2" 1
+	"ValveBiped.Bip01_L_Finger3" 1
+	"ValveBiped.Bip01_L_Finger4" 1
+	}
+
+$Weightlist ZombieWSBAnimFixNoHead {
+	"ValveBiped.Bip01_Pelvis" 0.0
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0
+	"ValveBiped.Bip01_Spine" 0.0
+	"ValveBiped.Bip01_L_Clavicle" 0.0
+	"ValveBiped.Bip01_R_Clavicle" 0.0
+	"ValveBiped.Bip01_Neck1" 0.0
+	"ValveBiped.Bip01_R_Finger0" 1
+	"ValveBiped.Bip01_R_Finger1" 1
+	"ValveBiped.Bip01_R_Finger2" 1
+	"ValveBiped.Bip01_R_Finger3" 1
+	"ValveBiped.Bip01_R_Finger4" 1
+	"ValveBiped.Bip01_L_Finger0" 1
+	"ValveBiped.Bip01_L_Finger1" 1
+	"ValveBiped.Bip01_L_Finger2" 1
+	"ValveBiped.Bip01_L_Finger3" 1
+	"ValveBiped.Bip01_L_Finger4" 1
+	}
+
+$Weightlist ZombieRunLayer {
+	"valvebiped.Bip01_Pelvis" 0.0
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0 
+	"ValveBiped.Bip01_Spine" 0.1
+	"ValveBiped.Bip01_Spine1" 0.2
+	"ValveBiped.Bip01_Spine2" 0.3
+	"ValveBiped.Bip01_Spine4" 0.5
+	"ValveBiped.Bip01_R_Hand" 0.0
+	"ValveBiped.Bip01_L_Hand" 0.0
+	"ValveBiped.Bip01_Neck1" 0.0
+	}	
+	
+$Weightlist ZombieRunHumans {
+	"valvebiped.Bip01_Pelvis" 0.1
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0 
+	"ValveBiped.Bip01_Spine" 0.3
+	"ValveBiped.Bip01_Spine1" 0.6 
+	"ValveBiped.Bip01_Spine2" 0.8
+	"ValveBiped.Bip01_Spine4" 1.0
+	"ValveBiped.Bip01_R_Hand" 0.8
+	"ValveBiped.Bip01_R_UpperArm" 0.8
+	"ValveBiped.Bip01_L_UpperArm" 0.8
+	"ValveBiped.Bip01_L_Hand" 0.8
+	"ValveBiped.Bip01_Neck1" 0.5
+	"ValveBiped.Bip01_Head1" 0.5
+}
+
+$Weightlist ZombieRunHumanA {
+	"valvebiped.Bip01_Pelvis" 0.0
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0 
+	"ValveBiped.Bip01_Spine" 0.1
+	"ValveBiped.Bip01_Spine1" 0.4 
+	"ValveBiped.Bip01_Spine2" 0.6
+	"ValveBiped.Bip01_Spine4" 0.7
+	"ValveBiped.Bip01_R_Hand" 0.7
+	"ValveBiped.Bip01_L_Hand" 0.7
+	"ValveBiped.Bip01_Neck1" 0.6
+	"ValveBiped.Bip01_Head1" 0.6
+}
+
+$Weightlist ZombieRunIdle {
+	"valvebiped.Bip01_Pelvis" 0.3
+	"ValveBiped.Bip01_L_Thigh" 0.0
+	"ValveBiped.Bip01_R_Thigh" 0.0 
+	"ValveBiped.Bip01_Spine" 0.2
+	"ValveBiped.Bip01_Spine1" 0.3
+	"ValveBiped.Bip01_Spine2" 0.4
+	"ValveBiped.Bip01_Spine4" 0.5
+	"ValveBiped.Bip01_R_Hand" 0.8
+	"ValveBiped.Bip01_L_Hand" 0.8
+	"ValveBiped.Bip01_Neck1" 1.0
+	"ValveBiped.Bip01_Head1" 1.0
+	}

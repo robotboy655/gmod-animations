@@ -1,0 +1,40 @@
+// body flex controllers
+flexcontroller head range -30 30 head_rightleft
+flexcontroller head range -15 15 head_updown
+flexcontroller head range -15 15 head_tilt
+
+flexcontroller eyes range -30 30 eyes_updown
+flexcontroller eyes range -30 30 eyes_rightleft
+
+//flexcontroller body range -6 6 move_rightleft
+//flexcontroller body range -10 6 move_forwardback
+//flexcontroller body range -10 2 move_updown
+
+flexcontroller body range -30 30 body_rightleft
+//flexcontroller body range -20 40 body_updown
+//flexcontroller body range -15 15 body_tilt
+
+flexcontroller chest range -30 30 chest_rightleft
+//flexcontroller chest range -25 50 chest_updown
+//flexcontroller chest range -20 20 chest_tilt
+
+flexcontroller head range -0.2 0.2 head_forwardback
+
+flexcontroller gesture range -1 1 gesture_updown
+flexcontroller gesture range -1 1 gesture_rightleft
+
+/*
+body_trans_y :   5.99  -6.04
+body_trans_x :   5.17 -10.07
+body_trans_z : -10.27   2.09
+body_rot_z :  56.18 -56.93
+body_rot_y : -20.51  43.03
+body_rot_x : -17.90  15.77
+spine_rot_z :  40.62 -40.63
+spine_rot_y : -28.06  52.54
+spine_rot_x : -21.84  21.84
+neck_trans_x :  -0.44   0.63
+head_rot_z : -59.74  59.74
+head_rot_y :  36.13 -30.00
+head_rot_x : -18.29  18.32
+*/

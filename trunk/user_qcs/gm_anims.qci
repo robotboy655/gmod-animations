@@ -1,0 +1,100 @@
+// --------------------------------------------------------
+//  USER SEQUENCES
+// 
+//  Useful links:
+//  * http://wiki.garrysmod.com/page/Player_animations
+//  * https://developer.valvesoftware.com/wiki/$sequence
+//  * https://developer.valvesoftware.com/wiki/$animation
+// --------------------------------------------------------
+
+// Here's a sample of how things look like for the regular player animations,
+// with the pistol and the revolver, as well as a few misc. things. Delete
+// this chunk once you're done learning with it, or modify it to suit your
+// needs, but you should NOT be overwriting the existing animations, or
+// bad stuff is likely to happen!
+
+// Idle poses (these are used for transition purposes; 30 frame long static pose)
+
+$MakeIdlePose pistol
+$MakeIdlePose revolver
+
+// Aimlayers (also known as aim matrixes / hold types)
+
+$makeaimlayer HL2DM_crouch_aim_pistol			"player/HL2DM_crouch_aim_pistol"
+
+$MakeAimLayerNoLeftHandIK aimlayer_pistol		"gmod/aimlayer_pistol.smd"
+$MakeAimLayerNoLeftHandIK aimlayer_pistol_walk	"gmod/aimlayer_pistol_walk.smd"
+$MakeAimLayerNoLeftHandIK aimlayer_pistol_run	"gmod/aimlayer_pistol_run.smd"
+
+$MakeAimLayer aimlayer_revolver		        "gmod/aimlayer_revolver.smd"
+$MakeAimLayer aimlayer_revolver_walk		"gmod/aimlayer_revolver_walk.smd"
+$MakeAimLayer aimlayer_revolver_run		    "gmod/aimlayer_revolver_run.smd"
+
+// Idle
+
+$MakeIdle	        idle_pistol		"gmod/aimlayer_pistol" 4 aimlayer_pistol ACT_HL2MP_IDLE_PISTOL 1
+$MakeIdle	        idle_revolver	"gmod/aimlayer_revolver" 4 aimlayer_revolver ACT_HL2MP_IDLE_REVOLVER 1
+
+// Crouch idle
+
+$makecidle	        cidle_pistol	"player/HL2DM_crouch_aim_pistol" 4 HL2DM_crouch_aim_pistol ACT_HL2MP_IDLE_CROUCH_PISTOL 1
+$makecidle	        cidle_revolver	"gmod/aimlayer_pose_revolver_crouch" 0 aimlayer_revolver ACT_HL2MP_IDLE_CROUCH_REVOLVER 1
+
+// Jumping
+
+$makejump	        jump_pistol		"gmod/aimlayer_pose_revolver_crouch" 4 aimlayer_revolver_run ACT_HL2MP_JUMP_PISTOL 1
+$makejump	        jump_revolver	"gmod/aimlayer_pose_revolver_crouch" 4 aimlayer_revolver_run ACT_HL2MP_JUMP_REVOLVER 1
+
+// Walking
+
+$MakeWalkNoLeftArm	walk_pistol		pistol "gmod/aimlayer_pistol_walk" 4 aimlayer_pistol_walk ACT_HL2MP_WALK_PISTOL 1
+$MakeWalk	        walk_revolver	revolver "gmod/aimlayer_revolver_walk" 4 aimlayer_revolver_walk ACT_HL2MP_WALK_REVOLVER 1
+
+// Crouch walking
+
+$makecwalk	        cwalk_pistol	"player/HL2DM_crouch_aim_pistol" 4 HL2DM_crouch_aim_pistol ACT_HL2MP_WALK_CROUCH_PISTOL 1
+$makecwalk	        cwalk_revolver	"gmod/aimlayer_revolver_run" 4 aimlayer_revolver_run ACT_HL2MP_WALK_CROUCH_REVOLVER 1
+
+// Running
+
+$MakeRunNoLeftArm	run_pistol	    "gmod/aimlayer_pistol_run" 4 aimlayer_pistol_run ACT_HL2MP_RUN_PISTOL 1
+$MakeRun	        run_revolver	revolver "gmod/aimlayer_revolver_run" 4 aimlayer_revolver_run ACT_HL2MP_RUN_REVOLVER 1
+
+// Swim idle
+
+$MakeSwimIdle	    swim_idle_pistol	"gmod/aimlayer_pistol_run" 4 aimlayer_pistol ACT_HL2MP_SWIM_IDLE_PISTOL 1
+$MakeSwimIdle	    swim_idle_revolver	"gmod/aimlayer_revolver_walk" 4 aimlayer_revolver_walk ACT_HL2MP_SWIM_IDLE_REVOLVER 1
+
+// Swimming
+
+$MakeSwimNoLeftArm	swimming_pistol		"gmod/aimlayer_pistol_run" 4 aimlayer_pistol ACT_HL2MP_SWIM_PISTOL 1
+$MakeSwim	        swimming_revolver 	"gmod/aimlayer_revolver_run" 4 aimlayer_revolver_run ACT_HL2MP_SWIM_REVOLVER 1
+
+// Attack gestures
+
+$MakeRange          range_pistol	"gmod/attack_pistol" 0 ACT_HL2MP_GESTURE_RANGE_ATTACK_PISTOL 1 fps 45
+$MakeRange          range_revolver	"gmod/attack_revolver" 0 ACT_HL2MP_GESTURE_RANGE_ATTACK_REVOLVER 1 fps 32
+
+// Reload gestures
+
+$MakeSplineGestureLockFeet reload_pistol    "gmod/reload_pistol" PelvisOnlyHalved FasterUpperBodyBlend 14 30 40 fps 30 ACT_HL2MP_GESTURE_RELOAD_PISTOL 1 ikrule lhand release
+$MakeSplineGestureLockFeet reload_revolver  "gmod/reload_revolver" PelvisOnly NoPelvisNoRightFingers 15 90 110 fps 35 ikrule lhand release {
+	ikrule lhand release
+	activity ACT_HL2MP_GESTURE_RELOAD_REVOLVER 1
+	event AE_CL_PLAYSOUND 8 "Weapon_357.OpenLoader"
+	event AE_CL_PLAYSOUND 14 "Weapon_357.RemoveLoader"
+	event AE_CL_PLAYSOUND 62 "Weapon_357.ReplaceLoader"
+	}
+
+// Misc. gestures
+
+$MakeSplineGestureLockFeet gesture_salute	"gmod/gesture_salute" PelvisOnly NoPelvisNoRightFingers 15 85 100 ACT_GMOD_GESTURE_SALUTE 1 fps 30
+$MakeSplineGestureLockFeet gesture_wave	    "gmod/gesture_wave" PelvisOnly NoPelvisNoRightFingers 15 90 110 ACT_GMOD_GESTURE_WAVE 1 fps 30
+	
+// And a simple sequence
+
+$sequence  death_01          "gmod/death_01" fps 30 activity ACT_GMOD_DEATH 1	
+
+//
+// Sample chunk ends here.
+//

@@ -1,0 +1,417 @@
+// ----------------------------------------------------------------------------
+//  PLAYER MOVEMENT MACROS
+//
+//  Used for creating the movement animations, which includes:
+//  idle, crouch idle, walking, crouch walking, running, sitting.
+// ----------------------------------------------------------------------------
+
+// ------------------------------------
+//  MAKE IDLE
+// ------------------------------------
+
+$definemacro makeidle idlename filename frame aimlayer \\
+$sequence $idlename$ $filename$ alignto reference frame $frame$ $frame$ numframes 30 loop fadein 0.30 fadeout 0.30 addlayer $aimlayer$ addlayer gmod_breath_layer node "standing" \\
+$continue $idlename$
+
+// ------------------------------------
+//  MAKE CROUCH IDLE
+// ------------------------------------
+
+$definemacro makecidle cidlename filename frame aimlayer \\
+$sequence $cidlename$ $filename$ alignto reference frame $frame$ $frame$ numframes 30 loop fadein 0.3 fadeout 0.3 addlayer $aimlayer$ addlayer gmod_breath_layer node "crouching" \\
+$continue $cidlename$
+
+// ------------------------------------
+//  MAKE CROUCH IDLE (BLEND)
+// ------------------------------------
+
+$definemacro makecidleB cidlename filename frame filenameB frameB aimlayer \\
+$animation a_$cidlename$_base $filename$ frame $frame$ $frame$ \\
+$sequence $cidlename$ $filenameB$ { \\
+	frame $frameB$ $frameB$ \\
+	weightlist UpperBodyBlend \\
+	worldspaceblend a_$cidlename$_base \\
+	weightlist AllBones \\
+	fadein 0.3 fadeout 0.3 loop \\
+	node "crouching" \\
+	} \\
+$continue $cidlename$
+
+// ------------------------------------
+//  MAKE SWIM IDLE
+// ------------------------------------
+
+$definemacro MakeSwimIdle idlename filename frame aimlayer \\
+$animation a_$filename$_base $filename$ frame $frame$ $frame$ \\
+$animation a_$filename$_swim_idle_layer "../gmod/swim_c" { \\
+	alignto reference \\
+	weightlist AimlayerSwimWL \\
+	worldspaceblend a_$filename$_base \\
+	weightlist AllBones \\
+	} \\
+$sequence $idlename$ a_$filename$_swim_idle_layer addlayer $aimlayer$ fadein 0.4 fadeout 0.4 loop node "swimming" \\\\
+$continue $idlename$
+
+// ------------------------------------
+// MAKE WALK
+// ------------------------------------
+
+$definemacro MakeWalkBlends walkname direction filename frame \\
+$animation a_walking_$walkname$_$direction$ ../base_f/walk$direction$ { \\
+	LX LY \\
+	startloop 0 \\
+	weightlist AimlayerWorldSpaceBlend \\
+	worldspaceblend a_$walkname$_pose \\
+	weightlist AllBones \\
+} \\
+$continue a_walking_$walkname$_$direction$ \\
+
+$definemacro MakeWalk walkname centralpose filename frame aimlayer \\
+$animation a_$walkname$_pose $filename$ frame $frame$ $frame$ \\
+$MakeWalkBlends $walkname$ SW $filename$ $frame$ \\
+$MakeWalkBlends $walkname$ S  $filename$ $frame$ \\
+$MakeWalkBlends $walkname$ SE $filename$ $frame$ \\
+$MakeWalkBlends $walkname$ W  $filename$ $frame$ \\
+$MakeWalkBlends $walkname$ E  $filename$ $frame$ \\
+$MakeWalkBlends $walkname$ NW $filename$ $frame$ \\
+$MakeWalkBlends $walkname$ N  $filename$ $frame$ \\
+$MakeWalkBlends $walkname$ NE $filename$ $frame$ \\
+$animation a_walking_$walkname$_C ../9way_central/$centralpose$ { \\
+	startloop 0 \\
+	numframes 30 \\
+	alignto reference \\
+	weightlist HandsOnly \\
+	worldspaceblend a_$walkname$_pose \\
+	weightlist AllBones \\
+} \\
+$sequence $walkname$ { \\
+	a_walking_$walkname$_SW  a_walking_$walkname$_S a_walking_$walkname$_SE \\
+	a_walking_$walkname$_W	 a_walking_$walkname$_C a_walking_$walkname$_E  \\
+	a_walking_$walkname$_NW  a_walking_$walkname$_N a_walking_$walkname$_NE \\
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1 \\
+	addlayer $aimlayer$ \\
+	addlayer gmod_breath_layer \\
+	fadein 0.3 fadeout 0.3 loop \\
+	node "walking" \\
+	} \\
+$continue $walkname$
+
+// ------------------------------------
+// MAKE WALK, NO LEFT ARM
+// For one-handed weapons e.g. melee
+// ------------------------------------
+
+$definemacro MakeWalkNoLeftArmBlends walkname direction filename frame \\
+$animation a_walking_$walkname$_$direction$ ../base_f/walk$direction$ { \\
+	LX LY \\
+	startloop 0 \\
+	alignto reference \\
+	weightlist MakeWalkNoLeftArm \\
+	worldspaceblend a_$walkname$_pose \\
+	weightlist AllBones \\
+} \\
+$continue a_walking_$walkname$_$direction$ \\
+
+$definemacro MakeWalkNoLeftArm walkname centralpose filename frame aimlayer \\
+$animation a_$walkname$_pose $filename$ frame $frame$ $frame$ \\
+$MakeWalkNoLeftArmBlends $walkname$ SW $filename$ $frame$ \\
+$MakeWalkNoLeftArmBlends $walkname$ S  $filename$ $frame$ \\
+$MakeWalkNoLeftArmBlends $walkname$ SE $filename$ $frame$ \\
+$MakeWalkNoLeftArmBlends $walkname$ W  $filename$ $frame$ \\
+$MakeWalkNoLeftArmBlends $walkname$ E  $filename$ $frame$ \\
+$MakeWalkNoLeftArmBlends $walkname$ NW $filename$ $frame$ \\
+$MakeWalkNoLeftArmBlends $walkname$ N  $filename$ $frame$ \\
+$MakeWalkNoLeftArmBlends $walkname$ NE $filename$ $frame$ \\
+$animation a_walking_$walkname$_C ../9way_central/$centralpose$ { \\
+	LX LY \\
+	startloop 0 \\
+	numframes 30 \\
+	alignto reference \\
+	weightlist HandsOnly \\
+	worldspaceblend a_$walkname$_pose \\
+	weightlist AllBones \\
+} \\
+$sequence $walkname$ { \\
+	a_walking_$walkname$_SW  a_walking_$walkname$_S a_walking_$walkname$_SE \\
+	a_walking_$walkname$_W	 a_walking_$walkname$_C a_walking_$walkname$_E  \\
+	a_walking_$walkname$_NW  a_walking_$walkname$_N a_walking_$walkname$_NE \\
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1 \\
+	addlayer $aimlayer$ \\
+	addlayer gmod_breath_layer \\
+	fadein 0.3 fadeout 0.3 loop \\
+	node "walking" \\
+	} \\
+$continue $walkname$
+
+// ------------------------------------
+// MAKE CROUCH WALK
+// ------------------------------------
+
+$definemacro MakeCrouchWalkBlends CrouchWalkname direction filename frame \\
+$animation a_CrouchWalking_$CrouchWalkname$_$direction$ ../base_f/crouch_walk$direction$ { \\
+	LX LY \\
+	startloop 0 \\
+	weightlist AimlayerWorldSpaceBlend \\
+	worldspaceblend a_$CrouchWalkname$_pose \\
+	weightlist AllBones \\
+} \\
+$continue a_CrouchWalking_$CrouchWalkname$_$direction$ \\
+
+$definemacro MakeCWalk CrouchWalkname filename frame aimlayer \\
+$animation a_$CrouchWalkname$_pose $filename$ frame $frame$ $frame$ \\
+$MakeCrouchWalkBlends $CrouchWalkname$ SW $filename$ $frame$ \\
+$MakeCrouchWalkBlends $CrouchWalkname$ S  $filename$ $frame$ \\
+$MakeCrouchWalkBlends $CrouchWalkname$ SE $filename$ $frame$ \\
+$MakeCrouchWalkBlends $CrouchWalkname$ W  $filename$ $frame$ \\
+$MakeCrouchWalkBlends $CrouchWalkname$ E  $filename$ $frame$ \\
+$MakeCrouchWalkBlends $CrouchWalkname$ NW $filename$ $frame$ \\
+$MakeCrouchWalkBlends $CrouchWalkname$ N  $filename$ $frame$ \\
+$MakeCrouchWalkBlends $CrouchWalkname$ NE $filename$ $frame$ \\
+// $MakeCrouchWalkBlends $CrouchWalkname$ C $filename$ $frame$ \\
+$animation a_CrouchWalking_$CrouchWalkname$_C $filename$ frame $frame$ $frame$ { \\
+	startloop 0 \\
+	numframes 30 \\
+	alignto reference \\
+	weightlist HandsOnly \\
+	worldspaceblend a_$CrouchWalkname$_pose \\
+	weightlist AllBones \\
+} \\
+$sequence $crouchwalkname$ { \\
+	a_CrouchWalking_$CrouchWalkname$_SW  a_CrouchWalking_$CrouchWalkname$_S a_CrouchWalking_$CrouchWalkname$_SE \\
+	a_CrouchWalking_$CrouchWalkname$_W	 a_CrouchWalking_$CrouchWalkname$_C a_CrouchWalking_$CrouchWalkname$_E  \\
+	a_CrouchWalking_$CrouchWalkname$_NW  a_CrouchWalking_$CrouchWalkname$_N a_CrouchWalking_$CrouchWalkname$_NE \\
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1 \\
+	addlayer $aimlayer$ \\
+	addlayer gmod_breath_layer \\
+	fadein 0.4 fadeout 0.3 loop \\
+	node "crouching" \\
+	} \\
+$continue $CrouchWalkname$
+
+// ------------------------------------
+// MAKE CROUCH WALK, NO LEFT ARM
+// ------------------------------------
+
+$definemacro MakeCrouchWalkNoLeftArmBlends CrouchWalkname direction filename frame \\
+$animation a_CrouchWalking_$CrouchWalkname$_$direction$ ../base_f/crouch_walk$direction$ { \\
+	LX LY \\
+	startloop 0 \\
+	weightlist MakeCrouchWalkNoLeftArm \\
+	worldspaceblend a_$CrouchWalkname$_pose \\
+	weightlist AllBones \\
+} \\
+$continue a_CrouchWalking_$CrouchWalkname$_$direction$ \\
+
+$definemacro MakeCWalkNoLeftArm CrouchWalkname filename frame aimlayer \\
+$animation a_$CrouchWalkname$_pose $filename$ frame $frame$ $frame$ \\
+$MakeCrouchWalkNoLeftArmBlends $CrouchWalkname$ SW $filename$ $frame$ \\
+$MakeCrouchWalkNoLeftArmBlends $CrouchWalkname$ S  $filename$ $frame$ \\
+$MakeCrouchWalkNoLeftArmBlends $CrouchWalkname$ SE $filename$ $frame$ \\
+$MakeCrouchWalkNoLeftArmBlends $CrouchWalkname$ W  $filename$ $frame$ \\
+$MakeCrouchWalkNoLeftArmBlends $CrouchWalkname$ E  $filename$ $frame$ \\
+$MakeCrouchWalkNoLeftArmBlends $CrouchWalkname$ NW $filename$ $frame$ \\
+$MakeCrouchWalkNoLeftArmBlends $CrouchWalkname$ N  $filename$ $frame$ \\
+$MakeCrouchWalkNoLeftArmBlends $CrouchWalkname$ NE $filename$ $frame$ \\
+// $MakeCrouchWalkNoLeftArmBlends $CrouchWalkname$ C $filename$ $frame$ \\
+$animation a_CrouchWalking_$CrouchWalkname$_C $filename$ frame $frame$ $frame$ { \\
+	startloop 0 \\
+	numframes 30 \\
+	alignto reference \\
+	weightlist HandsOnly \\
+	worldspaceblend a_$CrouchWalkname$_pose \\
+	weightlist AllBones \\
+} \\
+$sequence $crouchwalkname$ { \\
+	a_CrouchWalking_$CrouchWalkname$_SW  a_CrouchWalking_$CrouchWalkname$_S a_CrouchWalking_$CrouchWalkname$_SE \\
+	a_CrouchWalking_$CrouchWalkname$_W	 a_CrouchWalking_$CrouchWalkname$_C a_CrouchWalking_$CrouchWalkname$_E  \\
+	a_CrouchWalking_$CrouchWalkname$_NW  a_CrouchWalking_$CrouchWalkname$_N a_CrouchWalking_$CrouchWalkname$_NE \\
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1 \\
+	addlayer $aimlayer$ \\
+	addlayer gmod_breath_layer \\
+	fadein 0.4 fadeout 0.3 loop \\
+	node "crouching" \\
+	} \\
+$continue $CrouchWalkname$
+
+// ------------------------------------
+// MAKE RUN
+// MakeMatchRun is now default
+// ------------------------------------
+
+$definemacro MakeRunBlends runname direction filename frame \\
+$animation a_running_$runname$_$direction$ ../base_m/run$direction$ { \\
+	LX LY \\
+	startloop 0 \\
+	alignto reference \\
+	weightlist AimlayerWorldSpaceBlend \\
+	worldspaceblend a_$runname$_pose \\
+	weightlist AllBones \\
+} \\
+$continue a_running_$runname$_$direction$ \\
+
+$definemacro MakeRun runname filename frame aimlayer \\
+$animation a_$runname$_pose $filename$ frame $frame$ $frame$ \\
+$MakeRunBlends $runname$ SW $filename$ $frame$ \\
+$MakeRunBlends $runname$ S  $filename$ $frame$ \\
+$MakeRunBlends $runname$ SE $filename$ $frame$ \\
+$MakeRunBlends $runname$ W  $filename$ $frame$ \\
+$MakeRunBlends $runname$ E  $filename$ $frame$ \\
+$MakeRunBlends $runname$ NW $filename$ $frame$ \\
+$MakeRunBlends $runname$ N  $filename$ $frame$ \\
+$MakeRunBlends $runname$ NE $filename$ $frame$ \\
+$animation a_running_$runname$_C ../base_m/run_center { \\
+	LX LY \\
+	startloop 0 \\
+	numframes 30 \\
+	alignto reference \\
+	weightlist AimlayerWorldSpaceBlend \\
+	worldspaceblend a_$runname$_pose \\
+	weightlist AllBones \\
+} \\
+$sequence $runname$ { \\
+	a_running_$runname$_SW  a_running_$runname$_S a_running_$runname$_SE \\
+	a_running_$runname$_W	a_running_$runname$_C a_running_$runname$_E  \\
+	a_running_$runname$_NW  a_running_$runname$_N a_running_$runname$_NE \\
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1 \\
+	addlayer $aimlayer$ \\
+	fadein 0.3 fadeout 0.3 loop \\
+	node "running" \\
+	} \\
+$continue $runname$
+
+// ------------------------------------
+// MAKE RUN, NO LEFT ARM
+// For one-handed weapons e.g. melee
+// ------------------------------------
+
+$definemacro MakeRunNoLeftArmBlends runname direction filename frame \\
+$animation a_running_$runname$_$direction$ ../base_f/run$direction$ { \\
+	LX LY \\
+	startloop 0 \\
+	alignto reference \\
+	weightlist MakeRunNoLeftArm \\
+	worldspaceblend a_$runname$_pose \\
+	weightlist AllBones \\
+} \\
+$continue a_running_$runname$_$direction$ \\
+
+$definemacro MakeRunNoLeftArm runname filename frame aimlayer \\
+$animation a_$runname$_pose $filename$ frame $frame$ $frame$ \\
+$MakeRunNoLeftArmBlends $runname$ SW $filename$ $frame$ \\
+$MakeRunNoLeftArmBlends $runname$ S  $filename$ $frame$ \\
+$MakeRunNoLeftArmBlends $runname$ SE $filename$ $frame$ \\
+$MakeRunNoLeftArmBlends $runname$ W  $filename$ $frame$ \\
+$MakeRunNoLeftArmBlends $runname$ E  $filename$ $frame$ \\
+$MakeRunNoLeftArmBlends $runname$ NW $filename$ $frame$ \\
+$MakeRunNoLeftArmBlends $runname$ N  $filename$ $frame$ \\
+$MakeRunNoLeftArmBlends $runname$ NE $filename$ $frame$ \\
+$animation a_running_$runname$_C ../base_m/run_center { \\
+	LX LY \\
+	startloop 0 \\
+	numframes 30 \\
+	alignto reference \\
+	weightlist AimlayerWorldSpaceBlend \\
+	worldspaceblend a_$runname$_pose \\
+	weightlist AllBones \\
+} \\
+$sequence $runname$ { \\
+	a_running_$runname$_SW  a_running_$runname$_S a_running_$runname$_SE \\
+	a_running_$runname$_W	a_running_$runname$_C a_running_$runname$_E  \\
+	a_running_$runname$_NW  a_running_$runname$_N a_running_$runname$_NE \\
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1 \\
+	addlayer $aimlayer$ \\
+	fadein 0.3 fadeout 0.3 loop \\
+	node "running" \\
+	} \\
+$continue $runname$
+
+// ------------------------------------
+// MAKE SWIMMING
+// ------------------------------------
+
+$definemacro MakeSwimBlends swimname direction filename frame \\
+$animation a_swimming_$swimname$_$direction$ ../gmod/swim_$direction$ { \\
+	LX LY \\
+	startloop 0 \\
+	weightlist AimlayerSwimWL \\
+	worldspaceblend a_$swimname$_pose \\
+	weightlist AllBones \\
+	noautoik \\
+} \\
+$continue a_swimming_$swimname$_$direction$ \\
+
+$definemacro MakeSwim swimname filename frame aimlayer \\
+$animation a_$swimname$_pose $filename$ frame $frame$ $frame$ \\
+$MakeSwimBlends $swimname$ SW $filename$ $frame$ \\
+$MakeSwimBlends $swimname$ S  $filename$ $frame$ \\
+$MakeSwimBlends $swimname$ SE $filename$ $frame$ \\
+$MakeSwimBlends $swimname$ W  $filename$ $frame$ \\
+$MakeSwimBlends $swimname$ E  $filename$ $frame$ \\
+$MakeSwimBlends $swimname$ NW $filename$ $frame$ \\
+$MakeSwimBlends $swimname$ N  $filename$ $frame$ \\
+$MakeSwimBlends $swimname$ NE $filename$ $frame$ \\
+$MakeSwimBlends $swimname$ C  $filename$ $frame$ \\
+$sequence $swimname$ { \\
+	a_swimming_$swimname$_SW  a_swimming_$swimname$_S a_swimming_$swimname$_SE \\
+	a_swimming_$swimname$_W	  a_swimming_$swimname$_C a_swimming_$swimname$_E  \\
+	a_swimming_$swimname$_NW  a_swimming_$swimname$_N a_swimming_$swimname$_NE \\
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1 \\
+	addlayer $aimlayer$ \\
+	noautoik \\
+	fadein 0.5 fadeout 0.5 loop \\
+	node "swimming" \\
+	} \\
+$continue $swimname$
+
+// ------------------------------------
+// MAKE SWIMMING (NO LEFT ARM)
+// ------------------------------------
+
+$definemacro MakeSwimNoLeftArmBlends swimname direction filename frame \\
+$animation a_swimming_$swimname$_$direction$ ../gmod/swim_$direction$ { \\
+	LX LY \\
+	startloop 0 \\
+	weightlist AimlayerSwimNoLeftArmWL \\
+	worldspaceblend a_$swimname$_pose \\
+	weightlist AllBones \\
+	noautoik \\
+} \\
+$continue a_swimming_$swimname$_$direction$ \\
+
+$definemacro MakeSwimNoLeftArm swimname filename frame aimlayer \\
+$animation a_$swimname$_pose $filename$ frame $frame$ $frame$ \\
+$MakeSwimNoLeftArmBlends $swimname$ SW $filename$ $frame$ \\
+$MakeSwimNoLeftArmBlends $swimname$ S  $filename$ $frame$ \\
+$MakeSwimNoLeftArmBlends $swimname$ SE $filename$ $frame$ \\
+$MakeSwimNoLeftArmBlends $swimname$ W  $filename$ $frame$ \\
+$MakeSwimNoLeftArmBlends $swimname$ E  $filename$ $frame$ \\
+$MakeSwimNoLeftArmBlends $swimname$ NW $filename$ $frame$ \\
+$MakeSwimNoLeftArmBlends $swimname$ N  $filename$ $frame$ \\
+$MakeSwimNoLeftArmBlends $swimname$ NE $filename$ $frame$ \\
+$MakeSwimNoLeftArmBlends $swimname$ C  $filename$ $frame$ \\
+$sequence $swimname$ { \\
+	a_swimming_$swimname$_SW  a_swimming_$swimname$_S a_swimming_$swimname$_SE \\
+	a_swimming_$swimname$_W	  a_swimming_$swimname$_C a_swimming_$swimname$_E  \\
+	a_swimming_$swimname$_NW  a_swimming_$swimname$_N a_swimming_$swimname$_NE \\
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1 \\
+	addlayer $aimlayer$ \\
+	noautoik \\
+	fadein 0.5 fadeout 0.5 loop \\
+	node "swimming" \\
+	} \\
+$continue $swimname$
+
+// ------------------------------------
+// MAKE SIT
+// ------------------------------------
+
+$definemacro makesit sitname filename frame aimlayer \\
+$animation a_$sitname$_base $filename$ frame $frame$ $frame$ weightlist SlowerUpperBodyBlend \\
+$sequence $sitname$ "../gmod/sit_slam" { \\
+	weightlist SlowerUpperBodyBlend \\
+	worldspaceblend a_$sitname$_base \\
+	weightlist AllBones \\
+	loop addlayer gmod_breath_layer_sitting addlayer $aimlayer$ \\ 
+	node "sitting" \\
+	} \\	
+$continue $sitname$

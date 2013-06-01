@@ -1,0 +1,59 @@
+// --------------------------------------------------------
+//  BASE SEQUENCES
+//
+// These are the gender-specific animations. You should
+// not modify this file unless you really know what you
+// are doing; macros heavily rely on it.
+//
+// For your own animations, see gm_anims.qci!
+// --------------------------------------------------------
+
+$animation a_gmod_breath "gmod/breath" subtract reference 0 fixuploop 0 60
+$sequence gmod_breath_layer a_gmod_breath delta loop realtime fps 25 iklock rfoot 1 0 iklock lfoot 1 0 weightlist 75percent
+
+$animation a_gmod_jump_delta "../gmod/jump" subtract reference 0
+$sequence gmod_jump_delta a_gmod_jump_delta weightlist jump_delta delta hidden
+
+// Walking
+
+$animation a_WalkS "base_m/WalkS" loop LX LY rotateto -180 alignto reference
+$animation a_WalkSE "base_m/WalkSE" loop LX LY rotateto -135 alignto reference
+$animation a_WalkE "base_m/WalkE" loop LX LY rotateto -90 alignto reference
+$animation a_WalkNE "base_m/WalkNE" loop LX LY rotateto -45 alignto reference
+$animation a_WalkN "base_m/WalkN" loop LX LY rotateto 0 alignto reference
+$animation a_WalkNW "base_m/WalkNW" loop LX LY rotateto 45 alignto reference
+$animation a_WalkW "base_m/WalkW" loop LX LY rotateto 90 alignto reference
+$animation a_WalkSW "base_m/WalkSW" loop LX LY rotateto 135 alignto reference
+
+// Crouch walking
+
+$animation a_CwalkS "base_m/Crouch_walkS" loop LX LY rotateto -180
+$animation a_CwalkSE "base_m/Crouch_walkSE" loop LX LY rotateto -135
+$animation a_CwalkE "base_m/Crouch_walkE" loop LX LY rotateto -90
+$animation a_CwalkNE "base_m/Crouch_walkNE" loop LX LY rotateto -45
+$animation a_CwalkN "base_m/crouch_walkN" loop LX LY rotateto 0
+$animation a_CwalkNW "base_m/Crouch_walkNW" loop LX LY rotateto 45
+$animation a_CwalkW "base_m/Crouch_walkW" loop LX LY rotateto 90
+$animation a_CwalkSW "base_m/Crouch_walkSW" loop LX LY rotateto 135
+
+// Running
+
+$animation a_RunS "base_m/RunS" loop LX LY startloop 0 rotateto -180	alignto reference
+$animation a_RunSE "base_m/RunSE" loop LX LY startloop 0 rotateto -135 alignto reference
+$animation a_RunE "base_m/RunE" loop LX LY startloop 0 rotateto -90 alignto reference
+$animation a_RunNE "base_m/RunNE" loop LX LY startloop 0 rotateto -45 alignto reference
+$animation a_RunN "base_m/RunN" loop LX LY startloop 0 rotateto 0 alignto reference
+$animation a_RunNW "base_m/RunNW" loop LX LY startloop 0 rotateto 45 alignto reference
+$animation a_RunW "base_m/RunW" loop LX LY startloop 0 rotateto 90 alignto reference
+$animation a_RunSW "base_m/RunSW" loop LX LY startloop 0 rotateto 135 alignto reference
+
+// Swimming
+
+$animation a_SwimS  "gmod/swim_s"	loop LX LY fps 50
+$animation a_SwimSE "gmod/swim_se" loop LX LY fps 50
+$animation a_SwimE  "gmod/swim_e"	loop LX LY fps 50
+$animation a_SwimNE "gmod/swim_ne" loop LX LY fps 50
+$animation a_SwimN  "gmod/swim_n" loop LX LY fps 50
+$animation a_SwimNW "gmod/swim_nw" loop LX LY fps 50
+$animation a_SwimW  "gmod/swim_w" loop LX LY fps 50
+$animation a_SwimSW "gmod/swim_sw" loop LX LY fps 50

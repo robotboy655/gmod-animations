@@ -1,0 +1,191 @@
+// ------------------------------------
+//  BASE SEQUENCES
+// ------------------------------------
+
+$sequence idle_all_01		"../base_f/idle02"     loop startloop 0 fps 30 fadein 0.3 fadeout 0.3 alignto reference addlayer gmod_breath_layer addlayer body_rot_z ACT_HL2MP_IDLE 2
+$sequence idle_all_02		"../base_f/idle03"     loop startloop 0 fps 30 fadein 0.3 fadeout 0.3 alignto reference addlayer gmod_breath_layer addlayer body_rot_z //ACT_HL2MP_IDLE 1
+$sequence idle_all_angry	"../base_f/idle_angry" loop startloop 0 fps 25 fadein 0.3 fadeout 0.3 alignto reference addlayer gmod_breath_layer addlayer body_rot_z addlayer idle_layer ACT_HL2MP_IDLE_ANGRY 1
+$sequence idle_all_scared  "../base_f/idle_scared" loop startloop 0 fps 25 fadein 0.3 fadeout 0.3 alignto reference addlayer gmod_breath_layer addlayer idle_layer_alt ACT_HL2MP_IDLE_SCARED 1
+$sequence idle_all_cower	"../base_f/cower"      loop startloop 0 fps 01 fadein 0.3 fadeout 0.3 alignto reference addlayer gmod_breath_layer addlayer idle_layer_alt ACT_HL2MP_IDLE_COWER 1 frames 30 30
+
+$sequence cidle_all        "../base_f/crouch_idle" loop startloop 0 fps 20 fadein 0.3 fadeout 0.3 alignto reference addlayer gmod_breath_layer addlayer idle_layer ACT_HL2MP_IDLE_CROUCH 1 
+$sequence swim_idle_all    "../gmod/swim_c"        loop startloop 0 fps 40 fadein 0.4 fadeout 0.3 alignto reference addlayer gmod_breath_layer addlayer body_rot_z ACT_HL2MP_SWIM_IDLE 1
+$sequence sit              "../gmod/sit_slam"      loop startloop 0 fps 30 fadein 0.3 fadeout 0.3 alignto reference addlayer gmod_breath_layer_sitting ACT_HL2MP_SIT 1
+
+$animation a_idle_layer                             "../base_f/idle02" subtract idle_all_01 0 fixuploop 0 279
+$animation a_idle_layer_alt                         "../base_f/idle03" subtract idle_all_02 0 fixuploop 0 150
+
+$animation a_m_combine "../base_m/idle_unarmed" fixuploop 0 341
+$sequence  menu_walk "../base_f/WalkN" loop fps 30 alignto reference LX LY
+$sequence  menu_combine "a_m_combine" loop fps 30 alignto reference addlayer idle_layer
+$sequence  menu_gman "../base_m/tie_fidget" fps 30 alignto reference addlayer idle_layer
+
+// Walking
+
+$animation a_WalkC "../base_f/idle02"  loop startloop 0 alignto reference
+$animation a_WalkS "../base_f/WalkS"   loop startloop 0 LX LY alignto reference
+$animation a_WalkSE "../base_f/WalkSE" loop startloop 0 LX LY alignto reference
+$animation a_WalkE "../base_f/WalkE"   loop startloop 0 LX LY alignto reference
+$animation a_WalkNE "../base_f/WalkNE" loop startloop 0 LX LY alignto reference
+$animation a_WalkN "../base_f/WalkN"   loop startloop 0 LX LY alignto reference
+$animation a_WalkNW "../base_f/WalkNW" loop startloop 0 LX LY alignto reference
+$animation a_WalkW "../base_f/WalkW"   loop startloop 0 LX LY alignto reference
+$animation a_WalkSW "../base_f/WalkSW" loop startloop 0 LX LY alignto reference
+
+// Crouch walking
+
+$animation a_CwalkC  "../base_f/crouch_idle"   loop startloop 0 alignto reference
+$animation a_CwalkS  "../base_f/Crouch_walkS"  loop startloop 0 LX LY alignto reference 
+$animation a_CwalkSE "../base_f/Crouch_walkSE" loop startloop 0 LX LY alignto reference 
+$animation a_CwalkE  "../base_f/Crouch_walkE"  loop startloop 0 LX LY alignto reference 
+$animation a_CwalkNE "../base_f/Crouch_walkNE" loop startloop 0 LX LY alignto reference 
+$animation a_CwalkN  "../base_f/crouch_walkN"  loop startloop 0 LX LY alignto reference 
+$animation a_CwalkNW "../base_f/Crouch_walkNW" loop startloop 0 LX LY alignto reference 
+$animation a_CwalkW  "../base_f/Crouch_walkW"  loop startloop 0 LX LY alignto reference 
+$animation a_CwalkSW "../base_f/Crouch_walkSW" loop startloop 0 LX LY alignto reference 
+
+// Running
+
+$animation a_RunS "../base_f/RunS" loop LX LY startloop 0 rotateto -180	alignto reference
+$animation a_RunSE "../base_f/RunSE" loop LX LY startloop 0 rotateto -135 alignto reference
+$animation a_RunE "../base_f/RunE" loop LX LY startloop 0 rotateto -90 alignto reference
+$animation a_RunNE "../base_f/RunNE" loop LX LY startloop 0 rotateto -45 alignto reference
+$animation a_RunN "../base_f/RunN" loop LX LY startloop 0 rotateto 0 alignto reference
+$animation a_RunNW "../base_f/RunNW" loop LX LY startloop 0 rotateto 45 alignto reference
+$animation a_RunW "../base_f/RunW" loop LX LY startloop 0 rotateto 90 alignto reference
+$animation a_RunSW "../base_f/RunSW" loop LX LY startloop 0 rotateto 135 alignto reference
+
+$animation a_RunN_ch "../base_f/run_charging" loop LX LY startloop 0 rotateto 0 alignto reference
+$animation a_RunN_p1 "../base_f/run_panicked" loop LX LY startloop 0 rotateto 0 alignto reference
+$animation a_RunN_p2 "../base_f/runN_panicked2" loop LX LY startloop 0 rotateto 0 alignto reference
+$animation a_RunN_p3 "../base_f/runN_panicked3" loop LX LY startloop 0 rotateto 0 alignto reference
+$animation a_RunN_p5 "../base_f/runN_protected" loop LX LY startloop 0 rotateto 0 alignto reference
+
+// Swimming
+
+$animation a_SwimS "../gmod/swim_s"	loop LX LY fps 50
+$animation a_SwimSE "../gmod/swim_se" loop LX LY fps 50
+$animation a_SwimE "../gmod/swim_e"	loop LX LY fps 50
+$animation a_SwimNE "../gmod/swim_ne" loop LX LY fps 50
+$animation a_SwimN "../gmod/swim_n" loop LX LY fps 50
+$animation a_SwimNW "../gmod/swim_nw" loop LX LY fps 50
+$animation a_SwimW "../gmod/swim_w" loop LX LY fps 50
+$animation a_SwimSW "../gmod/swim_sw" loop LX LY fps 50
+
+// Composited sequences
+
+$sequence walk_all {
+	a_WalkSW  a_WalkS  a_WalkSE
+	a_WalkW	  a_WalkC   a_WalkE
+	a_WalkNW  a_WalkN  a_WalkNE
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1
+	activity ACT_HL2MP_WALK 1 node "walking"
+	addlayer gmod_breath_layer
+	addlayer body_rot_z 
+	fadein 0.3 fadeout 0.3
+}
+
+$sequence cwalk_all {
+	a_CwalkSW  a_CwalkS  a_CwalkSE
+	a_CwalkW   a_CWalkC  a_CwalkE
+	a_CwalkNW  a_CwalkN  a_CwalkNE
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1
+	activity ACT_HL2MP_WALK_CROUCH 1 node "walking"
+	addlayer gmod_breath_layer
+	addlayer body_rot_z
+	fadein 0.4 fadeout 0.3
+}
+
+$sequence run_all_01 {
+	a_RunSW  a_RunS  a_RunSE
+	a_RunW	 a_WalkC    a_RunE
+	a_RunNW  a_RunN  a_RunNE
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1
+	activity ACT_HL2MP_RUN 1 node "running"
+	addlayer gmod_breath_layer
+	addlayer body_rot_z 
+	numframes 18
+	fadein 0.4 fadeout 0.4
+}
+
+$sequence run_all_02 {
+	a_RunSW  a_RunS  a_RunSE
+	a_RunW	 a_WalkC    a_RunE
+	a_RunNW  a_RunN_p1  a_RunNE
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1
+	activity ACT_HL2MP_RUN_FAST 1 node "running"
+	addlayer gmod_breath_layer
+	addlayer body_rot_z 
+	numframes 18
+	fadein 0.4 fadeout 0.4
+}
+
+$sequence run_all_panicked_01 {
+	a_RunSW  a_RunS  a_RunSE
+	a_RunW	 a_WalkC    a_RunE
+	a_RunNW  a_RunN_p2  a_RunNE
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1
+	activity ACT_HL2MP_RUN_PANICKED 1 node "running"
+	addlayer gmod_breath_layer
+	addlayer body_rot_z 
+	numframes 18
+	fadein 0.4 fadeout 0.3
+}
+
+$sequence run_all_panicked_02 {
+	a_RunSW  a_RunS  a_RunSE
+	a_RunW	 a_WalkC    a_RunE
+	a_RunNW  a_RunN_p3  a_RunNE
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1
+	activity ACT_HL2MP_RUN_PANICKED 1 node "running"
+	addlayer gmod_breath_layer
+	addlayer body_rot_z 
+	numframes 18
+	fadein 0.4 fadeout 0.3
+}
+
+$sequence run_all_protected {
+	a_RunSW  a_RunS  a_RunSE
+	a_RunW	 a_WalkC    a_RunE
+	a_RunNW  a_RunN_p5  a_RunNE
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1
+	activity ACT_HL2MP_RUN_PROTECTED 1 node "running"
+	addlayer gmod_breath_layer
+	addlayer body_rot_z 
+	numframes 18
+	fadein 0.4 fadeout 0.3
+}
+
+$sequence run_all_charging {
+	a_RunSW  a_RunS  a_RunSE
+	a_RunW	 a_WalkC    a_RunE
+	a_RunNW  a_RunN_ch  a_RunNE
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1
+	activity ACT_HL2MP_RUN_CHARGING 1 node "running"
+	addlayer gmod_breath_layer
+	addlayer body_rot_z 
+	numframes 18
+	fadein 0.4 fadeout 0.3
+}
+
+$sequence swimming_all {
+	a_SwimSW  a_SwimS             a_SwimSE
+	a_SwimW	  ../gmod/swim_c   a_SwimE
+	a_SwimNW  a_SwimN             a_SwimNE
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1
+	activity ACT_HL2MP_SWIM 1 node "swimming" fps 50
+	addlayer gmod_breath_layer
+	fadein 0.4 fadeout 0.4
+	addlayer body_rot_z 
+}
+
+$animation a_WalkN_suitcase "../base_m/suitcase_walk" loop LX LY rotateto 0 alignto reference
+
+$sequence walk_suitcase {
+	a_WalkSW  a_WalkS                       a_WalkSE
+	a_WalkW	  ../base_m/suitcase_idle       a_WalkE
+	a_WalkNW  a_WalkN_suitcase              a_WalkNE
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1
+	loop activity ACT_HL2MP_WALK_SUITCASE 1
+	addlayer body_rot_z 
+}
