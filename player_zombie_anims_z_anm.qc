@@ -1,10 +1,12 @@
 $modelname z_anm.mdl
 
-$definevariable g "base_m"
+$definevariable g "base_m" // zombie gender is male
 
 $pushd	"player"
 
-// $include "Humans_sdk\male\commonbones.qci"
+// Zombie definebones
+// Get your scrolling finger ready
+// The rest is below
 
 $definebone "ValveBiped.Bip01_Pelvis" "" -0.000005 1.515989 38.353996 0.000000 -0.000057 90.000038 0.000000 0.000000 0.000000 -0.000000 0.000000 0.000000
 $definebone "ValveBiped.Bip01_L_Thigh" "ValveBiped.Bip01_Pelvis" 3.890453 0.000000 -0.000004 -6.298010 -90.530887 -89.999983 0.000000 -0.000000 0.000000 0.000000 -0.000000 0.000000
@@ -92,29 +94,24 @@ $include "Humans_sdk\standardikchains.qci"
 $include "Humans_sdk\male\hitbox.qci"
 
 // $lockbonelengths
-
 // $lockdefinebones
 
-$attachment "eyes" "ValveBiped.Bip01_Head1" 0 -4 67.5 absolute
-$include "Player\body_poses_lean.qci"
+// We do not lock the bone lengths unlike in the regular male and female libraries
+// because the zombies need their long, claw-like fingers. Rawr
 
+$attachment "eyes" "ValveBiped.Bip01_Head1" 0 -4 67.5 absolute
 $sequence reference "..\humans_sdk\male\ragdoll_pose"
 
 $include gm_base_m.qci
 $include gm_weightlists.qci
-
-// $sequence zombie_idle_layer_ref "../zombie/idle_layer" numframes 2 hidden
-// $animation a_zombie_idle_layer "../zombie/idle_layer" subtract zombie_idle_layer_ref 0 fixuploop 0 72
-// $sequence zombie_idle_layer_01 a_zombie_idle_layer delta weightlist 10percent loop fps 20 realtime autoplay hidden
-// $sequence zombie_idle_layer_02 a_zombie_idle_layer delta weightlist 10percent loop fps 25 realtime autoplay hidden
-
 $include macro_aimlayers.qci
 $include macro_gestures.qci
 $include macro_movement_m.qci
 $include macro_zombie.qci
-
 $include gm_anims.qci
 $include gm_sequences_zombie.qci
+
+$include "player/body_poses_lean.qci" // pose parameters e.g. head_rot, body_yaw...
 
 $animblocksize 32
 
@@ -136,5 +133,3 @@ $BoneSaveFrame "ValveBiped.Bip01_R_Clavicle" rotation
 $BoneSaveFrame "ValveBiped.Bip01_R_UpperArm" rotation
 $BoneSaveFrame "ValveBiped.Bip01_R_Forearm" rotation
 $BoneSaveFrame "ValveBiped.Bip01_R_Hand" rotation
-
-// $includemodel m_anm_user.mdl

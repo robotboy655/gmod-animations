@@ -1,6 +1,6 @@
 $modelname m_anm.mdl
 
-$definevariable g "base_m"// this defines the gender for some animations
+$definevariable g "base_m" // this defines the gender for some animations
 
 $pushd	"player"
 
@@ -14,7 +14,6 @@ $lockbonelengths
 // $lockdefinebones
 
 $attachment "eyes" "ValveBiped.Bip01_Head1" 0 -4 67.5 absolute
-$include "Player\body_poses_lean.qci"
 
 $sequence reference "..\humans_sdk\male\ragdoll_pose"
 
@@ -26,6 +25,10 @@ $include macro_movement_m.qci
 $include macro_zombie.qci
 $include gm_anims.qci
 $include gm_sequences_zombie_humans.qci
+
+$include "player/body_poses_lean.qci" // pose parameters e.g. head_rot, body_yaw...
+
+// Optimization commands
 
 $animblocksize 32
 
@@ -48,4 +51,3 @@ $BoneSaveFrame "ValveBiped.Bip01_R_UpperArm" rotation
 $BoneSaveFrame "ValveBiped.Bip01_R_Forearm" rotation
 $BoneSaveFrame "ValveBiped.Bip01_R_Hand" rotation
 
-// $includemodel m_anm_user.mdl
