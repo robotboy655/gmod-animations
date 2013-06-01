@@ -1,0 +1,81 @@
+//---------------------------------------
+// Head/chest/body posture animations
+
+$weightlist fullbody "ValveBiped.Bip01_Pelvis" 1.0 "ValveBiped.Bip01_L_Clavicle" 0.0 "ValveBiped.Bip01_R_Clavicle" 0.0
+$weightlist fullspine "ValveBiped.Bip01_Pelvis" 1.0 "ValveBiped.Bip01_L_Clavicle" 0.0 "ValveBiped.Bip01_R_Clavicle" 0.0 "ValveBiped.Bip01_L_Thigh" 0.0 "ValveBiped.Bip01_R_Thigh" 0.0 
+$weightlist fullspinenohead "ValveBiped.Bip01_Pelvis" 0.1 "ValveBiped.Bip01_L_Clavicle" 0.0 "ValveBiped.Bip01_R_Clavicle" 0.0 "ValveBiped.Bip01_L_Thigh" 0.05 "ValveBiped.Bip01_R_Thigh" 0.05 "ValveBiped.Bip01_Head1" 0.0
+$weightlist upperspine "ValveBiped.Bip01_Pelvis" 1.0 "ValveBiped.Bip01_R_Thigh" 0.0 "ValveBiped.Bip01_L_Thigh" 0.0 "ValveBiped.Bip01_L_Clavicle" 0.0 "ValveBiped.Bip01_R_Clavicle" 0.0
+$weightlist upperspinenohead "ValveBiped.Bip01_Pelvis" 1.0 "ValveBiped.Bip01_R_Thigh" 0.0 "ValveBiped.Bip01_L_Thigh" 0.0 "ValveBiped.Bip01_L_Clavicle" 0.0 "ValveBiped.Bip01_R_Clavicle" 0.0 "ValveBiped.Bip01_Head1" 0.0
+
+$ikautoplaylock rfoot 1.0 0.1
+$ikautoplaylock lfoot 1.0 0.1
+
+$animation a_pose_neutral "..\humans_sdk\male_animations\body_poses_lean" frames 0 0
+
+$animation a_body_rot "..\humans_sdk\male_animations\body_poses_lean" frame 0 0 noanimation
+$animation a_body_rot_z_rt "..\humans_sdk\male_animations\body_poses_lean" frame 58 58 subtract a_pose_neutral 0 weightlist fullspinenohead 
+$animation a_body_rot_z_lt "..\humans_sdk\male_animations\body_poses_lean" frame 67 67 subtract a_pose_neutral 0 weightlist fullspinenohead 
+$animation a_spine_rot "..\humans_sdk\male_animations\body_poses_lean" frame 0 0 noanimation
+$animation a_spine_rot_z_rt "..\humans_sdk\male_animations\body_poses_lean" frame 88 88 subtract a_pose_neutral 0 weightlist upperspinenohead
+$animation a_spine_rot_z_lt "..\humans_sdk\male_animations\body_poses_lean" frame 96 96 subtract a_pose_neutral 0 weightlist upperspinenohead
+$animation a_head_rot "..\humans_sdk\male_animations\body_poses_lean" frame 0 0 noanimation
+$animation a_head_rot_lt "..\humans_sdk\male_animations\body_poses_lean" frame 97 97 subtract a_pose_neutral 0 weightlist upperspine 
+$animation a_head_rot_rt "..\humans_sdk\male_animations\body_poses_lean" frame 98 98 subtract a_pose_neutral 0 weightlist upperspine 
+$animation a_head_rot_dwn "..\humans_sdk\male_animations\body_poses_lean" frame 101 101 subtract a_pose_neutral 0 weightlist upperspine 
+$animation a_head_rot_up "..\humans_sdk\male_animations\body_poses_lean" frame 102 102 subtract a_pose_neutral 0 weightlist upperspine 
+$animation a_head_rot_z_rt "..\humans_sdk\male_animations\body_poses_lean" frame 104 104 subtract a_pose_neutral 0 weightlist upperspine 
+$animation a_head_rot_z_lt "..\humans_sdk\male_animations\body_poses_lean" frame 106 106 subtract a_pose_neutral 0 weightlist upperspine 
+
+$sequence body_rot_z { 
+	a_body_rot_z_lt a_body_rot a_body_rot_z_rt 
+	blendref a_pose_neutral
+	blendcenter a_body_rot
+	blend aim_yaw 60 -60
+	delta 
+	autoplay 
+	hidden
+	iklock rfoot 1 0 iklock lfoot 1 0
+	realtime
+	fps 1
+}
+
+// $sequence spine_rot_z { 
+	// a_spine_rot_z_lt a_spine_rot a_spine_rot_z_rt 
+	// blendref a_pose_neutral
+	// blendcenter a_spine_rot 
+	// calcblend spine_yaw "eyes" ZR 
+	// delta 
+	// autoplay 
+	// hidden
+// }
+
+$sequence head_rot_z { 
+	a_head_rot_z_lt a_head_rot a_head_rot_z_rt 
+	// blendref a_pose_neutral
+	blendcenter a_head_rot 
+	blend head_yaw 75 -75
+	delta 
+	autoplay 
+	hidden
+}
+
+$sequence head_rot_y { 
+	a_head_rot_dwn a_head_rot a_head_rot_up 
+	// blendref a_pose_neutral
+	blendcenter a_head_rot 
+    blend head_pitch 60 -60
+	delta 
+	autoplay
+	hidden
+}
+
+// $sequence head_rot_x { 
+	// a_head_rot_lt a_head_rot a_head_rot_rt
+	// blendref a_pose_neutral
+	// blendcenter a_head_rot 
+	// calcblend head_roll "eyes" XR 
+	// delta 
+	// autoplay 
+	// hidden
+// }
+

@@ -1,0 +1,86 @@
+// ----------------------------------------------------------------------------
+//  MAKE GESTURES
+//
+//  Used for creating MP gestures, including attack animations and jumping.
+// ----------------------------------------------------------------------------
+
+// $MakeGesture [name of gesture] [SMD file] [weightlist]
+
+$definemacro MakeGesture gesturename filename weights \\
+$sequence $gesturename$ $filename$ { \\
+	weightlist $weights$ \\
+	} \\
+$continue $gesturename$
+
+// $MakeSplineGesture [name of gesture] [SMD file] [weightlist] [end fade-in] [begin fade-out] [end fade-out]
+
+$definemacro MakeSplineGesture splinename filename weights peak tail end \\
+$sequence $splinename$_base $filename$ weightlist $weights$ hidden \\
+$sequence $splinename$ "includes/ragdoll_pose" noanimation blendlayer $splinename$_base 0 $peak$ $tail$ $end$ spline numframes $end$ \\
+$continue $splinename$
+
+// ----------------------------------------------------------------------------
+// $MakeSplineGestureLockFeet
+// [name of gesture] [SMD file] [pelvis w.list] [base w.list] [spline fades (peak tail end)]
+
+// This will create a gesture that is additive on the pelvis, but normal on the spline.
+// IMPORTANT: the weightlists you use with this MUST have the pelvis' weight at 0.0,
+// or else it will not only double the pelvis motion but defeat the purpose of this macro...
+// It might work in your advantage in some circumstances, though! Nothing ventured, nothing gained.
+
+// Explanation of the code:
+//
+// Define the macro and its arguments.
+// SEQUENCE: sequence SMD without any animation processing.
+// ANIMATION: additive (delta) pelvis motion. Uses the above as reference (instead of T-pose) for various reasons.
+// SEQUENCE: pelvis_layer. Container of the delta pelvis motion. Weightlisted as PelvisOnly.
+// SEQUENCE: base_layer. Container of the "regular" base motion. Weightlisted as passed by the argument.
+// SEQUENCE: composite of the two motion layers.
+// ----------------------------------------------------------------------------
+
+$definemacro MakeSplineGestureLockFeet splinename filename pelvisweights baseweights peak tail end \\
+$sequence $splinename$_original					$filename$ hidden \\
+$animation a_$splinename$_pelvis_layer 			$filename$ subtract $splinename$_original 0 \\
+$sequence $splinename$_pelvis_layer 			a_$splinename$_pelvis_layer delta weightlist $pelvisweights$ hidden \\
+$sequence $splinename$_base_layer 				$filename$ weightlist $baseweights$ hidden \\
+$sequence $splinename$ "includes/ragdoll_pose" noanimation blendlayer $splinename$_pelvis_layer 0 $peak$ $tail$ $end$ spline blendlayer $splinename$_base_layer 0 $peak$ $tail$ $end$ spline numframes $end$ iklock rfoot 1 0 iklock lfoot 1 0 \\
+$continue $splinename$
+
+// $MakePelvisDeltaLayer (deprecated but usable... I think)
+
+$definemacro MakePelvisDeltaLayer pelvisname filename peak tail end \\
+$animation a_$pelvisname$_pelvis $filename$ subtract reference 0 \\
+$sequence $pelvisname$_delta_base a_$pelvisname$_pelvis weightlist PelvisOnly delta hidden \\
+$sequence $pelvisname$ "includes/ragdoll_pose" noanimation blendlayer $pelvisname$_delta_base 0 $peak$ $tail$ $end$ spline numframes $end$ \\
+$continue $pelvisname$
+
+// ------------------------------------
+// MAKE RANGE
+// (make attack, melee swing, gun fire)
+// ------------------------------------
+
+$definemacro makerange rangename filename startframe \\
+$animation a_$rangename$ $filename$ subtract a_$rangename$ $startframe$ weightlist AimLayerWL \\
+$sequence $rangename$ a_$rangename$ { \\
+	iklock lfoot 1 0 iklock rfoot 1 0 \\
+	delta \\
+	} \\
+$continue $rangename$
+
+// ------------------------------------
+// MAKE JUMP
+// ------------------------------------
+
+$definemacro makejump jumpname filename frame aimlayer \\
+$animation a_$jumpname$ $filename$ frame $frame$ $frame$ weightlist UpperBodyBlend \\
+$sequence $jumpname$ "../gmod/jump" { \\
+	weightlist UpperBodyReplace \\
+	worldspaceblend a_$jumpname$ \\
+	weightlist AllBones \\
+	addlayer $aimlayer$ \\
+	ikrule lfoot release \\
+	ikrule rfoot release \\
+	addlayer gmod_jump_delta \\
+	weightlist AllBones \\
+	} \\	
+$continue $jumpname$

@@ -1,0 +1,161 @@
+// ----------------------------------------------------------------------------
+//  MAKE AIM LAYERS
+//
+//  Used for creating MP aimlayers. All of them use the AimLayerWL weightlist.
+//  MakeAimLayerNoLeftHandIK is used for one-handed weapons (e.g. crowbar).
+//  The difference between MakeAimLayer and MakeAimLayerB is unknown.
+// ----------------------------------------------------------------------------
+
+// ------------------------------------
+//  MAKE AIMLAYER, WITH LEFT HAND IK
+// ------------------------------------
+
+$definemacro MakeAimLayer layername filename \\
+$animation a_$layername$_neutral $filename$ frame 4 4 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_R_Hand" usesource \\
+$animation a_$layername$_down_left $filename$ frame 0 0 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_R_Hand" usesource \\
+$animation a_$layername$_down_center $filename$ frame 1 1 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_R_Hand" usesource \\
+$animation a_$layername$_down_right $filename$ frame 2 2 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_R_Hand" usesource \\
+$animation a_$layername$_mid_left $filename$ frame 3 3 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_R_Hand" usesource \\
+$animation a_$layername$_mid_center $filename$ frame 4 4 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_R_Hand" usesource \\
+$animation a_$layername$_mid_right $filename$ frame 5 5 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_R_Hand" usesource \\
+$animation a_$layername$_up_left $filename$ frame 6 6 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_R_Hand" usesource \\
+$animation a_$layername$_up_center $filename$ frame 7 7 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_R_Hand" usesource \\
+$animation a_$layername$_up_right $filename$ frame 8 8 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_R_Hand" usesource \\
+// $animation a_$layername$_straight_up $filename$ frame 7 7 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_R_Hand" usesource \\
+$sequence $layername$ { \\
+	// a_$layername$_straight_up a_$layername$_straight_up a_$layername$_straight_up \\
+	a_$layername$_up_right a_$layername$_up_center a_$layername$_up_left \\
+	a_$layername$_mid_right a_$layername$_mid_center a_$layername$_mid_left \\
+	a_$layername$_down_right a_$layername$_down_center a_$layername$_down_left \\
+	blendref a_$layername$_neutral \\
+	blendcenter a_$layername$_mid_center \\
+	blendwidth 3 calcblend aim_yaw "anim_attachment_RH" ZR calcblend aim_pitch "anim_attachment_RH" YR \\
+	delta \\
+	iklock rfoot 1 0 iklock lfoot 1 0 \\
+	hidden \\
+	} \\
+$continue $layername$
+
+// ------------------------------------
+//  MAKE AIMLAYER, NO LEFT HAND IK
+// ------------------------------------
+
+$definemacro MakeAimLayerNoLeftHandIK layername filename \\
+$animation a_$layername$_neutral $filename$ frame 4 4 weightlist AimLayerWL \\
+$animation a_$layername$_down_left $filename$ frame 0 0 subtract a_$layername$_neutral 0 weightlist AimLayerWL \\
+$animation a_$layername$_down_center $filename$ frame 1 1 subtract a_$layername$_neutral 0 weightlist AimLayerWL \\
+$animation a_$layername$_down_right $filename$ frame 2 2 subtract a_$layername$_neutral 0 weightlist AimLayerWL \\
+$animation a_$layername$_mid_left $filename$ frame 3 3 subtract a_$layername$_neutral 0 weightlist AimLayerWL \\
+$animation a_$layername$_mid_center $filename$ frame 4 4 subtract a_$layername$_neutral 0 weightlist AimLayerWL \\
+$animation a_$layername$_mid_right $filename$ frame 5 5 subtract a_$layername$_neutral 0 weightlist AimLayerWL  \\
+$animation a_$layername$_up_left $filename$ frame 6 6 subtract a_$layername$_neutral 0 weightlist AimLayerWL \\
+$animation a_$layername$_up_center $filename$ frame 7 7 subtract a_$layername$_neutral 0 weightlist AimLayerWL \\
+$animation a_$layername$_up_right $filename$ frame 8 8 subtract a_$layername$_neutral 0 weightlist AimLayerWL \\
+// $animation a_$layername$_straight_up $filename$ frame 7 7 subtract a_$layername$_neutral 0 weightlist AimLayerWL \\
+$sequence $layername$ { \\
+	// a_$layername$_straight_up a_$layername$_straight_up a_$layername$_straight_up \\
+	a_$layername$_up_right a_$layername$_up_center a_$layername$_up_left \\
+	a_$layername$_mid_right a_$layername$_mid_center a_$layername$_mid_left \\
+	a_$layername$_down_right a_$layername$_down_center a_$layername$_down_left \\
+	blendref a_$layername$_neutral \\
+	blendcenter a_$layername$_mid_center \\
+	blendwidth 3 calcblend aim_yaw "anim_attachment_RH" ZR calcblend aim_pitch "anim_attachment_RH" YR \\
+	delta \\
+	iklock rfoot 1 0 iklock lfoot 1 0 \\
+	hidden \\
+	} \\
+$continue $layername$
+
+// ------------------------------------
+//  MAKE AIMLAYER, TELEKINESIS
+// ------------------------------------
+
+// putting the hand facing the ground causes calcblend to go all over the place. love you too, source.
+// for this reason, aimlayer_magic has a pistol pose that gets delta'd to the hand facing downwards.
+
+$sequence aimlayer_magic_delta_ref "../aimlayers/aimlayer_magic" hidden
+$animation a_aimlayer_magic_delta "../aimlayers/aimlayer_magic_delta" subtract aimlayer_magic_delta_ref 4
+$sequence aimlayer_magic_delta a_aimlayer_magic_delta loop fps 1 delta hidden
+
+$definemacro MakeAimLayerTelekinesis layername filename \\
+$animation a_$layername$_neutral $filename$ frame 4 4 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_Head1" usesource \\
+$animation a_$layername$_down_left $filename$ frame 0 0 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_Head1" usesource \\
+$animation a_$layername$_down_center $filename$ frame 1 1 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_Head1" usesource \\
+$animation a_$layername$_down_right $filename$ frame 2 2 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_Head1" usesource \\
+$animation a_$layername$_mid_left $filename$ frame 3 3 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_Head1" usesource \\
+$animation a_$layername$_mid_center $filename$ frame 4 4 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_Head1" usesource \\
+$animation a_$layername$_mid_right $filename$ frame 5 5 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_Head1" usesource \\
+$animation a_$layername$_up_left $filename$ frame 6 6 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_Head1" usesource \\
+$animation a_$layername$_up_center $filename$ frame 7 7 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_Head1" usesource \\
+$animation a_$layername$_up_right $filename$ frame 8 8 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_Head1" usesource \\
+$sequence $layername$ { \\
+	// a_$layername$_straight_up a_$layername$_straight_up a_$layername$_straight_up \\
+	a_$layername$_up_right a_$layername$_up_center a_$layername$_up_left \\
+	a_$layername$_mid_right a_$layername$_mid_center a_$layername$_mid_left \\
+	a_$layername$_down_right a_$layername$_down_center a_$layername$_down_left \\
+	blendref a_$layername$_neutral \\
+	blendcenter a_$layername$_mid_center \\
+	blendwidth 3 calcblend aim_yaw "anim_attachment_RH" ZR calcblend aim_pitch "anim_attachment_RH" YR \\
+	delta \\
+	addlayer aimlayer_magic_delta \\
+	iklock rfoot 1 0 iklock lfoot 1 0 \\
+	hidden \\
+	} \\
+$continue $layername$
+
+// ------------------------------------
+//  MAKE AIMLAYER, CAMERA
+// ------------------------------------
+
+// same as regular one, just with an added rule so the hands get locked to the head..
+
+$definemacro MakeAimLayerCamera layername filename \\
+$animation a_$layername$_neutral $filename$ frame 4 4 weightlist AimLayerWL ikrule rhand touch "ValveBiped.Bip01_Head1" usesource ikrule lhand touch "ValveBiped.Bip01_Head1" usesource \\
+$animation a_$layername$_down_left $filename$ frame 0 0 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule rhand touch "ValveBiped.Bip01_Head1" usesource ikrule lhand touch "ValveBiped.Bip01_Head1" usesource \\
+$animation a_$layername$_down_center $filename$ frame 1 1 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule rhand touch "ValveBiped.Bip01_Head1" usesource ikrule lhand touch "ValveBiped.Bip01_Head1" usesource \\
+$animation a_$layername$_down_right $filename$ frame 2 2 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule rhand touch "ValveBiped.Bip01_Head1" usesource ikrule lhand touch "ValveBiped.Bip01_Head1" usesource \\
+$animation a_$layername$_mid_left $filename$ frame 3 3 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule rhand touch "ValveBiped.Bip01_Head1" usesource ikrule lhand touch "ValveBiped.Bip01_Head1" usesource \\
+$animation a_$layername$_mid_center $filename$ frame 4 4 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule rhand touch "ValveBiped.Bip01_Head1" usesource ikrule lhand touch "ValveBiped.Bip01_Head1" usesource \\
+$animation a_$layername$_mid_right $filename$ frame 5 5 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule rhand touch "ValveBiped.Bip01_Head1" usesource ikrule lhand touch "ValveBiped.Bip01_Head1" usesource \\
+$animation a_$layername$_up_left $filename$ frame 6 6 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule rhand touch "ValveBiped.Bip01_Head1" usesource ikrule lhand touch "ValveBiped.Bip01_Head1" usesource \\
+$animation a_$layername$_up_center $filename$ frame 7 7 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule rhand touch "ValveBiped.Bip01_Head1" usesource ikrule lhand touch "ValveBiped.Bip01_Head1" usesource \\
+$animation a_$layername$_up_right $filename$ frame 8 8 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule rhand touch "ValveBiped.Bip01_Head1" usesource ikrule lhand touch "ValveBiped.Bip01_Head1" usesource \\
+$sequence $layername$ { \\
+	// a_$layername$_straight_up a_$layername$_straight_up a_$layername$_straight_up \\
+	a_$layername$_up_right a_$layername$_up_center a_$layername$_up_left \\
+	a_$layername$_mid_right a_$layername$_mid_center a_$layername$_mid_left \\
+	a_$layername$_down_right a_$layername$_down_center a_$layername$_down_left \\
+	blendref a_$layername$_neutral \\
+	blendcenter a_$layername$_mid_center \\
+	blendwidth 3 calcblend aim_yaw "anim_attachment_RH" ZR calcblend aim_pitch "anim_attachment_RH" YR \\
+	delta \\
+	iklock rfoot 1 0 iklock lfoot 1 0 \\
+	hidden \\
+	} \\
+$continue $layername$
+
+// ------------------------------------
+//  MAKE AIMLAYER B, WITH LEFT HAND IK
+// ------------------------------------
+
+$definemacro MakeAimLayerB layername filename \\
+$animation a_$layername$_neutral $filename$ frame 1 1 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_R_Hand" usesource \\
+$animation a_$layername$_mid_left $filename$ frame 0 0 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_R_Hand" usesource \\
+$animation a_$layername$_mid_center $filename$ frame 1 1 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_R_Hand" usesource \\
+$animation a_$layername$_mid_right $filename$ frame 2 2 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_R_Hand" usesource \\
+$animation a_$layername$_up_left $filename$ frame 3 3 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_R_Hand" usesource \\
+$animation a_$layername$_up_center $filename$ frame 4 4 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_R_Hand" usesource \\
+$animation a_$layername$_up_right $filename$ frame 5 5 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_R_Hand" usesource \\
+$animation a_$layername$_straight_up $filename$ frame 6 6 subtract a_$layername$_neutral 0 weightlist AimLayerWL ikrule lhand touch "ValveBiped.Bip01_R_Hand" usesource \\
+$sequence $layername$ { \\
+	a_$layername$_straight_up a_$layername$_straight_up a_$layername$_straight_up \\
+	a_$layername$_up_right a_$layername$_up_center a_$layername$_up_left \\
+	a_$layername$_mid_right a_$layername$_mid_center a_$layername$_mid_left \\
+	blendref a_$layername$_neutral \\
+	blendcenter a_$layername$_mid_center \\
+	blendwidth 3 calcblend aim_yaw "anim_attachment_RH" ZR calcblend aim_pitch "anim_attachment_RH" YR \\
+	delta \\
+	iklock rfoot 1 0 iklock lfoot 1 0 \\
+	hidden \\
+	} \\
+$continue $layername$

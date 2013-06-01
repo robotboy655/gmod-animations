@@ -1,0 +1,232 @@
+// ------------------------------------
+//  SEQUENCES
+// ------------------------------------
+
+$popd $pushd	"gmod"
+
+$sequence  death_01          "death_01" fps 30 activity ACT_GMOD_DEATH 1
+$sequence  death_02          "death_02" fps 30 activity ACT_GMOD_DEATH 2
+$sequence  death_03          "death_03" fps 30 activity ACT_GMOD_DEATH 1
+$sequence  death_04          "death_04" fps 34 activity ACT_GMOD_DEATH 1
+
+$sequence	idle_melee_angry "../base_m/idle_angry_melee" loop fps 30 activity ACT_HL2MP_IDLE_MELEE_ANGRY 1 addlayer gmod_breath_layer
+$sequence	idle_suitcase    "../base_m/suitcase_idle" fps 30 loop addlayer gmod_breath_layer activity ACT_HL2MP_IDLE_SUITCASE 1
+
+$sequence   sit_zen          "sit_zen" fps 5 addlayer gmod_breath_layer_lock_hands
+
+// Showoff poses
+
+$sequence  pose_standing_01 "poses_standing" frames 02 03 fps 1 activity ACT_GMOD_SHOWOFF_STAND_01 -1 addlayer gmod_breath_layer_lock_hands 
+$sequence  pose_standing_02 "poses_standing" frames 06 07 fps 1 activity ACT_GMOD_SHOWOFF_STAND_02 -1 addlayer gmod_breath_layer_lock_hands
+$sequence  pose_standing_03 "poses_standing" frames 12 13 fps 1 activity ACT_GMOD_SHOWOFF_STAND_03 -1 addlayer gmod_breath_layer addlayer idle_layer
+$sequence  pose_standing_04 "poses_standing" frames 16 17 fps 1 activity ACT_GMOD_SHOWOFF_STAND_04 -1 addlayer gmod_breath_layer addlayer idle_layer 
+
+$sequence  pose_ducking_01  "poses_ducking"  frames 02 03 fps 1 activity ACT_GMOD_SHOWOFF_DUCK_01 -1 addlayer gmod_breath_layer_lock_right 
+$sequence  pose_ducking_02  "poses_ducking"  frames 06 07 fps 1 activity ACT_GMOD_SHOWOFF_DUCK_02 -1 addlayer gmod_breath_layer_lock_hands 
+
+$popd $pushd	"player"
+
+// General sequences
+
+$sequence seq_cower			"../base_m/cower" fps 30
+$sequence seq_preskewer		"../base_m/preskewer" fps 30
+
+// Gender-specific sequences
+
+$sequence seq_baton_swing   ../$g$/baton_swing fps 36
+$sequence seq_meleeattack01 ../$g$/meleeattack01 fps 32
+$sequence seq_throw			../$g$/throw fps 32
+$sequence seq_wave_smg1		../$g$/wave_smg1 fps 28
+
+// ------------------------------------
+//  ANIMATION LAYERS
+// ------------------------------------
+
+$sequence idle_layer                      a_idle_layer     delta loop realtime fps 30 iklock rfoot 1 0 iklock lfoot 1 0 hidden
+$sequence idle_layer_alt                  a_idle_layer_alt delta loop realtime fps 20 iklock rfoot 1 0 iklock lfoot 1 0 hidden weightlist 75percent
+$sequence idle_layer_alt_nofeetlock       a_idle_layer_alt delta loop realtime fps 30 hidden
+$sequence idle_layer_lock_right           a_idle_layer     delta loop realtime fps 30 iklock rfoot 1 0 iklock lfoot 1 0 iklock rhand 1 0 hidden
+
+/* HACK/WARNING: the regular (not the noclip one) breath layer makes the player aim slightly to the right in order to
+ fix how weapons aim too much to the left in the first place. This may or may not create problems down the road... */
+
+// For some reason I have to make the original one reference its own $animation!! The compositing system must be getting
+// confused otherwise and it locks the pelvis, probably reading off gmod_breath_layer_sitting... really really weird stuff
+
+$animation a_gmod_breath "../gmod/breath" subtract reference 0 fixuploop 0 60
+$animation a_gmod_breath_sit "../gmod/breath" subtract reference 0 fixuploop 0 60
+
+$sequence gmod_breath_layer a_gmod_breath delta loop realtime fps 25 iklock rfoot 1 0 iklock lfoot 1 0 weightlist 75percent
+$sequence gmod_breath_layer_lock_right a_gmod_breath delta loop realtime fps 25 iklock rfoot 1 0 iklock lfoot 1 0 iklock rhand 1 0
+$sequence gmod_breath_layer_lock_hands a_gmod_breath delta loop realtime fps 25 iklock rfoot 1 0 iklock lfoot 1 0 iklock rhand 1 0 iklock lhand 1 0
+$sequence gmod_breath_layer_sitting a_gmod_breath_sit delta loop realtime fps 25 iklock rfoot 1 0 iklock lfoot 1 0 iklock rhand 0.8 0.3 iklock lhand 0.8 0.3 weightlist SlowerUpperBodyBlend
+
+$animation a_breath_noclip "../gmod/breath_noclip" subtract reference 0 fixuploop 0 60
+$sequence gmod_breath_noclip_layer a_breath_noclip delta loop fps 25 fadein 0.3 fadeout 0.3 activity ACT_GMOD_NOCLIP_LAYER 1
+
+$animation a_gmod_jump_delta "../gmod/jump_c" subtract reference 0
+$sequence gmod_jump_delta a_gmod_jump_delta weightlist jump_delta delta 
+
+$animation a_jump_land "../gmod/jump_land" subtract a_jump_land 40
+$sequence jump_land "a_jump_land" delta weightlist AllBones fps 60 iklock rfoot 1 0 iklock lfoot 1 0 ACT_LAND 1
+
+$sequence gesture_voicechat "../gmod/in_chat" loop fadein 0.3 fadeout 0.3 weightlist LeftArmSpline ikrule lhand touch "ValveBiped.Bip01_Head1" usesource ACT_GMOD_IN_CHAT 1
+
+// ------------------------------------
+//  GESTURES
+// ------------------------------------
+
+$MakeSplineGestureLockFeet gesture_agree	"../gmod/gesture_agree" PelvisOnly NoPelvisNoRightFingers 20 80 100 ACT_GMOD_GESTURE_AGREE 1 fps 36
+$MakeSplineGestureLockFeet gesture_bow      "../gmod/gesture_bow" PelvisOnly NoPelvisNoRightFingers 25 65 100 ACT_GMOD_GESTURE_BOW 1 fps 32
+$MakeSplineGestureLockFeet gesture_becon    "../gmod/gesture_comeon" PelvisOnly NoPelvisNoRightFingers 20 92 110 ACT_GMOD_GESTURE_BECON 1 fps 30
+$MakeSplineGestureLockFeet gesture_disagree	"../gmod/gesture_disagree" PelvisOnly NoPelvisNoRightFingers 15 65 80 ACT_GMOD_GESTURE_DISAGREE 1 fps 30
+$MakeSplineGestureLockFeet gesture_salute	"../gmod/gesture_salute" PelvisOnlyMinusQuarter NoPelvisNoRightFingers 15 85 100 ACT_GMOD_TAUNT_SALUTE 1 fps 30
+$MakeSplineGestureLockFeet gesture_wave	    "../gmod/gesture_wave" PelvisOnlyMinusQuarter NoPelvisNoRightFingers 15 90 110 ACT_GMOD_GESTURE_WAVE 1 fps 32
+
+$MakeSplineGestureLockFeet gesture_item_drop		"../gmod/grenDrop" PelvisOnly UpperBodyBlend 14 34 42 ACT_GMOD_GESTURE_ITEM_DROP 1
+$MakeSplineGestureLockFeet gesture_item_give		"../gmod/Heal" PelvisOnly UpperBodyBlend 10 40 47 ACT_GMOD_GESTURE_ITEM_GIVE 1
+$MakeSplineGestureLockFeet gesture_item_place		"../gmod/grenPlace" PelvisOnly UpperBodyBlend 10 36 44 ACT_GMOD_GESTURE_ITEM_PLACE 1 
+$MakeSplineGestureLockFeet gesture_item_throw		"../gmod/grenThrow" PelvisOnlyMinusQuarter UpperBodyBlend 12 34 45 ACT_GMOD_GESTURE_ITEM_THROW 1
+
+$MakeSplineGestureLockFeet gesture_signal_forward	"../gmod/signal_forward" PelvisOnly LeftArmBlend 8 25 36 ACT_SIGNAL_FORWARD 1 fps 30
+$MakeSplineGestureLockFeet gesture_signal_halt		"../gmod/signal_halt" PelvisOnly LeftArmBlend 11 25 38 ACT_SIGNAL_HALT 1  fps 25
+$MakeSplineGestureLockFeet gesture_signal_group		"../gmod/signal_group" PelvisOnly LeftArmBlend 16 35 47 ACT_SIGNAL_GROUP 1 fps 30
+
+// TAUNTS: is the animation designed in mind with making the weapons disappear? Then it's a taunt.
+
+$MakeSplineGesture         taunt_cheer	                ../$g$/cheer1 AllBones 8 44 56 ACT_GMOD_TAUNT_CHEER 1 fps 20
+$MakeSplineGesture         taunt_dance	        "../gmod/taunt_dance" AllBones 10 270 290 ACT_GMOD_TAUNT_DANCE 1 fps 32
+$MakeSplineGesture         taunt_laugh			"../gmod/taunt_laugh" AllBones 10 200 215 ACT_GMOD_TAUNT_LAUGH 1 fps 35
+$MakeSplineGesture         taunt_muscle			"../gmod/taunt_muscle" AllBones 15 430 450 ACT_GMOD_TAUNT_MUSCLE 1 fps 35
+$MakeSplineGesture         taunt_robot			"../gmod/taunt_robot" AllBones 15 370 400 ACT_GMOD_TAUNT_ROBOT 1 fps 35
+$MakeSplineGesture         taunt_persistence	"../gmod/taunt_persistence" AllBones 10 80 100 ACT_GMOD_TAUNT_PERSISTENCE 1
+
+// ------------------------------------
+//  WEAPON GESTURES
+// ------------------------------------
+
+$animation a_shotgun_pump 	"../gmod/shotgun_pump_layer" subtract reference 0
+$sequence shotgun_pump		a_shotgun_pump delta ikrule lhand release loop fps 1
+
+$makegesture fist_block	"../gmod/fightpose_block" UpperbodyMeld ACT_HL2MP_FIST_BLOCK 1
+
+$MakeRange	range_ar2		"..\combine_soldier_xsi\Shoot_AR2" 0 ACT_HL2MP_GESTURE_RANGE_ATTACK_AR2 1
+$MakeRange	range_crossbow	"../gmod/attack_crossbow" 0 ACT_HL2MP_GESTURE_RANGE_ATTACK_CROSSBOW 1 fps 25
+$MakeRange	range_dual_r	"../gmod/attack_dual_right" 0 ACT_HL2MP_GESTURE_RANGE_ATTACK_DUEL 1 fps 40 weightlist 75percent
+$MakeRange	range_dual_l	"../gmod/attack_dual_left" 0 ACT_HL2MP_GESTURE_RANGE_ATTACK_DUEL 1 fps 40 weightlist 75percent
+$MakeRange	range_gravgun	"HL2DM_Fire_Gravgun" 0 ACT_HL2MP_GESTURE_RANGE_ATTACK_PHYSGUN 1
+$MakeRange	range_grenade	"HL2DM_Throw_Grenade" 0 ACT_HL2MP_GESTURE_RANGE_ATTACK_GRENADE 1 fps 25
+$MakeRange	range_knife		"../gmod/attack_knife" 0 ACT_HL2MP_GESTURE_RANGE_ATTACK_KNIFE 1 fps 30
+$MakeRange	range_melee		"HL2DM_MeleeAttack" 0 ACT_HL2MP_GESTURE_RANGE_ATTACK_MELEE 1 looping fps 36
+$MakeRange	range_melee2_b	"../gmod/melee2_attack_01" 0 ACT_HL2MP_GESTURE_RANGE_ATTACK_MELEE2 1 fps 45 weightlist Pelvis50
+$MakeRange  range_pistol	"../gmod/attack_pistol" 0 ACT_HL2MP_GESTURE_RANGE_ATTACK_PISTOL 1 fps 45
+$MakeRange  range_revolver	"../gmod/attack_revolver" 0 ACT_HL2MP_GESTURE_RANGE_ATTACK_REVOLVER 1 fps 32
+$MakeRange	range_rpg		"..\humans_sdk\male_animations\WeaponAnims_Shared\ShootRPG" 0 ACT_HL2MP_GESTURE_RANGE_ATTACK_RPG 1
+// $MakeRange	range_shotgun_t	"..\combine_soldier_xsi\Shoot_SG" 0 frames 0 29 ACT_HL2MP_GESTURE_RANGE_ATTACK_SHOTGUN 1 blendlayer shotgun_pump 13 18 21 27 spline
+$MakeRange	range_shotgun	"..\combine_soldier_xsi\Shoot_SG" 0 frames 0 29 ACT_HL2MP_GESTURE_RANGE_ATTACK_SHOTGUN 1
+$MakeRange	range_slam		"HL2DM_deploy_SLAM" 0 ACT_HL2MP_GESTURE_RANGE_ATTACK_SLAM 1
+$MakeRange	range_smg1		"..\combine_soldier_xsi\Shoot_SMG1" 0 ACT_HL2MP_GESTURE_RANGE_ATTACK_SMG1 1
+
+$MakeSplineGestureLockFeet reload_ar2 "..\combine_soldier_xsi\Reload_standing" PelvisOnly FasterUpperBodyBlend 15 52 65 fps 32 ACT_HL2MP_GESTURE_RELOAD_AR2 1 ikrule lhand release range 0 10 55 65
+$MakeSplineGestureLockFeet reload_pistol "..\police_xsi\Pistol_reload" PelvisOnlyHalved FasterUpperBodyBlend 14 35 45 fps 32 ACT_HL2MP_GESTURE_RELOAD_PISTOL 1 ikrule lhand release range 0 14 30 45
+$MakeSplineGestureLockFeet reload_smg1 "..\combine_soldier_xsi\Reload_standing" PelvisOnly FasterUpperBodyBlend 15 52 65 fps 34 ACT_HL2MP_GESTURE_RELOAD_SMG1 1 ikrule lhand release range 0 10 55 65
+$MakeSplineGestureLockFeet reload_smg1_alt "../base_f/crouch_smg1_reload" PelvisOnlyHalved FasterUpperBodyBlend 25 60 80 fps 40 ACT_HL2MP_GESTURE_RELOAD_SMG1 1 ikrule lhand release range 0 20 65 80
+
+$MakeSplineGestureLockFeet reload_dual "../gmod/reload_dual" PelvisOnly FasterUpperBodyBlend 10 80 100 fps 30 {
+	activity ACT_HL2MP_GESTURE_RELOAD_DUEL 1
+	event AE_CL_PLAYSOUND 19 "Weapon_Pistol.Special1"
+	event AE_CL_PLAYSOUND 21 "Weapon.ImpactSoft"
+	event AE_CL_PLAYSOUND 24 "Weapon_Pistol.Special2"
+	event AE_CL_PLAYSOUND 56 "Weapon_357.ReplaceLoader"
+	event AE_CL_PLAYSOUND 59 "Weapon.StepLeft"
+	event AE_CL_PLAYSOUND 76 "Weapon_357.ReplaceLoader"
+	event AE_CL_PLAYSOUND 79 "Weapon.StepRight"
+	}
+
+
+$MakeSplineGestureLockFeet reload_revolver "../gmod/reload_revolver" PelvisOnly FasterUpperBodyBlend 15 90 110 fps 38 {
+	ikrule lhand release range 0 15 90 110
+	activity ACT_HL2MP_GESTURE_RELOAD_REVOLVER 1
+	event AE_CL_PLAYSOUND 8 "Weapon_357.OpenLoader"
+	event AE_CL_PLAYSOUND 14 "Weapon_357.RemoveLoader"
+	event AE_CL_PLAYSOUND 62 "Weapon_357.ReplaceLoader"
+	}
+
+$MakeSplineGestureLockFeet reload_shotgun "../gmod/reload_shotgun" PelvisOnly FasterUpperBodyBlend 15 68 80 fps 30 {
+	ikrule lhand release range 0 10 70 80
+	activity ACT_HL2MP_GESTURE_RELOAD_SHOTGUN 1
+	event AE_CL_PLAYSOUND 23 "Weapon_Shotgun.NPC_Reload"
+	event AE_CL_PLAYSOUND 29 "Weapon_Shotgun.NPC_Reload"
+	event AE_CL_PLAYSOUND 54 "Weapon_Shotgun.Special1"
+	}
+
+$MakeSplineGestureLockFeet range_melee_shove_2hand "../gmod/meleeattack01" PelvisOnlyMinusQuarter MeleeShove 5 26 33 ACT_GMOD_GESTURE_MELEE_SHOVE_2HAND 1 fps 36
+$MakeSplineGestureLockFeet range_melee_shove_1hand "../gmod/meleeattack01" PelvisOnlyMinusQuarter MeleeShove 5 26 33 ACT_GMOD_GESTURE_MELEE_SHOVE_1HAND 1 fps 36
+
+$sequence range_melee_shove "../gmod/meleeattack01" fps 35
+
+// ------------------------------------
+//  FLINCHING GESTURES
+// ------------------------------------
+
+$popd $pushd "flinching"
+
+$MakeRange    flinch_01           "flinch_01"      0 weightlist 50percent activity ACT_FLINCH 1
+$MakeRange    flinch_02           "flinch_02"      0 weightlist 50percent activity ACT_FLINCH 1
+$MakeRange    flinch_back_01      "back_01"        0 weightlist 50percent activity ACT_FLINCH_BACK 1
+$MakeRange    flinch_head_01      "head_01"        0 weightlist 50percent activity ACT_FLINCH_HEAD 1
+$MakeRange    flinch_head_02      "head_02"        0 weightlist 50percent activity ACT_FLINCH_HEAD 1
+$MakeRange    flinch_phys_01      "physics_01"     0 weightlist 50percent activity ACT_FLINCH_PHYSICS 1 // gravgun range...?
+$MakeRange    flinch_phys_02      "physics_02"     0 weightlist 50percent activity ACT_FLINCH_PHYSICS 1 // gravgun range...?
+$MakeRange    flinch_shoulder_l   "shoulder_left"  0 weightlist 50percent activity ACT_FLINCH_SHOULDER_LEFT 1
+$MakeRange    flinch_shoulder_r   "shoulder_right" 0 weightlist 50percent activity ACT_FLINCH_SHOULDER_RIGHT 1
+$MakeRange    flinch_stomach_01   "stomach_01"     0 weightlist 50percent activity ACT_FLINCH_STOMACH 1
+$MakeRange    flinch_stomach_02   "stomach_02"     0 weightlist 50percent activity ACT_FLINCH_STOMACH 1
+
+$popd $pushd "player"
+
+// ------------------------------------
+//  PUNCHING ANIMATIONS
+// ------------------------------------
+
+$animation a_idle_fist          "../gmod/fists_idle" fixuploop 0 127
+$animation a_idle_fist_layer    "../gmod/fists_idle" fixuploop 0 127 subtract a_idle_fist 0
+$sequence  idle_fist "a_idle_fist" loop fps 30 activity ACT_HL2MP_IDLE_FIST 1 addlayer idle_layer fadein 0.3 fadeout 0.3 alignto reference
+$sequence  idle_fist_layer      a_idle_fist_layer loop delta iklock rfoot 1 0 iklock lfoot 1 0 hidden
+$sequence  idle_fist_layer_weak a_idle_fist_layer loop delta iklock rfoot 1 0 iklock lfoot 1 0 weightlist 50percent hidden
+$sequence  idle_fist_layer_rt   a_idle_fist_layer loop delta iklock rfoot 1 0 iklock lfoot 1 0 weightlist AimlayerWorldSpaceBlend realtime hidden
+
+$animation range_fists_r_up "../gmod/fightpose_punchA_Upper" subtract range_fists_r_up 0 weightlist UpperBodyBlend fps 50.00
+$animation range_fists_r_mid "../gmod/fightpose_punchA" subtract range_fists_r_mid 0 weightlist UpperBodyBlend fps 50.00
+$animation range_fists_r_lo "../gmod/fightpose_punchA_Lower" subtract range_fists_r_lo 0 weightlist UpperBodyBlend fps 50.00
+$sequence range_fists_r {
+	range_fists_r_up range_fists_r_mid range_fists_r_lo
+	blendwidth 3 blend aim_pitch -45 45 ACT_HL2MP_GESTURE_RANGE_ATTACK_FIST 2
+	weightlist UpperBodyBlend
+	delta
+	fadeout 0.2
+}
+
+$animation range_fists_l_up "../gmod/fightpose_punchB_Upper" subtract range_fists_l_up 0 weightlist UpperBodyBlend fps 60.00
+$animation range_fists_l_mid "../gmod/fightpose_punchB" subtract range_fists_l_mid 0 weightlist UpperBodyBlend fps 60.00
+$animation range_fists_l_lo "../gmod/fightpose_punchB_Lower" subtract range_fists_l_lo 0 weightlist UpperBodyBlend fps 60.00
+$sequence range_fists_l {
+	range_fists_l_up range_fists_l_mid range_fists_l_lo
+	blendwidth 3 blend aim_pitch -45 45 ACT_HL2MP_GESTURE_RANGE_ATTACK_FIST 1
+	weightlist UpperBodyBlend
+	delta
+	fadeout 0.2
+}
+
+// ------------------------------------
+//  TRANSITION SEQUENCES
+// ------------------------------------
+
+// $popd $pushd "transitions"
+
+// $sequence transition_standing_to_crouching Stand_to_crouch transition "standing" "crouching" ACT_TRANSITION 1
+// $sequence transition_crouching_to_standing Crouch_to_stand transition "crouching" "standing" ACT_TRANSITION 1
+
+// $skiptransition "running" "walking" "walk_crouching" "run_crouching"
+
+// $popd $pushd "player"

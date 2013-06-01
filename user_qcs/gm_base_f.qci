@@ -1,0 +1,59 @@
+// --------------------------------------------------------
+//  BASE SEQUENCES
+//
+// These are the gender-specific animations. You should
+// not modify this file unless you really know what you
+// are doing; macros heavily rely on it.
+//
+// For your own animations, see gm_anims.qci!
+// --------------------------------------------------------
+
+$animation a_gmod_breath "gmod/breath" subtract reference 0 fixuploop 0 60
+$sequence gmod_breath_layer a_gmod_breath delta loop realtime fps 25 iklock rfoot 1 0 iklock lfoot 1 0 weightlist 75percent
+
+$animation a_gmod_jump_delta "../gmod/jump" subtract reference 0
+$sequence gmod_jump_delta a_gmod_jump_delta weightlist jump_delta delta hidden
+
+// Walking
+
+$animation a_WalkS "base_f/WalkS" loop LX LY alignto reference
+$animation a_WalkSE "base_f/WalkSE" loop LX LY alignto reference
+$animation a_WalkE "base_f/WalkE" loop LX LY alignto reference
+$animation a_WalkNE "base_f/WalkNE" loop LX LY alignto reference
+$animation a_WalkN "base_f/WalkN" loop LX LY alignto reference
+$animation a_WalkNW "base_f/WalkNW" loop LX LY alignto reference
+$animation a_WalkW "base_f/WalkW" loop LX LY alignto reference
+$animation a_WalkSW "base_f/WalkSW" loop LX LY alignto reference
+
+// Crouch walking
+
+$animation a_CwalkS  "base_f/Crouch_walkS"  loop LX LY //ikrule lfoot footstep range .. 8 22 .. ikrule rfoot footstep range .. 23 7 ..
+$animation a_CwalkSE "base_f/Crouch_walkSE" loop LX LY //ikrule lfoot footstep range .. 8 22 .. ikrule rfoot footstep range .. 23 7 ..
+$animation a_CwalkE  "base_f/Crouch_walkE"  loop LX LY //ikrule lfoot footstep range .. 8 23 .. ikrule rfoot footstep range .. 22 8 ..
+$animation a_CwalkNE "base_f/Crouch_walkNE" loop LX LY //ikrule lfoot footstep range .. 8 23 .. ikrule rfoot footstep range .. 22 8 ..
+$animation a_CwalkN  "base_f/crouch_walkN"  loop LX LY //ikrule lfoot footstep range .. 8 23 .. ikrule rfoot footstep range .. 23 7 ..
+$animation a_CwalkNW "base_f/Crouch_walkNW" loop LX LY //ikrule lfoot footstep range .. 8 11 .. ikrule rfoot footstep range .. 16 0 ..
+$animation a_CwalkW  "base_f/Crouch_walkW"  loop LX LY //ikrule lfoot footstep range .. 8 11 .. ikrule rfoot footstep range .. 16 0 ..
+$animation a_CwalkSW "base_f/Crouch_walkSW" loop LX LY //ikrule lfoot footstep range .. 8 11 .. ikrule rfoot footstep range .. 16 0 ..
+
+// Running
+
+$animation a_RunS "base_f/RunS" loop LX LY startloop 0 rotateto -180	alignto reference
+$animation a_RunSE "base_f/RunSE" loop LX LY startloop 0 rotateto -135 alignto reference
+$animation a_RunE "base_f/RunE" loop LX LY startloop 0 rotateto -90 alignto reference
+$animation a_RunNE "base_f/RunNE" loop LX LY startloop 0 rotateto -45 alignto reference
+$animation a_RunN "base_f/RunN" loop LX LY startloop 0 rotateto 0 alignto reference
+$animation a_RunNW "base_f/RunNW" loop LX LY startloop 0 rotateto 45 alignto reference
+$animation a_RunW "base_f/RunW" loop LX LY startloop 0 rotateto 90 alignto reference
+$animation a_RunSW "base_f/RunSW" loop LX LY startloop 0 rotateto 135 alignto reference
+
+// Swimming
+
+$animation a_SwimS "gmod/swim_s"	loop LX LY fps 50
+$animation a_SwimSE "gmod/swim_se" loop LX LY fps 50
+$animation a_SwimE "gmod/swim_e"	loop LX LY fps 50
+$animation a_SwimNE "gmod/swim_ne" loop LX LY fps 50
+$animation a_SwimN "gmod/swim_n" loop LX LY fps 50
+$animation a_SwimNW "gmod/swim_nw" loop LX LY fps 50
+$animation a_SwimW "gmod/swim_w" loop LX LY fps 50
+$animation a_SwimSW "gmod/swim_sw" loop LX LY fps 50

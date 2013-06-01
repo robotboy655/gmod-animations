@@ -1,0 +1,38 @@
+// ----------------------------------------------------------------------------
+//  ZOMBIE MACROS
+// ----------------------------------------------------------------------------
+
+// This is $MakeSplineGestureLockFeet but the pelvis isn't self-additive, it looks at the reference instead,
+// allowing me to push the pelvis down by a few units, avoiding IK pops on anims that push it up.
+
+$definemacro MakeZombieAnimFix splinename filename pelvisweights baseweights peak tail end \\
+$animation a_$splinename$_pelvis_layer 			$filename$ subtract reference 0 \\
+$sequence $splinename$_pelvis_layer 			a_$splinename$_pelvis_layer delta weightlist $pelvisweights$ hidden \\
+$sequence $splinename$_base_layer 				$filename$ weightlist $baseweights$ hidden \\
+$sequence $splinename$ "..\humans_sdk\male\ragdoll_pose" noanimation blendlayer $splinename$_pelvis_layer 0 $peak$ $tail$ $end$ spline blendlayer $splinename$_base_layer 0 $peak$ $tail$ $end$ spline numframes $end$ iklock rfoot 1 0 iklock lfoot 1 0 fadein 0.3 fadeout 0.3 hidden \\
+$continue $splinename$
+
+// Movement
+
+$definemacro MakeZombieWalk walkname walkanim \\
+$sequence $walkname$ { \\
+	a_ZombieWalkSW  a_ZombieWalkS   a_ZombieWalkSE \\
+	a_ZombieWalkW	a_ZombieWalkC   a_ZombieWalkE \\
+	a_ZombieWalkNW  $walkanim$      a_ZombieWalkNE \\
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1 \\
+	fadein 0.4 fadeout 0.3 loop \\
+	addlayer idle_layer_alt addlayer body_rot_z \\
+	} \\
+$continue $walkname$
+
+$definemacro MakeZombieCrouchWalk walkname walkanim \\
+$sequence $walkname$ { \\
+	a_ZombieCrouchWalkSW  a_ZombieCrouchWalkS   a_ZombieCrouchWalkSE \\
+	a_ZombieCrouchWalkW	a_ZombieCrouchWalkC   a_ZombieCrouchWalkE \\
+	a_ZombieCrouchWalkNW  $walkanim$      a_ZombieCrouchWalkNE \\
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1 \\
+	fadein 0.4 fadeout 0.3 loop \\
+	addlayer zombie_crouch_layer_pelvis \\
+	addlayer idle_layer_alt addlayer body_rot_z \\
+	} \\
+$continue $walkname$

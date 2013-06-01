@@ -1,0 +1,177 @@
+// ------------------------------------
+//  ZOMBIE ANIMATIONS
+// ------------------------------------
+
+// This is $MakeSplineGestureLockFeet but the pelvis isn't self-additive, it looks at the reference instead,
+// allowing me to push the pelvis down by a few units, avoiding IK pops on anims that push it up.
+
+$MakeZombieAnimFix zombie_anim_fix "../zombie/anim_fix" PelvisOnlyHalved ZombieAnimFix 0 3 3 loop fps 1
+
+$animation a_zom_crouch1 "../zombie/crouch_layer"
+$animation a_zom_crouch2 "../zombie/crouch_layer" weightlist PelvisOnlyMinusQuarter subtract reference 0
+$animation a_zom_animfix "../zombie/anim_fix" weightlist ZombieWSBAnimFix subtract reference 0
+$sequence  zombie_crouch_layer_pelvis a_zom_crouch2 loop fps 30 delta iklock rfoot 1 0 iklock lfoot 1 0 hidden
+
+// $origin 0 0 -1 // slightly pushing up the anims
+
+$cmdlist    ZombieCrouchWalk weightlist ZombieWSB worldspaceblend a_zom_crouch1 weightlist AllBones alignto reference
+$cmdlist    ZombieAnimFix weightlist ZombieWSBAnimFix worldspaceblend a_zom_animfix weightlist AllBones
+
+$animation a_ZombieWalkC "../zombie/idle" loop rotateto -90 alignto reference
+$animation a_ZombieWalkS  "../zombie/walk_s"  loop LX LY rotateto -180 alignto reference
+$animation a_ZombieWalkSE "../zombie/walk_se" loop LX LY rotateto -135 alignto reference
+$animation a_ZombieWalkE  "../zombie/walk_e"  loop LX LY rotateto -90 alignto reference
+$animation a_ZombieWalkNE "../zombie/walk_ne" loop LX LY rotateto -45 alignto reference
+$animation a_ZombieWalkNW "../zombie/walk_nw" loop LX LY rotateto 45 alignto reference
+$animation a_ZombieWalkW  "../zombie/walk_w"  loop LX LY rotateto 90 alignto reference
+$animation a_ZombieWalkSW "../zombie/walk_sw" loop LX LY rotateto 135 alignto reference
+
+$animation a_ZombieWalkFastC  "../zombie/walk_fast_n"  loop rotateto 0 frames 0 0 alignto reference
+$animation a_ZombieWalkFastS  "../zombie/walk_fast_s"  loop LX LY rotateto -180 alignto reference
+$animation a_ZombieWalkFastSE "../zombie/walk_fast_se" loop LX LY rotateto -135 alignto reference
+$animation a_ZombieWalkFastE  "../zombie/walk_fast_e"  loop LX LY rotateto -90 alignto reference
+$animation a_ZombieWalkFastNE "../zombie/walk_fast_ne" loop LX LY rotateto -45 alignto reference
+$animation a_ZombieWalkFastN  "../zombie/walk_fast_n"  loop LX LY rotateto -0 alignto reference
+$animation a_ZombieWalkFastNW "../zombie/walk_fast_nw" loop LX LY rotateto 45 alignto reference
+$animation a_ZombieWalkFastW  "../zombie/walk_fast_w"  loop LX LY rotateto 90 alignto reference
+$animation a_ZombieWalkFastSW "../zombie/walk_fast_sw" loop LX LY rotateto 135 alignto reference
+
+$animation a_ZombieWalkN_01 "../zombie/walk_01" loop LX LY rotateto 0 alignto reference
+$animation a_ZombieWalkN_02 "../zombie/walk_02" loop LX LY rotateto 0 alignto reference
+$animation a_ZombieWalkN_03 "../zombie/walk_03" loop LX LY rotateto 0 alignto reference
+$animation a_ZombieWalkN_04 "../zombie/walk_04" loop LX LY rotateto 0 alignto reference
+$animation a_ZombieWalkN_05 "../zombie/walk_05" loop LX LY rotateto 0 alignto reference
+
+$animation a_ZombieCrouchWalkC  "../zombie/idle" loop rotateto -90 { weightlist ZombieWSBCenterNoHands worldspaceblend a_zom_crouch1 weightlist AllBones }
+$animation a_ZombieCrouchWalkS  "../zombie/walk_s"  loop LX LY rotateto -180 { cmdlist ZombieCrouchWalk }
+$animation a_ZombieCrouchWalkSE "../zombie/walk_se" loop LX LY rotateto -135 { cmdlist ZombieCrouchWalk }
+$animation a_ZombieCrouchWalkE  "../zombie/walk_e"  loop LX LY rotateto -90 { cmdlist ZombieCrouchWalk }
+$animation a_ZombieCrouchWalkNE "../zombie/walk_ne" loop LX LY rotateto -45 { cmdlist ZombieCrouchWalk }
+$animation a_ZombieCrouchWalkNW "../zombie/walk_nw" loop LX LY rotateto 45 { cmdlist ZombieCrouchWalk }
+$animation a_ZombieCrouchWalkW  "../zombie/walk_w"  loop LX LY rotateto 90 { cmdlist ZombieCrouchWalk }
+$animation a_ZombieCrouchWalkSW "../zombie/walk_sw" loop LX LY rotateto 135 { cmdlist ZombieCrouchWalk }
+
+$animation a_ZombieCrouchWalkN_01 "../zombie/walk_01" loop LX LY rotateto 0 { cmdlist ZombieCrouchWalk }
+$animation a_ZombieCrouchWalkN_02 "../zombie/walk_02" loop LX LY rotateto 0 { cmdlist ZombieCrouchWalk }
+$animation a_ZombieCrouchWalkN_03 "../zombie/walk_03" loop LX LY rotateto 0 { cmdlist ZombieCrouchWalk }
+$animation a_ZombieCrouchWalkN_04 "../zombie/walk_04" loop LX LY rotateto 0 { cmdlist ZombieCrouchWalk }
+$animation a_ZombieCrouchWalkN_05 "../zombie/walk_05" loop LX LY rotateto 0 { cmdlist ZombieCrouchWalk }
+
+$sequence   zombie_idle_01 a_ZombieWalkC loop fps 30  addlayer idle_layer_alt addlayer body_rot_z fadein 0.3 fadeout 0.3 activity ACT_HL2MP_IDLE_ZOMBIE 2
+// $sequence   zombie_idle_02 "../zombie/idle" loop fps 30  addlayer idle_layer fadein 0.4 fadeout 0.3 activity ACT_HL2MP_IDLE_ZOMBIE 1
+
+$sequence   zombie_cidle_01 a_ZombieCrouchWalkC loop fps 30 addlayer zombie_crouch_layer_pelvis addlayer idle_layer addlayer body_rot_z fadein 0.2 fadeout 0.3 activity ACT_HL2MP_IDLE_CROUCH_ZOMBIE 1
+$sequence   zombie_cidle_02 a_ZombieCrouchWalkC loop fps 30 addlayer zombie_crouch_layer_pelvis addlayer idle_layer_alt addlayer body_rot_z fadein 0.2 fadeout 0.3 activity ACT_HL2MP_IDLE_CROUCH_ZOMBIE 2
+
+$MakeZombieWalk zombie_walk_01 a_ZombieWalkN_01 activity ACT_HL2MP_WALK_ZOMBIE_01 1 
+$MakeZombieWalk zombie_walk_02 a_ZombieWalkN_02 activity ACT_HL2MP_WALK_ZOMBIE_02 1 
+$MakeZombieWalk zombie_walk_03 a_ZombieWalkN_03 activity ACT_HL2MP_WALK_ZOMBIE_03 1 
+$MakeZombieWalk zombie_walk_04 a_ZombieWalkN_04 activity ACT_HL2MP_WALK_ZOMBIE_04 1 
+$MakeZombieWalk zombie_walk_05 a_ZombieWalkN_05 activity ACT_HL2MP_WALK_ZOMBIE_05 1 
+
+$MakeZombieCrouchWalk zombie_cwalk_01 a_ZombieCrouchWalkN_01 activity ACT_HL2MP_WALK_CROUCH_ZOMBIE_01 1
+$MakeZombieCrouchWalk zombie_cwalk_02 a_ZombieCrouchWalkN_02 activity ACT_HL2MP_WALK_CROUCH_ZOMBIE_02 1 
+$MakeZombieCrouchWalk zombie_cwalk_03 a_ZombieCrouchWalkN_03 activity ACT_HL2MP_WALK_CROUCH_ZOMBIE_03 1
+$MakeZombieCrouchWalk zombie_cwalk_04 a_ZombieCrouchWalkN_04 activity ACT_HL2MP_WALK_CROUCH_ZOMBIE_04 1 
+$MakeZombieCrouchWalk zombie_cwalk_05 a_ZombieCrouchWalkN_05 activity ACT_HL2MP_WALK_CROUCH_ZOMBIE_05 1
+
+$sequence zombie_walk_06 {
+	a_ZombieWalkFastSW  a_ZombieWalkFastS   a_ZombieWalkFastSE
+	a_ZombieWalkFastW   a_ZombieWalkFastC   a_ZombieWalkFastE
+	a_ZombieWalkFastNW  a_ZombieWalkFastN   a_ZombieWalkFastNE
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1
+	addlayer body_rot_z
+	addlayer idle_layer_alt
+	activity ACT_HL2MP_WALK_ZOMBIE_06 1
+}
+
+$animation a_zom_run_layer "../zombie/walk_05" frames 5 29 fixuploop 0 24 fixuploop 1 23 fixuploop 2 22 subtract a_zom_run_layer 0
+$animation a_zom_run_pose "../zombie/walk_05" frames 5 5
+$animation a_zom_run_cntr "../zombie/walk_05" frames 5 5
+$sequence zombie_run_upperbody_layer "a_zom_run_layer" weightlist UpperBodyBlend loop fps 15 hidden delta realtime
+
+$cmdlist ZRunC weightlist ZombieRunIdle          worldspaceblend a_zom_run_cntr weightlist AllBones alignto reference
+$cmdlist ZRun  weightlist FasterUpperBodyBlend   worldspaceblend a_zom_run_pose weightlist AllBones alignto reference
+$cmdlist ZRunA weightlist UpperBodyBlend         worldspaceblend a_zom_run_pose weightlist AllBones alignto reference
+
+$animation a_ZRunC  ../zombie/idle   loop LX LY startloop 0 rotateto -90 alignto reference cmdlist ZRunC
+$animation a_ZRunS  ../$g$/RunS   loop LX LY startloop 0 rotateto -180 alignto reference cmdlist ZRunA
+$animation a_ZRunSE ../$g$/RunSE loop LX LY startloop 0 rotateto -135 alignto reference cmdlist ZRunA
+$animation a_ZRunE  ../$g$/RunE   loop LX LY startloop 0 rotateto -90 alignto reference cmdlist ZRun
+$animation a_ZRunNE ../$g$/RunNE loop LX LY startloop 0 rotateto -45 alignto reference cmdlist ZRun
+$animation a_ZRunN  ../$g$/RunN   loop LX LY startloop 0 rotateto 0 alignto reference cmdlist ZRun
+$animation a_ZRunNW ../$g$/RunNW loop LX LY startloop 0 rotateto 45 alignto reference cmdlist ZRun
+$animation a_ZRunW  ../$g$/RunW   loop LX LY startloop 0 rotateto 90 alignto reference cmdlist ZRun
+$animation a_ZRunSW ../$g$/RunSW loop LX LY startloop 0 rotateto 135 alignto reference cmdlist ZRunA
+
+$animation a_ZRunNF ../zombie/ZombieFast_RunN loop LX LY startloop 0 rotateto 0 alignto reference
+$animation a_ZRunNWF ../zombie/ZombieFast_RunN loop LX LY startloop 0 rotateto 45 alignto reference
+$animation a_ZRunNEF ../zombie/ZombieFast_RunN loop LX LY startloop 0 rotateto -45 alignto reference
+$animation a_ZRunCF ../zombie/ZombieFast_Idle loop startloop 0 alignto reference
+
+$sequence zombie_run {
+	a_ZRunSW  a_ZRunS   a_ZRunSE
+	a_ZRunW	  a_ZRunC   a_ZRunE
+	a_ZRunNW  a_ZRunN   a_ZRunNE
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1
+	addlayer zombie_run_upperbody_layer
+	addlayer body_rot_z
+	addlayer idle_layer_alt
+	activity ACT_HL2MP_RUN_ZOMBIE 1
+	}
+
+$sequence zombie_run_fast {
+	a_ZombieWalkFastSW  a_ZombieWalkFastS   a_ZombieWalkFastSE
+	a_ZombieWalkFastW   a_ZRunCF   a_ZombieWalkFastE
+	a_ZRunNWF a_ZRunNF  a_ZRunNEF
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1
+	addlayer body_rot_z
+	addlayer idle_layer_alt
+	activity ACT_HL2MP_RUN_ZOMBIE_FAST 1
+}	
+	
+$MakeSplineGestureLockFeet zombie_attack_01 "../zombie/attack_01" PelvisOnly NoPelvis 12 28 55 ACT_GMOD_GESTURE_RANGE_ZOMBIE 1 fps 32 
+$MakeSplineGestureLockFeet zombie_attack_02 "../zombie/attack_02" PelvisOnly NoPelvis 12 34 55 ACT_GMOD_GESTURE_RANGE_ZOMBIE 1 fps 32 
+$MakeSplineGestureLockFeet zombie_attack_03 "../zombie/attack_03" Pelvis0090 NoPelvis 12 28 55 ACT_GMOD_GESTURE_RANGE_ZOMBIE 1 fps 34 
+$MakeSplineGestureLockFeet zombie_attack_04 "../zombie/attack_04" PelvisOnly NoPelvis 06 34 49 ACT_GMOD_GESTURE_RANGE_ZOMBIE 2 fps 31 
+$MakeSplineGestureLockFeet zombie_attack_05 "../zombie/attack_05" Pelvis0090 NoPelvis 06 24 41 ACT_GMOD_GESTURE_RANGE_ZOMBIE 2 fps 30 
+$MakeSplineGestureLockFeet zombie_attack_06 "../zombie/attack_06" PelvisOnly NoPelvis 06 28 41 ACT_GMOD_GESTURE_RANGE_ZOMBIE 2 fps 28 
+$MakeSplineGestureLockFeet zombie_attack_07 "../zombie/ZombieFast_MeleeLunge" Pelvis50 NoPelvis 8 20 30 ACT_GMOD_GESTURE_RANGE_ZOMBIE 1 fps 25
+
+$MakeSplineGestureLockFeet zombie_attack_special "../zombie/BloodyRoar2_edit" Pelvis50 NoPelvis 8 38 46 ACT_GMOD_GESTURE_RANGE_ZOMBIE_SPECIAL 1 fps 30
+
+$MakeSplineGestureLockFeet zombie_attack_frenzy "../zombie/ZombieFast_MeleeAttack" Pelvis50 NoPelvis 0 14 14 ACT_GMOD_GESTURE_RANGE_FRENZY 1 fps 28 fadein 0.3 fadeout 0.3
+
+$MakeSplineGestureLockFeet taunt_zombie "../zombie/BloodyRoar3" Pelvis50 NoPelvis 10 45 60 ACT_GMOD_GESTURE_TAUNT_ZOMBIE 1 fps 25
+
+$sequence menu_zombie_01 "../zombie/BloodyRoar3" blendlayer zombie_idle_01 46 60 65 65 spline addlayer idle_layer_alt addlayer idle_layer addlayer gmod_breath_layer
+
+$animation a_zom_climblanding "../zombie/ZombieFast_ClimbDismount_EndPose" alignto reference
+
+$sequence zombie_climb_start "../zombie/zombiefast_climb" frames 0 30 alignto reference fps 20 LX LY LZ ACT_ZOMBIE_CLIMB_START 1
+$sequence zombie_climb_loop "../zombie/ZombieFast_ClimbLoop" origin 7.2 11.9 60 fps 20 loop LZ ACT_ZOMBIE_CLIMB_UP 1
+$sequence zombie_climb_end "../zombie/ZombieFast_ClimbDismount" fps 30 ACT_ZOMBIE_CLIMB_END 1 {
+	align zombie_climb_loop X Y Z 0 0 
+	walkalign 33 a_zom_climblanding lm lz 0 52
+	walkalign 52 a_zom_climblanding lm lx 0 52
+	ikrule lfoot footstep range 40 44 52 52
+	ikrule rfoot footstep range 43 47 52 52
+	ikrule lhand footstep range 18 23 33 38 contact 33
+	ikrule rhand footstep range 12 16 33 38 contact 33
+	fps 20
+}
+
+$animation a_leap_start  "../zombie/ZombieFast_LeapAttack_Leap"
+$sequence zombie_leap_start "a_leap_start" X Y Z alignto reference activity ACT_ZOMBIE_LEAP_START -1 fps 20 
+$sequence zombie_leap_mid "../zombie/ZombieFast_LeapAttack_Strike" alignto reference fps 20 activity ACT_ZOMBIE_LEAPING -1
+
+$sequence zombie_slump_idle_02 		"../zombie/slumpalt_idle" frames 0 0 loop fps 10 ACT_HL2MP_ZOMBIE_SLUMP_ALT_IDLE 1  fadein 0.3 fadeout 0.3
+$sequence zombie_slump_rise_02_fast "../zombie/slumpalt_rise_fast" fps 34 ACT_HL2MP_ZOMBIE_SLUMP_ALT_RISE_FAST 1  fadein 0.2 fadeout 0.3
+$sequence zombie_slump_rise_02_slow "../zombie/slumpalt_rise_slow" fps 26 ACT_HL2MP_ZOMBIE_SLUMP_ALT_RISE_SLOW 1  fadein 0.3 fadeout 0.3
+
+$origin 0 -86 -64 // fixing the offset in those specific anims
+
+$sequence zombie_slump_idle_01 "../zombie/slump_idle" loop fps 10 ACT_HL2MP_ZOMBIE_SLUMP_IDLE 1  fadein 0.3 fadeout 0.3
+$sequence zombie_slump_rise_01 "../zombie/slump_rise" fps 30 ACT_HL2MP_ZOMBIE_SLUMP_RISE 1  fadein 0.3 fadeout 0.3
+
+$origin 0 0 0 // switching back to no offset

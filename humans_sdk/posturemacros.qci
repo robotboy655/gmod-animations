@@ -1,0 +1,104 @@
+//$weightlist posture_nohands "ValveBiped.Bip01_Pelvis" 1.0 "ValveBiped.Bip01_L_Hand" 0.0 "ValveBiped.Bip01_R_Hand" 0.0 "ValveBiped.Bip01_L_Thigh" 0.0 "ValveBiped.Bip01_R_Thigh" 0.0
+$weightlist posture_nohands "ValveBiped.Bip01_Pelvis" 1.0 "ValveBiped.Bip01_L_Hand" 0.0 "ValveBiped.Bip01_R_Hand" 0.0 "ValveBiped.Bip01_L_Thigh" 1.0 "ValveBiped.Bip01_R_Thigh" 1.0
+
+$definemacro makeposturewithhandslockgaze posturename filename Apex LoopStart LoopEnd LoopFPS LastFrame \\
+$sequence $posturename$loop $filename$ frame $LoopStart$ $LoopEnd$ fps $LoopFPS$ loop fixuploop -2 2 realtime hidden noautoik \\
+$sequence $posturename$in $filename$ frame 0 $LoopStart$ splinedelta delta hidden \\
+$sequence $posturename$out $filename$ frame $LoopEnd$ $LastFrame$ splinedelta delta hidden \\
+\\
+$sequence $posturename$ { \\
+  $filename$ noanimation numframes $LastFrame$ \\
+  blendlayer $posturename$loop 0 $LoopStart$ $LoopEnd$ $LastFrame$ spline \\
+  blendlayer $posturename$in 0 0 $LoopStart$ $LoopStart$ \\
+  blendlayer $posturename$out $LoopEnd$ $LoopEnd$ $LastFrame$ $LastFrame$ \\
+  // iklock rfoot 1 0 iklock lfoot 1 0 \\
+  keyvalues \\
+  { \\
+    faceposer \\
+    { \\
+      type "posture" \\
+      tags \\
+      { \\
+	"apex" $Apex$ \\
+	"loop" $LoopStart$ \\
+	"end" $LoopEnd$ \\
+      } \\
+      endmatch "loop" \\
+      thumbnail_frame $LoopStart$ \\
+    } \\
+  } \\
+  ikrule lhand release range 0 $Apex$ $LoopEnd$ $LastFrame$ \\
+  ikrule rhand release range 0 $Apex$ $LoopEnd$ $LastFrame$ \\
+}
+
+$definemacro makeposturewithhands posturename filename Apex LoopStart LoopEnd LoopFPS LastFrame \\
+$makeposturewithhandslockgaze $posturename$ $filename$ $Apex$ $LoopStart$ $LoopEnd$ $LoopFPS$ $LastFrame$ \\
+$prepend $posturename$loop counterrotate "ValveBiped.forward" \\
+$prepend $posturename$in counterrotate "ValveBiped.forward" \\
+$prepend $posturename$out counterrotate "ValveBiped.forward"
+
+$definemacro makeposturelockgaze posturename filename Apex LoopStart LoopEnd LoopFPS LastFrame \\
+$makeposturewithhandslockgaze $posturename$ $filename$ $Apex$ $LoopStart$ $LoopEnd$ $LoopFPS$ $LastFrame$ \\
+$prepend $posturename$in weightlist posture_nohands \\
+$prepend $posturename$out weightlist posture_nohands
+
+$definemacro makeposture posturename filename Apex LoopStart LoopEnd LoopFPS LastFrame \\
+$makeposturelockgaze $posturename$ $filename$ $Apex$ $LoopStart$ $LoopEnd$ $LoopFPS$ $LastFrame$ \\
+$prepend $posturename$loop counterrotate "ValveBiped.forward" \\
+$prepend $posturename$in counterrotate "ValveBiped.forward" \\
+$prepend $posturename$out counterrotate "ValveBiped.forward"
+
+
+$definemacro makeposturewithhandslockgazeshortloop posturename filename Apex ApexTag LoopStart LoopPeak LoopTail LoopEnd LoopFPS Exit LastFrame \\
+$sequence $posturename$loopDelta $filename$ frame $LoopPeak$ $LoopTail$ fps $LoopFPS$ loop fixuploop -2 2 subtract @$posturename$loopDelta 0 delta realtime hidden noautoik \\
+$sequence $posturename$apex $filename$ frame $Apex$ $Apex$ hidden noautoik \\
+$sequence $posturename$apexDelta $filename$ frame 0 $Apex$ splinedelta delta hidden noautoik \\
+$sequence $posturename$in $filename$ frame $LoopPeak$ $LoopPeak$ hidden noautoik \\
+$sequence $posturename$inDelta $filename$ frame $Apex$ $LoopPeak$ splinedelta delta hidden noautoik \\
+$sequence $posturename$out $filename$ frame $LoopTail$ $LoopTail$ hidden noautoik \\
+$sequence $posturename$outDelta $filename$ frame $LoopTail$ $Exit$ splinedelta delta hidden noautoik \\
+$sequence $posturename$exit $filename$ frame $Exit$ $Exit$ hidden noautoik \\
+$sequence $posturename$exitDelta $filename$ frame $Exit$ $LastFrame$ splinedelta delta hidden noautoik \\
+\\
+$sequence $posturename$ { \\
+  $filename$ noanimation numframes $LastFrame$ \\
+  blendlayer $posturename$apex 0 $Apex$ $Apex$ $LoopPeak$ spline xfade \\
+  blendlayer $posturename$in $Apex$ $LoopPeak$ $LoopPeak$ $LoopTail$ spline xfade \\
+  blendlayer $posturename$out $LoopPeak$ $LoopTail$ $LoopTail$ $Exit$ spline xfade \\
+  blendlayer $posturename$exit $LoopTail$ $Exit$ $Exit$ $LastFrame$ spline \\
+  blendlayer $posturename$apexDelta 0 0 $Apex$ $Apex$ \\
+  blendlayer $posturename$inDelta $Apex$ $Apex$ $LoopPeak$ $LoopPeak$ \\
+  blendlayer $posturename$loopDelta $LoopStart$ $LoopPeak$ $LoopTail$ $LoopEnd$ spline \\
+  blendlayer $posturename$outDelta $LoopTail$ $LoopTail$ $Exit$ $Exit$ \\
+  blendlayer $posturename$exitDelta $Exit$ $Exit$ $LastFrame$ $LastFrame$ \\
+   // iklock rfoot 1 0 iklock lfoot 1 0 \\
+  keyvalues \\
+  { \\
+    faceposer \\
+    { \\
+      type "posture" \\
+      tags \\
+      { \\
+	"apex" $ApexTag$ \\
+	"loop" $LoopPeak$ \\
+	"end" $LoopTail$ \\
+      } \\
+      endmatch "loop" \\
+      thumbnail_frame $LoopPeak$ \\
+    } \\
+  } \\
+  ikrule lhand release range 0 $Apex$ $LoopTail$ $LastFrame$ \\
+  ikrule rhand release range 0 $Apex$ $LoopTail$ $LastFrame$ \\
+}
+
+
+$definemacro makeposturewithhandsshortloop posturename filename Apex ApexTag LoopStart LoopPeak LoopTail LoopEnd LoopFPS Exit LastFrame \\
+$makeposturewithhandslockgazeshortloop $posturename$ $filename$ $Apex$ $ApexTag$ $LoopStart$ $LoopPeak$ $LoopTail$ $LoopEnd$ $LoopFPS$ $Exit$ $LastFrame$ \\
+$prepend $posturename$apex counterrotate "ValveBiped.forward" \\
+$prepend $posturename$in counterrotate "ValveBiped.forward" \\
+$prepend $posturename$out counterrotate "ValveBiped.forward" \\
+$prepend $posturename$exit counterrotate "ValveBiped.forward" \\
+$prepend $posturename$apexDelta counterrotate "ValveBiped.forward" \\
+$prepend $posturename$inDelta counterrotate "ValveBiped.forward" \\
+$prepend $posturename$outDelta counterrotate "ValveBiped.forward" \\
+$prepend $posturename$exitDelta counterrotate "ValveBiped.forward"

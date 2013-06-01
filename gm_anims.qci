@@ -1,0 +1,293 @@
+// ------------------------------------
+//  AIMLAYERS (LOOK AROUND)
+// ------------------------------------
+
+// Aimlayers are additive animations which define how exactly you move when you
+// look around. They are not the weapon pose themselves; this is defined elsewhere.
+// If you wanted, you could theorically use a pistol aimlayer with a SMG pose. 
+
+// If the aimlayer has left hand IK enabled, then the aimlayer will define the
+// position of the left hand, not the weapon pose. So the aimlayer has to be correct.
+// Note that it will only define the position of the IK target of the left hand; it
+// won't change the fingers of the left hand, for example. That's still up to the wep pose.
+
+// $makeaimlayer police_WalkN_pistol_aim_matrix	"../police_xsi/WalkN_pistol_aim_matrix" 
+// $makeaimlayer weapons_Pistol_aim_matrix			"../humans_sdk/male_animations/WeaponAnims_Shared/Pistol_aim_matrix"
+// $makeaimlayer aimlayer_pistol_crouch			"aimlayer_pistol_crouch"
+
+$makeaimlayer  soldier_Aim_9_directions			"../combine_soldier_xsi/Aim_9_directions"
+
+// $makeaimlayerB aimlayer_smg	"../combine_soldier_xsi/Crouch_aim_9_directions"
+
+$makeaimlayer weapons_Aim_9_directions			"../humans_sdk/male_animations/WeaponAnims_Shared/Aim_9_directions"
+$makeaimlayer weapons_Aim_9_directions_Alert	"../humans_sdk/male_animations/WeaponAnims_Shared/Aim_9_directions_Alert"
+// $makeaimlayer weapons_RunN_SMG1_Aim_9_directions "../humans_sdk/male_animations/WeaponAnims_Shared/RunN_SMG1_Aim_9_directions"
+// $makeaimlayer weapons_WalkN_SMG1_Alert_Aim_9_directions "../humans_sdk/male_animations/WeaponAnims_Shared/WalkN_SMG1_Alert_Aim_9_directions"
+
+// $makeaimlayer aimlayer_rpg		"../humans_sdk/male_animations/WeaponAnims_Shared/Aim_RPG_9_directions"
+// $makeaimlayer aimlayer_rpg_crouch				"aimlayer_rpg_crouch"
+
+// Aimlayers organized by weapon type etc.
+
+$popd $pushd "aimlayers"
+
+$MakeAimLayer             aimlayer_ar2                  "aimlayer_ar2.smd"
+// $MakeAimLayer             aimlayer_ar2_crouch           "aimlayer_ar2_crouch.smd"
+$MakeAimLayerCamera       aimlayer_camera               "aimlayer_camera.smd"
+$MakeAimLayerCamera       aimlayer_camera_crouch        "aimlayer_camera_crouch.smd"
+$MakeAimLayer             aimlayer_crossbow				"aimlayer_crossbow.smd"
+$MakeAimLayerNoLeftHandIK aimlayer_dual		            "aimlayer_dual.smd"
+$MakeAimLayerNoLeftHandIK aimlayer_dual_crouch          "aimlayer_dual_crouch.smd"
+$MakeAimLayerNoLeftHandIK aimlayer_dual_walk		    "aimlayer_dual_walk.smd"
+$MakeAimLayerNoLeftHandIK aimlayer_dual_run		        "aimlayer_dual_run.smd"
+$MakeAimLayerNoLeftHandIK aimlayer_knife			    "aimlayer_knife.smd"
+$MakeAimLayerNoLeftHandIK aimlayer_knife_crouch			"aimlayer_knife_crouch.smd"
+$MakeAimLayerNoLeftHandIK aimlayer_knife_walk			"aimlayer_knife_walk.smd"
+$MakeAimLayerTelekinesis  aimlayer_magic			    "aimlayer_magic.smd"
+$MakeAimLayerTelekinesis  aimlayer_magic_crouch	        "aimlayer_magic_crouch.smd"
+$MakeAimLayerNoLeftHandIK aimlayer_melee			    "aimlayer_melee.smd"	
+$MakeAimLayer             aimlayer_melee2			    "aimlayer_melee2.smd"
+$MakeAimLayer             aimlayer_melee2_crouch	    "aimlayer_melee2_crouch.smd"
+$MakeAimLayer             aimlayer_physgun		        "aimlayer_physgun.smd"
+$MakeAimLayer             aimlayer_physgun_crouch       "aimlayer_physgun_crouch.smd"
+$MakeAimLayer             aimlayer_physgun_run	        "aimlayer_physgun_run.smd"
+$MakeAimLayerNoLeftHandIK aimlayer_pistol		        "aimlayer_pistol.smd"
+$MakeAimLayer             aimlayer_pistol_crouch        "aimlayer_pistol_crouch.smd"
+$MakeAimLayerNoLeftHandIK aimlayer_pistol_walk	        "aimlayer_pistol_walk.smd"
+$MakeAimLayerNoLeftHandIK aimlayer_pistol_run	        "aimlayer_pistol_run.smd"
+$MakeAimLayer             aimlayer_rpg		            "aimlayer_rpg.smd"
+$MakeAimLayer             aimlayer_rpg_crouch		    "aimlayer_rpg_crouch.smd"
+$MakeAimLayer             aimlayer_revolver		        "aimlayer_revolver.smd"
+$MakeAimLayer             aimlayer_revolver_walk		"aimlayer_revolver_walk.smd"
+$MakeAimLayer             aimlayer_revolver_run		    "aimlayer_revolver_run.smd"
+$MakeAimLayerNoLeftHandIK aimlayer_slam			        "aimlayer_slam.smd"
+$MakeAimLayerNoLeftHandIK aimlayer_slam_crouch	        "aimlayer_slam_crouch.smd"
+$MakeAimLayer             aimlayer_shotgun		        "aimlayer_shotgun.smd"
+$MakeAimLayer             aimlayer_smg					"aimlayer_smg.smd"
+
+$popd $pushd "player"		
+
+// ------------------------------------
+//  MOVEMENT ANIMATIONS
+// ------------------------------------
+
+$MakeCIdle	cidle_ar2		"../combine_soldier_xsi/Shoot_AR2_crouch" 0 aimlayer_ar2 ACT_HL2MP_IDLE_CROUCH_AR2 1
+$MakeCIdle 	cidle_crossbow	"../combine_soldier_xsi/Shoot_SG_crouch" 0 aimlayer_crossbow ACT_HL2MP_IDLE_CROUCH_CROSSBOW 1
+$MakeCIdle 	cidle_camera	"../aimlayers/aimlayer_camera_crouch" 4 aimlayer_camera_crouch ACT_HL2MP_IDLE_CROUCH_CAMERA 1 addlayer idle_layer
+$MakeCIdle	cidle_dual		"../aimlayers/aimlayer_dual_crouch" 4 aimlayer_dual_crouch ACT_HL2MP_IDLE_CROUCH_DUEL 1
+$MakeCIdle 	cidle_fist		"../9way_central/fist_crouch" 0 aimlayer_dual_crouch ACT_HL2MP_IDLE_CROUCH_FIST 1 numframes 128 addlayer idle_fist_layer_weak
+$MakeCIdle	cidle_grenade	"../9way_central/grenade_crouch" 0 aimlayer_melee ACT_HL2MP_IDLE_CROUCH_GRENADE 1 addlayer idle_layer_alt
+$MakeCIdle	cidle_knife		"../aimlayers/aimlayer_knife_crouch" 4 aimlayer_knife_crouch activity ACT_HL2MP_IDLE_CROUCH_KNIFE 1 addlayer idle_layer
+$MakeCIdle	cidle_magic		"../aimlayers/aimlayer_magic_crouch" 4 aimlayer_magic_crouch ACT_HL2MP_IDLE_CROUCH_MAGIC 1 addlayer idle_layer_alt
+$MakeCIdle	cidle_melee		"../9way_central/melee_crouch" 0 aimlayer_melee ACT_HL2MP_IDLE_CROUCH_MELEE 1 addlayer idle_layer
+$MakeCIdle	cidle_melee2	"../aimlayers/aimlayer_melee2_crouch" 4 aimlayer_melee2_crouch ACT_HL2MP_IDLE_CROUCH_MELEE2 1 addlayer idle_layer
+$MakeCIdle	cidle_passive 	"Idle_Angry_RPG" 0 body_rot_z ACT_HL2MP_IDLE_CROUCH_PASSIVE 1 addlayer idle_layer
+$MakeCIdle	cidle_physgun	"../aimlayers/aimlayer_physgun_crouch" 4 aimlayer_physgun_crouch ACT_HL2MP_IDLE_CROUCH_PHYSGUN 1 addlayer idle_layer
+$MakeCIdle	cidle_pistol	"../aimlayers/aimlayer_pistol_crouch" 4 aimlayer_revolver_run ACT_HL2MP_IDLE_CROUCH_PISTOL 1
+$MakeCIdle	cidle_revolver	"../9way_central/revo_crouch" 0 aimlayer_revolver ACT_HL2MP_IDLE_CROUCH_REVOLVER 1
+$MakeCIdle	cidle_rpg		"../aimlayers/aimlayer_rpg_crouch" 4 aimlayer_rpg_crouch ACT_HL2MP_IDLE_CROUCH_RPG 1 
+$MakeCIdle	cidle_shotgun	"../combine_soldier_xsi/Shoot_SG_crouch" 0 aimlayer_shotgun ACT_HL2MP_IDLE_CROUCH_SHOTGUN 1
+$MakeCIdle	cidle_slam		"../aimlayers/aimlayer_slam_crouch" 4 aimlayer_slam_crouch ACT_HL2MP_IDLE_CROUCH_SLAM 1 addlayer idle_layer
+$MakeCIdle	cidle_smg1		"../9way_central/smg1_crouch" 0 aimlayer_smg ACT_HL2MP_IDLE_CROUCH_SMG1 1
+
+$MakeCWalk	cwalk_ar2		"../combine_soldier_xsi/Shoot_AR2_crouch" 0 aimlayer_ar2 ACT_HL2MP_WALK_CROUCH_AR2 1
+$MakeCWalk	cwalk_camera	"../aimlayers/aimlayer_camera_crouch" 4 aimlayer_camera_crouch ACT_HL2MP_WALK_CROUCH_CAMERA 1
+$MakeCWalk	cwalk_crossbow	"../aimlayers/aimlayer_crossbow" 4 aimlayer_crossbow ACT_HL2MP_WALK_CROUCH_CROSSBOW 1
+$MakeCWalk	cwalk_dual		"../aimlayers/aimlayer_dual_crouch" 4 aimlayer_dual_crouch ACT_HL2MP_WALK_CROUCH_DUEL 1
+$MakeCWalk	cwalk_fist		"../9way_central/fist_crouch" 0 aimlayer_dual_crouch ACT_HL2MP_WALK_CROUCH_FIST 1 addlayer idle_fist_layer_rt
+$MakeCWalk	cwalk_knife		"../aimlayers/aimlayer_knife_crouch" 4 aimlayer_knife_crouch ACT_HL2MP_WALK_CROUCH_KNIFE 1 
+$MakeCWalk	cwalk_magic		"../aimlayers/aimlayer_magic_crouch" 4 aimlayer_magic_crouch ACT_HL2MP_WALK_CROUCH_MAGIC 1 
+$MakeCWalk	cwalk_melee2	"../aimlayers/aimlayer_melee2_crouch" 4 aimlayer_melee2 ACT_HL2MP_WALK_CROUCH_MELEE2 1
+$MakeCWalk	cwalk_passive 	"Idle_Angry_RPG" 0 body_rot_z ACT_HL2MP_WALK_CROUCH_PASSIVE 1
+$MakeCWalk	cwalk_pistol	"../aimlayers/aimlayer_pistol_crouch" 4 aimlayer_revolver_run ACT_HL2MP_WALK_CROUCH_PISTOL 1
+$MakeCWalk	cwalk_physgun	"../aimlayers/aimlayer_physgun_crouch" 4 aimlayer_physgun_crouch ACT_HL2MP_WALK_CROUCH_PHYSGUN 1
+$MakeCWalk	cwalk_revolver	"../9way_central/revo_crouch" 4 aimlayer_revolver_run ACT_HL2MP_WALK_CROUCH_REVOLVER 1
+$MakeCWalk	cwalk_rpg		"../aimlayers/aimlayer_rpg_crouch" 4 aimlayer_rpg_crouch ACT_HL2MP_WALK_CROUCH_RPG 1
+$MakeCWalk	cwalk_shotgun	"../combine_soldier_xsi/Shoot_SG_crouch" 0 aimlayer_shotgun ACT_HL2MP_WALK_CROUCH_SHOTGUN 1
+$MakeCWalk	cwalk_smg1		"../9way_central/smg1_crouch" 0 aimlayer_smg ACT_HL2MP_WALK_CROUCH_SMG1 1
+
+$MakeCWalkNoLeftArm	cwalk_grenade	"../9way_central/grenade_crouch" 0 aimlayer_melee ACT_HL2MP_WALK_CROUCH_GRENADE 1 
+$MakeCWalkNoLeftArm	cwalk_melee		"../9way_central/melee_crouch" 0 aimlayer_melee ACT_HL2MP_WALK_CROUCH_MELEE 1 
+// $MakeCWalkNoLeftArm	cwalk_knife		"../aimlayers/aimlayer_knife_crouch" 4 aimlayer_knife_crouch ACT_HL2MP_WALK_CROUCH_KNIFE 1 
+$MakeCWalkNoLeftArm	cwalk_slam		"../aimlayers/aimlayer_slam_crouch" 4 aimlayer_slam_crouch ACT_HL2MP_WALK_CROUCH_SLAM 1
+
+$MakeIdle	idle_ar2		"../combine_soldier_xsi/Hold_AR2" 0 aimlayer_ar2 ACT_HL2MP_IDLE_AR2 1
+$MakeIdle	idle_camera	    "../aimlayers/aimlayer_camera" 4 aimlayer_camera ACT_HL2MP_IDLE_CAMERA 1 addlayer idle_layer
+$MakeIdle	idle_crossbow	"../aimlayers/aimlayer_crossbow" 4 aimlayer_crossbow ACT_HL2MP_IDLE_CROSSBOW 1
+$MakeIdle	idle_dual		"../aimlayers/aimlayer_dual" 4 aimlayer_dual ACT_HL2MP_IDLE_DUEL 1
+//$MakeIdle	idle_fist		"../gmod/fists_idle" 0 aimlayer_dual ACT_HL2MP_IDLE_FIST 1 addlayer idle_layer fixuploop 0 127
+$MakeIdle	idle_knife		"../aimlayers/aimlayer_knife" 4 aimlayer_knife ACT_HL2MP_IDLE_KNIFE 1 addlayer idle_layer
+$MakeIdle	idle_grenade	"../9way_central/grenade" 0 aimlayer_melee ACT_HL2MP_IDLE_GRENADE 1 addlayer idle_layer_alt
+$MakeIdle	idle_magic		"../aimlayers/aimlayer_magic" 4 aimlayer_magic ACT_HL2MP_IDLE_MAGIC 1 addlayer idle_layer_alt
+$MakeIdle	idle_melee		"../9way_central/melee" 0 aimlayer_melee ACT_HL2MP_IDLE_MELEE 1 addlayer idle_layer
+$MakeIdle	idle_melee2		"../aimlayers/aimlayer_melee2" 4 aimlayer_melee2 ACT_HL2MP_IDLE_MELEE2 1
+$MakeIdle	idle_passive 	"Idle_RPG_Relaxed" 0 body_rot_z ACT_HL2MP_IDLE_PASSIVE 1 addlayer idle_layer
+$MakeIdle	idle_pistol		../9way_central/pist_$g$ 4 aimlayer_pistol ACT_HL2MP_IDLE_PISTOL 1
+$MakeIdle	idle_physgun	"../aimlayers/aimlayer_physgun" 4 aimlayer_physgun ACT_HL2MP_IDLE_PHYSGUN 2 addlayer idle_layer
+$MakeIdle	idle_revolver	../9way_central/revo_$g$ 4 aimlayer_revolver ACT_HL2MP_IDLE_REVOLVER 1
+$MakeIdle	idle_rpg		"../humans_sdk/male_animations/WeaponAnims_Shared/Aim_RPG_9_directions" 4 aimlayer_rpg ACT_HL2MP_IDLE_RPG 1
+$MakeIdle	idle_shotgun	"../9way_central/shotgun" 0 aimlayer_shotgun ACT_HL2MP_IDLE_SHOTGUN 1
+$MakeIdle	idle_slam		"../aimlayers/aimlayer_slam" 4 aimlayer_slam ACT_HL2MP_IDLE_SLAM 1 addlayer idle_layer
+$MakeIdle	idle_smg1		"../combine_soldier_xsi/Hold_SMG1" 0 aimlayer_smg ACT_HL2MP_IDLE_SMG1 1
+
+$MakeJump	jump_ar2		"../combine_soldier_xsi/Shoot_AR2_crouch" 0 aimlayer_shotgun ACT_HL2MP_JUMP_AR2 1
+$MakeJump	jump_camera	    "../aimlayers/aimlayer_camera" 4 aimlayer_camera ACT_HL2MP_JUMP_CAMERA 1
+$MakeJump	jump_crossbow	"../aimlayers/aimlayer_crossbow" 4 aimlayer_crossbow ACT_HL2MP_JUMP_CROSSBOW 1
+$MakeJump	jump_dual		"../aimlayers/aimlayer_dual" 4 aimlayer_dual ACT_HL2MP_JUMP_DUEL 1
+$MakeJump	jump_fist		"../gmod/fists_idle" 0 aimlayer_dual ACT_HL2MP_JUMP_FIST 1
+$MakeJump	jump_grenade	"../9way_central/grenade_crouch" 0 aimlayer_dual ACT_HL2MP_JUMP_GRENADE 1
+$MakeJump	jump_knife		"../aimlayers/aimlayer_knife" 4 aimlayer_knife ACT_HL2MP_JUMP_KNIFE 1
+$MakeJump	jump_magic		"../aimlayers/aimlayer_magic_crouch" 4 aimlayer_magic_crouch ACT_HL2MP_JUMP_MAGIC 1
+$MakeJump	jump_melee		"../9way_central/melee_crouch" 0 aimlayer_melee ACT_HL2MP_JUMP_MELEE 1
+$MakeJump	jump_melee2		"../aimlayers/aimlayer_melee2" 4 aimlayer_melee2 ACT_HL2MP_JUMP_MELEE2 1
+$MakeJump	jump_passive 	"Idle_Angry_RPG" 0 body_rot_z ACT_HL2MP_JUMP_PASSIVE 1
+$MakeJump	jump_pistol		"../9way_central/revo_crouch" 4 aimlayer_revolver_run ACT_HL2MP_JUMP_PISTOL 1
+$MakeJump	jump_physgun	"../aimlayers/aimlayer_physgun_crouch" 4 aimlayer_physgun_crouch ACT_HL2MP_JUMP_PHYSGUN 1
+$MakeJump	jump_revolver	"../9way_central/revo_crouch" 4 aimlayer_revolver_run ACT_HL2MP_JUMP_REVOLVER 1
+$MakeJump	jump_rpg		"../aimlayers/aimlayer_rpg" 4 aimlayer_rpg ACT_HL2MP_JUMP_RPG 1
+$MakeJump	jump_shotgun	"../9way_central/shotgun" 0 aimlayer_shotgun ACT_HL2MP_JUMP_SHOTGUN 1
+$MakeJump	jump_slam		"../aimlayers/aimlayer_slam_crouch" 4 aimlayer_slam_crouch ACT_HL2MP_JUMP_SLAM 1
+$MakeJump	jump_smg1		"../9way_central/smg1_crouch" 0 aimlayer_smg ACT_HL2MP_JUMP_SMG1 1
+
+$MakeRun	run_ar2			"../combine_soldier_xsi/Hold_AR2" 0 aimlayer_ar2 ACT_HL2MP_RUN_AR2 1
+$MakeRun	run_camera	    "../aimlayers/aimlayer_camera" 4 aimlayer_camera ACT_HL2MP_RUN_CAMERA 1
+$MakeRun	run_crossbow	"../aimlayers/aimlayer_crossbow" 4 aimlayer_crossbow ACT_HL2MP_RUN_CROSSBOW 1
+$MakeRun	run_dual		"../aimlayers/aimlayer_dual_run" 4 aimlayer_dual_run ACT_HL2MP_RUN_DUEL 1
+$MakeRun	run_fist		"../gmod/fists_idle" 0 aimlayer_dual ACT_HL2MP_RUN_FIST 1 addlayer idle_fist_layer_rt
+$MakeRun	run_knife	    "../aimlayers/aimlayer_knife" 4 aimlayer_dual ACT_HL2MP_RUN_KNIFE 1 addlayer idle_fist_layer_rt
+$MakeRun	run_magic		"../aimlayers/aimlayer_magic" 4 aimlayer_magic ACT_HL2MP_RUN_MAGIC 1
+$MakeRun	run_melee2		"../aimlayers/aimlayer_melee2" 4 aimlayer_melee2 ACT_HL2MP_RUN_MELEE2 1
+$MakeRun	run_passive 	"Idle_Angry_RPG" 0 body_rot_z ACT_HL2MP_RUN_PASSIVE 1
+$MakeRun	run_physgun 	"../aimlayers/aimlayer_physgun_run" 4 aimlayer_physgun_run ACT_HL2MP_RUN_PHYSGUN 1
+$MakeRun	run_revolver	"../aimlayers/aimlayer_revolver_run" 4 aimlayer_revolver_run ACT_HL2MP_RUN_REVOLVER 1
+$MakeRun	run_rpg			"../humans_sdk/male_animations/WeaponAnims_Shared/Aim_RPG_9_directions" 4 aimlayer_rpg ACT_HL2MP_RUN_RPG 1
+$MakeRun	run_shotgun		"../combine_soldier_xsi/RunN_aim_sg" 0 aimlayer_shotgun ACT_HL2MP_RUN_SHOTGUN 1
+$MakeRun	run_smg1		"../9way_central/smg1_crouch" 0 aimlayer_smg ACT_HL2MP_RUN_SMG1 1
+
+$MakeRunNoLeftArm	run_grenade     "../9way_central/grenade" 0 aimlayer_melee ACT_HL2MP_RUN_GRENADE 1 
+// $MakeRunNoLeftArm	run_knife	"../aimlayers/aimlayer_knife" 4 aimlayer_dual ACT_HL2MP_RUN_KNIFE 1 
+$MakeRunNoLeftArm	run_melee	    "../9way_central/melee" 0 aimlayer_melee ACT_HL2MP_RUN_MELEE 1 
+$MakeRunNoLeftArm	run_pistol	    "../aimlayers/aimlayer_pistol_run" 4 aimlayer_pistol_run ACT_HL2MP_RUN_PISTOL 1
+$MakeRunNoLeftArm	run_slam	    "../aimlayers/aimlayer_slam" 4 aimlayer_slam ACT_HL2MP_RUN_SLAM 1 
+
+$MakeSit	sit_ar2		 "../combine_soldier_xsi/Hold_AR2" 0 aimlayer_shotgun ACT_HL2MP_SIT_AR2 1
+$MakeSit 	sit_camera	 "../aimlayers/aimlayer_camera" 4 aimlayer_camera_crouch ACT_HL2MP_SIT_CAMERA 1
+$MakeSit 	sit_crossbow "HL2DM_Idle_Crossbow" 0 soldier_Aim_9_directions ACT_HL2MP_SIT_CROSSBOW 1
+$MakeSit	sit_duel	 "../aimlayers/aimlayer_dual" 0 aimlayer_dual ACT_HL2MP_SIT_duel 1
+$MakeSit 	sit_fist	 "../gmod/fightpose_duck" 0 aimlayer_dual ACT_HL2MP_SIT_FIST 1
+$MakeSit	sit_grenade	 "HL2DM_Throw_Grenade" 0 aimlayer_melee ACT_HL2MP_SIT_GRENADE 1
+$MakeSit	sit_knife	 "../aimlayers/aimlayer_knife" 4 aimlayer_knife ACT_HL2MP_SIT_KNIFE 1
+$MakeSit	sit_melee	 "HL2DM_MeleeAttack" 0 aimlayer_melee ACT_HL2MP_SIT_MELEE 1
+$MakeSit	sit_melee2	 "../aimlayers/aimlayer_melee2" 4 aimlayer_melee2 ACT_HL2MP_SIT_MELEE2 1
+$MakeSit	sit_pistol	 "../aimlayers/aimlayer_pistol_crouch" 4 aimlayer_revolver_walk ACT_HL2MP_SIT_PISTOL 1
+$MakeSit	sit_shotgun	 "../combine_soldier_xsi/Shoot_SG_crouch" 0 aimlayer_shotgun ACT_HL2MP_SIT_SHOTGUN 1
+$MakeSit	sit_smg1     "../combine_soldier_xsi/Hold_SMG1" 0 aimlayer_shotgun ACT_HL2MP_SIT_SMG1 1
+$MakeSit	sit_physgun	 "../aimlayers/aimlayer_physgun" 4 aimlayer_physgun ACT_HL2MP_SIT_PHYSGUN 1
+$MakeSit	sit_rpg		 "../humans_sdk/male_animations/WeaponAnims_Shared/Aim_RPG_9_directions" 4 aimlayer_rpg_crouch ACT_HL2MP_SIT_RPG 1
+$MakeSit	sit_passive  "Idle_Relaxed_Shotgun_4" 0 body_rot_z ACT_HL2MP_SIT_PASSIVE 1
+$MakeSit	sit_slam	 "HL2DM_Idle_Slam" 0 aimlayer_melee ACT_HL2MP_SIT_SLAM 1
+
+
+$MakeSwimIdle	swim_idle_ar2		"../combine_soldier_xsi/Hold_AR2" 0 soldier_Aim_9_directions ACT_HL2MP_SWIM_IDLE_AR2 1
+$MakeSwimIdle	swim_idle_camera	"../aimlayers/aimlayer_camera" 4 aimlayer_camera ACT_HL2MP_SWIM_IDLE_CAMERA 1
+$MakeSwimIdle	swim_idle_crossbow	"../aimlayers/aimlayer_crossbow" 4 aimlayer_crossbow ACT_HL2MP_SWIM_IDLE_CROSSBOW 1
+$MakeSwimIdle	swim_idle_duel		"../aimlayers/aimlayer_dual" 4 aimlayer_dual ACT_HL2MP_SWIM_IDLE_DUEL 1
+$MakeSwimIdle	swim_idle_fist		"../9way_central/fist" 0 aimlayer_dual ACT_HL2MP_SWIM_IDLE_FIST 1 addlayer idle_fist_layer_rt
+$MakeSwimIdle	swim_idle_gravgun 	"../aimlayers/aimlayer_physgun_run" 4 aimlayer_physgun_run ACT_HL2MP_SWIM_IDLE_PHYSGUN 1
+$MakeSwimIdle	swim_idle_grenade 	"../9way_central/grenade" 0 aimlayer_melee ACT_HL2MP_SWIM_IDLE_GRENADE 1
+$MakeSwimIdle	swim_idle_knife		"../aimlayers/aimlayer_knife" 4 aimlayer_knife ACT_HL2MP_SWIM_IDLE_KNIFE 1
+$MakeSwimIdle	swim_idle_magic		"../aimlayers/aimlayer_magic" 4 aimlayer_magic ACT_HL2MP_SWIM_IDLE_MAGIC 1
+$MakeSwimIdle	swim_idle_melee		"../9way_central/melee" 0 aimlayer_melee ACT_HL2MP_SWIM_IDLE_MELEE 1
+$MakeSwimIdle	swim_idle_melee2	"../aimlayers/aimlayer_melee2" 4 aimlayer_melee2 ACT_HL2MP_SWIM_IDLE_MELEE2 1
+$MakeSwimIdle	swim_idle_passive 	"Idle_Angry_RPG" 0 body_rot_z ACT_HL2MP_SWIM_IDLE_PASSIVE 1
+$MakeSwimIdle	swim_idle_pistol	"../aimlayers/aimlayer_pistol_run" 4 aimlayer_pistol ACT_HL2MP_SWIM_IDLE_PISTOL 1
+$MakeSwimIdle	swim_idle_revolver	"../aimlayers/aimlayer_revolver_walk" 4 aimlayer_revolver_walk ACT_HL2MP_SWIM_IDLE_REVOLVER 1
+$MakeSwimIdle	swim_idle_rpg		"../humans_sdk/male_animations/WeaponAnims_Shared/Aim_RPG_9_directions" 4 aimlayer_rpg ACT_HL2MP_SWIM_IDLE_RPG 1
+$MakeSwimIdle	swim_idle_shotgun	"../combine_soldier_xsi/runN_aim_sg" 0 aimlayer_shotgun ACT_HL2MP_SWIM_IDLE_SHOTGUN 1
+$MakeSwimIdle	swim_idle_slam		"../aimlayers/aimlayer_slam" 4 aimlayer_slam ACT_HL2MP_SWIM_IDLE_SLAM 1
+$MakeSwimIdle	swim_idle_smg1		"../humans_sdk/male_animations/WeaponAnims_Shared/runN_Alert_SMG1_Aim" 0 aimlayer_smg ACT_HL2MP_SWIM_IDLE_SMG1 1
+
+$MakeSwim	swimming_ar2		"../combine_soldier_xsi/Hold_AR2" 0 soldier_Aim_9_directions ACT_HL2MP_SWIM_AR2 1
+$MakeSwim	swimming_camera	    "../aimlayers/aimlayer_camera" 4 aimlayer_camera ACT_HL2MP_SWIM_CAMERA 1
+$MakeSwim	swimming_crossbow	"../aimlayers/aimlayer_crossbow" 4 aimlayer_crossbow ACT_HL2MP_SWIM_CROSSBOW 1
+$MakeSwim	swimming_duel		"../aimlayers/aimlayer_dual_run" 4 aimlayer_dual_run ACT_HL2MP_SWIM_DUEL 1
+$MakeSwim	swimming_fist		"../9way_central/fist_crouch" 0 aimlayer_dual ACT_HL2MP_SWIM_FIST 1 addlayer idle_fist_layer_rt
+$MakeSwim	swimming_gravgun 	"../aimlayers/aimlayer_physgun_run" 4 aimlayer_physgun_run ACT_HL2MP_SWIM_PHYSGUN 1
+$MakeSwim	swimming_magic		"../aimlayers/aimlayer_magic" 4 aimlayer_magic ACT_HL2MP_SWIM_MAGIC 1
+$MakeSwim	swimming_melee2		"../aimlayers/aimlayer_melee2" 4 aimlayer_melee2 ACT_HL2MP_SWIM_MELEE2 1
+$MakeSwim	swimming_passive 	"Idle_Angry_RPG" 0 body_rot_z ACT_HL2MP_SWIM_PASSIVE 1
+$MakeSwim	swimming_revolver 	"../aimlayers/aimlayer_revolver_run" 4 aimlayer_revolver_run ACT_HL2MP_SWIM_REVOLVER 1
+$MakeSwim	swimming_rpg		"../humans_sdk/male_animations/WeaponAnims_Shared/Aim_RPG_9_directions" 4 aimlayer_rpg ACT_HL2MP_SWIM_RPG 1
+$MakeSwim	swimming_shotgun	"../combine_soldier_xsi/runN_aim_sg" 0 aimlayer_shotgun ACT_HL2MP_SWIM_SHOTGUN 1
+$MakeSwim	swimming_smg1		"../humans_sdk/male_animations/WeaponAnims_Shared/runN_Alert_SMG1_Aim" 0 aimlayer_smg ACT_HL2MP_SWIM_SMG1 1
+
+$MakeSwimNoLeftArm	swimming_grenade 	"../9way_central/grenade" 0 aimlayer_melee ACT_HL2MP_SWIM_GRENADE 1
+$MakeSwimNoLeftArm	swimming_knife		"../aimlayers/aimlayer_knife" 4 aimlayer_knife_crouch ACT_HL2MP_SWIM_KNIFE 1
+$MakeSwimNoLeftArm	swimming_melee		"../9way_central/melee" 0 aimlayer_melee ACT_HL2MP_SWIM_MELEE 1
+$MakeSwimNoLeftArm	swimming_pistol		"../aimlayers/aimlayer_pistol_run" 4 aimlayer_pistol ACT_HL2MP_SWIM_PISTOL 1
+$MakeSwimNoLeftArm	swimming_slam		"../aimlayers/aimlayer_slam" 4 aimlayer_slam ACT_HL2MP_SWIM_SLAM 1
+
+$MakeWalk	walk_ar2		smg1     "../combine_soldier_xsi/Hold_AR2" 0 soldier_Aim_9_directions ACT_HL2MP_WALK_AR2 1
+$MakeWalk	walk_camera	    camera   "../aimlayers/aimlayer_camera" 4 aimlayer_camera ACT_HL2MP_WALK_CAMERA 1 addlayer idle_layer
+$MakeWalk	walk_crossbow	shotgun  "../aimlayers/aimlayer_crossbow" 4 aimlayer_crossbow ACT_HL2MP_WALK_CROSSBOW 1
+$MakeWalk	walk_dual		dual     "../aimlayers/aimlayer_dual_walk" 4 aimlayer_dual_walk ACT_HL2MP_WALK_DUEL 1
+$MakeWalk	walk_fist		fist     "../gmod/fists_idle" 0 aimlayer_dual ACT_HL2MP_WALK_FIST 1 addlayer idle_fist_layer_rt
+$MakeWalk	walk_knife		knife    "../aimlayers/aimlayer_knife" 4 aimlayer_knife ACT_HL2MP_WALK_KNIFE 1 addlayer idle_layer
+$MakeWalk	walk_magic		magic    "../aimlayers/aimlayer_magic" 4 aimlayer_magic ACT_HL2MP_WALK_MAGIC 1 addlayer idle_layer_alt
+$MakeWalk	walk_melee2		melee2   "../aimlayers/aimlayer_melee2" 4 aimlayer_melee2 ACT_HL2MP_WALK_MELEE2 1 addlayer idle_layer
+$MakeWalk	walk_passive 	passive  "Idle_RPG_Relaxed" 0 body_rot_z ACT_HL2MP_WALK_PASSIVE 1 addlayer idle_layer
+$MakeWalk	walk_physgun	gravgun  "../aimlayers/aimlayer_physgun_run" 4 aimlayer_physgun_run ACT_HL2MP_WALK_PHYSGUN 1 addlayer idle_layer
+$MakeWalk	walk_revolver	revo_$g$ "../aimlayers/aimlayer_revolver_walk" 4 aimlayer_revolver_walk ACT_HL2MP_WALK_REVOLVER 1
+$MakeWalk	walk_rpg		rpg      "../humans_sdk/male_animations/WeaponAnims_Shared/Aim_RPG_9_directions" 4 aimlayer_rpg ACT_HL2MP_WALK_RPG 1
+$MakeWalk	walk_shotgun	shotgun  "../combine_soldier_xsi/RunN_aim_sg" 0 aimlayer_shotgun ACT_HL2MP_WALK_SHOTGUN 1
+$MakeWalk	walk_smg1		smg1     "../9way_central/smg1_crouch" 0 aimlayer_smg ACT_HL2MP_WALK_SMG1 1
+
+$MakeWalkNoLeftArm	walk_grenade	melee    "../9way_central/grenade" 0 aimlayer_melee ACT_HL2MP_WALK_GRENADE 1 addlayer idle_layer_alt
+// $MakeWalkNoLeftArm	walk_knife		knife    "../aimlayers/aimlayer_knife" 4 aimlayer_knife_walk ACT_HL2MP_WALK_KNIFE 1 
+$MakeWalkNoLeftArm	walk_melee		melee    "../9way_central/melee" 0 aimlayer_melee ACT_HL2MP_WALK_MELEE 1 addlayer idle_layer
+$MakeWalkNoLeftArm	walk_pistol		pist_$g$ "../aimlayers/aimlayer_pistol_walk" 4 aimlayer_pistol_walk ACT_HL2MP_WALK_PISTOL 1
+$MakeWalkNoLeftArm	walk_slam		slam     "../aimlayers/aimlayer_slam" 4 aimlayer_slam ACT_HL2MP_WALK_SLAM 1 addlayer idle_layer
+
+// $include gm_special.qci
+
+// ------------------------------------
+//  GESTURES AND STUFF AND OTHER STUFF
+// ------------------------------------
+
+$include gm_sequences.qci
+
+// ------------------------------------
+//  OTHER MISC. STUFF
+// ------------------------------------
+
+$sequence drive_pd "../gmod/drive_pd" ACT_DRIVE_POD 1 fps 30.00
+
+$origin 0 0 4
+
+$animation sit_rollercoaster_idle "../gmod/sit_slam"
+$animation sit_rollercoaster_fall "../gmod/ride_fall"
+$animation sit_rollercoaster_fast "../gmod/ride_fast"
+
+$sequence sit_rollercoaster { sit_rollercoaster_fall sit_rollercoaster_idle sit_rollercoaster_fast
+	                          blendwidth 3 blend vertical_velocity -1 1 ACT_GMOD_SIT_ROLLERCOASTER 1 
+							  loop fps 30 fadein 0.3 fadeout 0.3 addlayer gmod_breath_layer_sitting }
+
+$origin 0 9.4 -0.7 // XSI offset, positions the player perfectly in the vehicle 0 9.4 -0.7
+
+$animation drive_airboat_left "../gmod/drive_airboat_left" { loop LX LY rotateto -1 }
+$animation drive_airboat_right "../gmod/drive_airboat_right" { loop LX LY rotateto 1 }
+$animation drive_airboat_center "../gmod/drive_airboat" { loop LX LY rotateto 1 }
+
+$sequence drive_airboat { drive_airboat_left drive_airboat_center drive_airboat_right
+                          blendwidth 3 blend vehicle_steer -1 1 ACT_DRIVE_AIRBOAT 1 }
+ 
+$origin 0 8.5 -4 // XSI offset, positions the player perfectly in the vehicle 0 8.5 -4
+
+$animation drive_jeep_left "../gmod/drive_jeep_left" { loop LX LY rotateto -1 }
+$animation drive_jeep_right "../gmod/drive_jeep_right" { loop LX LY rotateto 1 }
+$animation drive_jeep_center "../gmod/drive_jeep" { loop LX LY rotateto 1 }
+
+$sequence drive_jeep { drive_jeep_left drive_jeep_center drive_jeep_right
+                       blendwidth 3 blend vehicle_steer -1 1 ACT_DRIVE_JEEP 1 }
+
+$origin 0 0 0

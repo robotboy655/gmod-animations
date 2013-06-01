@@ -1,0 +1,44 @@
+defaultflex frame 20		// baseline mouth closed expression
+
+flex "AU42"	frame 5				// eyes		half_closed
+	
+flexpair "AU1" 1	frame 6 		// brow 	inner_raiser	
+flexpair "AU2" 1.5	frame 7			// brow 	outer_raiser	
+flexpair "AU4" 1.5	frame 8			// brow 	lowerer 	
+flexpair "AU1AU2" 1.5	frame 9			// brow		brow_raiser
+
+flexpair "AU12" 1.0 	frame 10 position 0.5	// mouth	corner_puller
+flexpair "AU12" 1.0	frame 11 position 1.0	// mouth
+flex "AU12AU25" 	frame 12		// mouth	open_mouth_smile
+
+flexpair "AU15" 1.0	frame 13		// mouth	corner_depressor 
+flexpair "AU17" 1.0	frame 14 		// mouth	chin_raiser	
+
+flexpair "AU10" 1.0	frame 15		// mouth	upper_raiser	
+//flex "AU10SL"		frame 16		// mouth	snear_left
+//flex "AU10SR"		frame 16		// mouth	snear_right
+flex "AU16"		frame 17 		// mouth 	lower_lip_depressor
+
+flexpair "AU6" 1.0	frame 18		// nose		cheek_raiser	
+flexpair "AU9" 1.0	frame 19		// nose 	wrinkler	
+
+flexpair "AU25" 1.0	frame 21		// phoneme	part
+flexpair "AU18" 1.0 	frame 22 position 0.8	// phoneme	puckerer
+flexpair "AU18" 1.0 	frame 27 position 1.0	// phoneme	puckerer
+flexpair "AU22" 1.0 	frame 23 		// phoneme	funneler	
+flexpair "AU20" 1.0 	frame 24		// phoneme	stretcher	
+flex "AU32"		frame 25		// phoneme	bite		
+flex "AU24"		frame 26		// phoneme	presser		
+
+flex "AU38"		frame 28		// nose		dilator		
+
+flex "AU31"		frame 30		// phoneme	jaw_clencher	
+flexpair "AU26" 1.5 	frame 31 		// phoneme	jaw_dropped	
+flexpair "AU27" 1.5	frame 32 		// phoneme	mouth_stretch	
+
+flexpair "AU26Z" 1.5	frame 33		// phoneme	jaw_dropped
+//flexpair "AU27Z" 1.5	frame 34 		// phoneme	mouth_stretch
+
+// flex "AU11"		frame 00		// nose 	furrow_deepener	
+// flex "AU13"		frame 00		// mouth	cheek_puffer	
+

@@ -1,0 +1,245 @@
+// ----------------------------------------------------------------------------
+//  PLAYER MOVEMENT MACROS
+//
+//  Used for creating the movement animations, which includes:
+//  idle, crouch idle, walking, crouch walking, running, sitting.
+// ----------------------------------------------------------------------------
+
+// ------------------------------------
+//  MAKE IDLE
+// ------------------------------------
+
+$definemacro makeidle idlename filename frame aimlayer \\
+$sequence $idlename$ $filename$ alignto reference frame $frame$ $frame$ numframes 30 loop addlayer $aimlayer$ addlayer gmod_breath_layer \\
+$continue $idlename$
+
+// ------------------------------------
+//  MAKE IDLE POSE
+// ------------------------------------
+
+$definemacro MakeIdlePose idlename \\
+$animation a_idlepose_$idlename$ gmod/idle_pose/$idlename$ \\
+
+// ------------------------------------
+//  MAKE CROUCH IDLE
+//  (common idle??)
+// ------------------------------------
+
+$definemacro makecidle cidlename filename frame aimlayer \\
+$sequence $cidlename$ $filename$ alignto reference frame $frame$ $frame$ numframes 30 loop addlayer $aimlayer$ addlayer gmod_breath_layer\\
+$continue $cidlename$
+
+// ------------------------------------
+//  MAKE CROUCH IDLE B
+//  (B is world space blend?)
+// ------------------------------------
+
+$definemacro makecidleB cidlename filename frame filenameB frameB aimlayer \\
+$animation a_$cidlename$_base $filename$ frame $frame$ $frame$ \\
+$sequence $cidlename$ $filenameB$ { \\
+	frame $frameB$ $frameB$ \\
+	weightlist AimlayerWorldspaceBlend \\
+	worldspaceblend a_$cidlename$_base \\
+	weightlist AllBones \\
+	loop \\ 
+	} \\
+$continue $cidlename$
+
+// ------------------------------------
+//  MAKE SWIM IDLE
+// ------------------------------------
+
+$definemacro MakeSwimIdle idlename filename frame aimlayer \\
+$sequence $idlename$ "gmod/swim_idle" loop addlayer $aimlayer$ \\
+$continue $idlename$
+
+// ------------------------------------
+// MAKE WALK
+// ------------------------------------
+
+$definemacro MakeWalk walkname idlepose filename frame aimlayer \\
+$animation a_$walkname$_base $filename$ frame $frame$ $frame$ \\
+$sequence $walkname$_layer "base_f/walkN" { \\
+	X Y rotateto 0 \\
+	alignto reference \\
+	weightlist AimlayerWorldspaceBlend \\
+	worldspaceblend a_$walkname$_base \\
+	weightlist AimlayerComposite \\
+	hidden \\
+	iklock lfoot 1 0 iklock rfoot 1 0 \\
+	} \\
+$sequence $walkname$ { \\
+	a_WalkSW  a_WalkS                       a_WalkSE \\
+	a_WalkW	  gmod/idle_pose/$idlepose$  a_WalkE \\
+	a_WalkNW  a_WalkN                       a_WalkNE \\
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1 \\
+	addlayer $walkname$_layer \\
+	addlayer $aimlayer$ \\
+	loop \\
+	} \\
+$continue $walkname$
+
+// ------------------------------------
+// MAKE WALK, NO LEFT ARM
+// For one-handed weapons e.g. melee
+// ------------------------------------
+
+$definemacro MakeWalkNoLeftArm walkname idlepose filename frame aimlayer \\
+$animation a_$walkname$_base $filename$ frame $frame$ $frame$ \\
+$sequence $walkname$_layer "base_f/walkN" { \\
+	X Y rotateto 0 \\
+	alignto reference \\
+	weightlist AimlayerWorldSpaceBlend \\
+	worldspaceblend a_$walkname$_base \\
+	weightlist AimlayerComposite \\
+	hidden \\
+	iklock lfoot 1 0 iklock rfoot 1 0 \\
+	} \\
+$sequence $walkname$ { \\
+	a_WalkSW  a_WalkS                       a_WalkSE \\
+	a_WalkW	  gmod/idle_pose/$idlepose$  a_WalkE \\
+	a_WalkNW  a_WalkN                       a_WalkNE \\
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1 \\
+	addlayer $walkname$_layer \\
+	addlayer $aimlayer$ \\
+	loop \\
+	} \\
+$continue $walkname$
+
+// ------------------------------------
+// MAKE CROUCH WALK
+// ------------------------------------
+
+$definemacro makecwalk crouch_walkname filename frame aimlayer \\
+$animation a_$crouch_walkname$_base $filename$ frame $frame$ $frame$ \\
+$sequence $crouch_walkname$_layer "base_f/crouch_walkN" { \\
+	X Y rotateto 0 \\
+	alignto reference \\
+	weightlist AimlayerWorldspaceBlend \\
+	worldspaceblend a_$crouch_walkname$_base \\
+	weightlist AimlayerComposite \\
+	hidden \\
+	iklock lfoot 1 0 iklock rfoot 1 0 \\
+	} \\
+$sequence $crouch_walkname$ { \\
+	a_CwalkSW  a_CwalkS  a_CwalkSE \\
+	a_CwalkW   player/CrouchIdle_D  a_CwalkE \\
+	a_CwalkNW  a_CwalkN  a_CwalkNE \\
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1 \\
+	addlayer $crouch_walkname$_layer \\
+	addlayer $aimlayer$ \\
+	loop \\
+	} \\
+$continue $crouch_walkname$
+
+// ------------------------------------
+// MAKE RUN
+// MakeMatchRun is now default
+// ------------------------------------
+
+$definemacro MakeRun runname idlepose filename frame aimlayer \\
+$animation a_$runname$_base $filename$ frame $frame$ $frame$ \\
+$sequence $runname$_mod "base_f/RunN" { \\
+	X Y rotateto 0 \\
+	alignto reference \\
+	weightlist AimlayerWorldspaceBlend \\
+	worldspaceblend a_$runname$_base \\
+	weightlist AimlayerComposite \\
+	hidden \\
+	} \\
+$sequence $runname$ { \\
+	a_RunSW  a_RunS  a_RunSE \\
+	a_RunW	 gmod/idle_pose/$idlepose$ a_RunE \\
+	a_RunNW  a_RunN  a_RunNE \\
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1 \\
+	addlayer $runname$_mod \\
+	addlayer $aimlayer$ \\
+	} \\
+$continue $runname$
+
+// ------------------------------------
+// MAKE RUN, NO LEFT ARM
+// For one-handed weapons e.g. melee
+// ------------------------------------
+
+$definemacro MakeRunNoLeftArm runname filename frame aimlayer \\
+$animation a_$runname$_base $filename$ frame $frame$ $frame$ \\
+$sequence $runname$_mod "base_f/RunN" { \\
+	X Y rotateto 0 \\
+	alignto reference \\
+	weightlist MakeRunNoLeftArm \\
+	worldspaceblend a_$runname$_base \\
+	weightlist AimlayerComposite \\
+	hidden \\
+	} \\
+$sequence $runname$ { \\
+	a_RunSW  a_RunS  a_RunSE \\
+	a_RunW	 player/idle    a_RunE \\
+	a_RunNW  a_RunN  a_RunNE \\
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1 \\
+	addlayer $runname$_mod \\
+	addlayer $aimlayer$ \\
+	} \\
+$continue $runname$
+
+// ------------------------------------
+// MAKE SWIMMING
+// ------------------------------------
+
+$definemacro MakeSwim swimname filename frame aimlayer \\
+$animation a_$swimname$_base $filename$ frame $frame$ $frame$ \\
+$sequence $swimname$_layer "includes/ragdoll_pose" { \\
+	X Y rotateto 0 \\
+	alignto reference \\
+	weightlist AimlayerSwimWL \\
+	worldspaceblend a_$swimname$_base \\
+	weightlist AllBones \\
+	hidden \\
+	} \\
+$sequence $swimname$ { \\
+	a_SwimSW  a_SwimS             a_SwimSE \\
+	a_SwimW	  gmod/swim_idle   a_SwimE \\
+	a_SwimNW  a_SwimN             a_SwimNE \\
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1 \\
+	addlayer $swimname$_layer \\
+	addlayer $aimlayer$ \\
+	} \\
+$continue $swimname$
+
+// ------------------------------------
+// MAKE SWIMMING (NO LEFT ARM)
+// ------------------------------------
+
+$definemacro MakeSwimNoLeftArm swimname filename frame aimlayer \\
+$animation a_$swimname$_base $filename$ frame $frame$ $frame$ \\
+$sequence $swimname$_layer "includes/ragdoll_pose" { \\
+	X Y rotateto 0 \\
+	alignto reference \\
+	weightlist AimlayerSwimWL \\
+	worldspaceblend a_$swimname$_base \\
+	weightlist MakeSwimNoLeftArm \\
+	hidden \\
+	} \\
+$sequence $swimname$ { \\
+	a_SwimSW  a_SwimS             a_SwimSE \\
+	a_SwimW	  gmod/swim_idle   a_SwimE \\
+	a_SwimNW  a_SwimN             a_SwimNE \\
+	blendwidth 3 blend move_y -1 1 blend move_x -1 1 \\
+	addlayer $swimname$_layer \\
+	addlayer $aimlayer$ \\
+	} \\
+$continue $swimname$
+
+// ------------------------------------
+// MAKE SIT
+// ------------------------------------
+
+$definemacro makesit sitname filename frame aimlayer \\
+$animation a_$sitname$_base $filename$ frame $frame$ $frame$ weightlist UpperbodyReplace \\
+$sequence $sitname$ "..\GMod\sit_slam" { \\
+	weightlist UpperbodyReplace \\
+	worldspaceblend a_$sitname$_base \\
+	weightlist AllBones \\
+	loop \\ 
+	} addlayer $aimlayer$ \\	
+$continue $sitname$

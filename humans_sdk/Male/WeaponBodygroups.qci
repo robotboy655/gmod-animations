@@ -1,0 +1,39 @@
+
+$cdmaterials models\weapons\w_pistol models/weapons/w_smg1 models\weapons\w_stunbaton models/weapons/w_shotgun models/weapons/w_AR2
+
+
+
+//** Weapon Bodygroups -- For animators' assistance in HLMV
+
+$bodygroup Pistol
+{
+Blank
+studio "../../Weapons/w_pistol_XSI/Pistol_reference.smd"
+}
+
+$bodygroup SMG1
+{
+blank
+studio "../../Weapons/W_SMG1_XSI/smg1_reference.smd"
+}
+
+$bodygroup Shotgun
+{
+blank
+studio "../../Weapons/w_shotgun_XSI/shotgun_reference.smd"
+}
+
+$bodygroup AR2
+{
+blank
+studio "../../Weapons/W_ar2_XSI/AR2_reference.smd"
+}
+
+$bodygroup Stunstick
+{
+blank
+studio "../../Weapons/W_stunbaton_xsi/stunbaton_reference.smd"
+}
+
+//**end weapons bodygroups
+
