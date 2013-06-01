@@ -14,11 +14,10 @@ $lockbonelengths
 // $lockdefinebones
 
 $attachment "eyes" "ValveBiped.Bip01_Head1" 0 -3.5 65.2 absolute
-$include "Player\body_poses_lean.qci"
 
 $sequence reference "..\humans_sdk\male\ragdoll_pose"
 
-$include gm_base_f.qci
+$include gm_base_f.qci // base anims e.g. movement cycles
 $include gm_weightlists.qci
 $include macro_aimlayers.qci
 $include macro_gestures.qci
@@ -26,6 +25,10 @@ $include macro_movement_f.qci
 $include macro_zombie.qci
 $include gm_anims.qci
 $include gm_sequences_zombie_humans.qci
+
+$include "player/body_poses_lean.qci" // pose parameters e.g. head_rot, body_yaw...
+
+// Optimization commands
 
 $animblocksize 32
 

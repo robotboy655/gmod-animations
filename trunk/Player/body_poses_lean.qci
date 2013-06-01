@@ -39,15 +39,8 @@ $sequence body_rot_z {
 	fps 1
 }
 
-// $sequence spine_rot_z { 
-	// a_spine_rot_z_lt a_spine_rot a_spine_rot_z_rt 
-	// blendref a_pose_neutral
-	// blendcenter a_spine_rot 
-	// calcblend spine_yaw "eyes" ZR 
-	// delta 
-	// autoplay 
-	// hidden
-// }
+// BODY_ROT_Z was reconverted into a very weak layer that rotates the body very slightly. Think of it as
+// a "neutral" aimlayer. It needs to be manually added to sequences; addlayer body_rot_z
 
 $sequence head_rot_z { 
 	a_head_rot_z_lt a_head_rot a_head_rot_z_rt 
@@ -79,3 +72,12 @@ $sequence head_rot_y {
 	// hidden
 // }
 
+// $sequence spine_rot_z { 
+	// a_spine_rot_z_lt a_spine_rot a_spine_rot_z_rt 
+	// blendref a_pose_neutral
+	// blendcenter a_spine_rot 
+	// calcblend spine_yaw "eyes" ZR 
+	// delta 
+	// autoplay 
+	// hidden
+// }
