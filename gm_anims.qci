@@ -2,32 +2,20 @@
 //  AIMLAYERS (LOOK AROUND)
 // ------------------------------------
 
-// Aimlayers are additive animations which define how exactly you move when you
-// look around. They are not the weapon pose themselves; this is defined elsewhere.
-// If you wanted, you could theorically use a pistol aimlayer with a SMG pose. 
+// Aimlayers are *additive* sequence layers which define how the body moves when you look around.
+// They do NOT define the pose of the body; this is up the weapon pose sequence.
+// You can use the pistol aimlayer with the SMG pose, for example. With exceptions: see below.
 
-// If the aimlayer has left hand IK enabled, then the aimlayer will define the
+// However, if the aimlayer has left hand IK enabled, then the aimlayer will define the
 // position of the left hand, not the weapon pose. So the aimlayer has to be correct.
 // Note that it will only define the position of the IK target of the left hand; it
 // won't change the fingers of the left hand, for example. That's still up to the wep pose.
 
-// $makeaimlayer police_WalkN_pistol_aim_matrix	"../police_xsi/WalkN_pistol_aim_matrix" 
-// $makeaimlayer weapons_Pistol_aim_matrix			"../humans_sdk/male_animations/WeaponAnims_Shared/Pistol_aim_matrix"
-// $makeaimlayer aimlayer_pistol_crouch			"aimlayer_pistol_crouch"
-
 $makeaimlayer  soldier_Aim_9_directions			"../combine_soldier_xsi/Aim_9_directions"
-
-// $makeaimlayerB aimlayer_smg	"../combine_soldier_xsi/Crouch_aim_9_directions"
-
 $makeaimlayer weapons_Aim_9_directions			"../humans_sdk/male_animations/WeaponAnims_Shared/Aim_9_directions"
 $makeaimlayer weapons_Aim_9_directions_Alert	"../humans_sdk/male_animations/WeaponAnims_Shared/Aim_9_directions_Alert"
-// $makeaimlayer weapons_RunN_SMG1_Aim_9_directions "../humans_sdk/male_animations/WeaponAnims_Shared/RunN_SMG1_Aim_9_directions"
-// $makeaimlayer weapons_WalkN_SMG1_Alert_Aim_9_directions "../humans_sdk/male_animations/WeaponAnims_Shared/WalkN_SMG1_Alert_Aim_9_directions"
 
-// $makeaimlayer aimlayer_rpg		"../humans_sdk/male_animations/WeaponAnims_Shared/Aim_RPG_9_directions"
-// $makeaimlayer aimlayer_rpg_crouch				"aimlayer_rpg_crouch"
-
-// Aimlayers organized by weapon type etc.
+// List of aimlayers organized by weapon type, alphabetically
 
 $popd $pushd "aimlayers"
 
@@ -248,16 +236,14 @@ $MakeWalkNoLeftArm	walk_melee		melee    "../9way_central/melee" 0 aimlayer_melee
 $MakeWalkNoLeftArm	walk_pistol		pist_$g$ "../aimlayers/aimlayer_pistol_walk" 4 aimlayer_pistol_walk ACT_HL2MP_WALK_PISTOL 1
 $MakeWalkNoLeftArm	walk_slam		slam     "../aimlayers/aimlayer_slam" 4 aimlayer_slam ACT_HL2MP_WALK_SLAM 1 addlayer idle_layer
 
-// $include gm_special.qci
-
 // ------------------------------------
-//  GESTURES AND STUFF AND OTHER STUFF
+//  GESTURES AND OTHER MISC. STUFF
 // ------------------------------------
 
 $include gm_sequences.qci
 
 // ------------------------------------
-//  OTHER MISC. STUFF
+//  THE REST OF THE OTHER MISC. STUFF
 // ------------------------------------
 
 $sequence drive_pd "../gmod/drive_pd" ACT_DRIVE_POD 1 fps 30.00

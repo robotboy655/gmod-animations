@@ -2,7 +2,6 @@
 //  ZOMBIE ANIMATIONS
 // ------------------------------------
 
-
 // This is $MakeSplineGestureLockFeet but the pelvis isn't self-additive, it looks at the reference instead,
 // allowing me to push the pelvis down by a few units, avoiding IK pops on anims that push it up.
 
